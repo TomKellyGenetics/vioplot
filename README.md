@@ -23,3 +23,7 @@ Vioplotx works in much the same manner as Vioplot
 
 
 For development history prior to package documentation, see the original repo: https://github.com/TomKellyGenetics/R-violin-plot/commits?author=TomKellyGenetics
+
+Modifications inspired by the following StackOverFlow threads: http://stackoverflow.com/questions/14975853/how-can-i-create-violin-plot-in-different-colours
+http://stackoverflow.com/questions/19416768/vioplot-r-how-to-set-axis-labels
+http://stackoverflow.com/questions/20250063/axis-titles-on-vioplot
