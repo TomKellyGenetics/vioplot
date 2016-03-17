@@ -11,7 +11,7 @@
 #' @param border Graphical parameters for the colour of the violin border passed to lines. NA for no border. If border is a vector, it specifies the colour per bean, and colours are reused if necessary.
 #' @param lty,lwd Graphical parameters for the violin passed to lines and polygon
 #' @param rectCol Graphical parameters to control fill colour of the box. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
-#' @param lineCol Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per bean, and colours are reused if necessary.
+#' @param lineCol Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param colMed Graphical parameters to control colour of the median point
 #' @param pchMed Graphical parameters to control shape of the median point
 #' @param drawRect logical. the box is drawn if TRUE.

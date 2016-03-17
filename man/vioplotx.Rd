@@ -33,7 +33,7 @@ vioplotx(x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
 
 \item{rectCol}{Graphical parameters to control fill colour of the box. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
-\item{lineCol}{Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per bean, and colours are reused if necessary.}
+\item{lineCol}{Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
 \item{colMed}{Graphical parameters to control colour of the median point}
 
