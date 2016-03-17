@@ -8,7 +8,7 @@ To get the modified version from github:
 
 ```R
 # install.packages("devtools")
-devtools::install_github("tomkellygenetics/vioplotx")
+devtools::install_github("TomKellyGenetics/vioplotx")
 ```
 
 # Running
