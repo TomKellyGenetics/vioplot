@@ -20,3 +20,6 @@ Vioplotx works in much the same manner as Vioplot
 * `vioplotx::vioplotx()` also takes additional arguments to specify `main`, `sub`, `xlab`, and `ylab` as used in `plot` or `title`
 
 * `vioplotx::vioplotx()` can take vectorised forms of colour variables `col`, `border`, and `rectCol` to modify the colours separately for each violin respectively. This also applies to a new variable `lineCol` to modify the colour of the boxplots. 
+
+
+For development history prior to package documentation, see the original repo: https://github.com/TomKellyGenetics/R-violin-plot/commits?author=TomKellyGenetics
