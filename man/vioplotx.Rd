@@ -29,7 +29,7 @@ vioplotx(x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
 
 \item{border}{Graphical parameters for the colour of the violin border passed to lines. NA for no border. If border is a vector, it specifies the colour per bean, and colours are reused if necessary.}
 
-\item{lty, }{lwd Graphical parameters for the violin passed to lines and polygon}
+\item{lty, lwd}{Graphical parameters for the violin passed to lines and polygon}
 
 \item{rectCol}{Graphical parameters to control fill colour of the box. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
@@ -47,7 +47,7 @@ vioplotx(x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
 
 \item{drawRect}{logical. the box is drawn if TRUE.}
 
-\item{main, }{sub, xlab, ylab graphical parameters passed to plot.}
+\item{main, sub, xlab, ylab}{graphical parameters passed to plot.}
 }
 \description{
 Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group.

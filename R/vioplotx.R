@@ -9,7 +9,7 @@
 #' @param names one label, or a vector of labels for the datas must match the number of datas given
 #' @param col Graphical parameter for fill colour of the violin(s) polygon. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param border Graphical parameters for the colour of the violin border passed to lines. NA for no border. If border is a vector, it specifies the colour per bean, and colours are reused if necessary.
-#' @param lty, lwd Graphical parameters for the violin passed to lines and polygon
+#' @param lty,lwd Graphical parameters for the violin passed to lines and polygon
 #' @param rectCol Graphical parameters to control fill colour of the box. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param lineCol Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per bean, and colours are reused if necessary.
 #' @param colMed Graphical parameters to control colour of the median point
@@ -19,7 +19,7 @@
 #' @param add logical. if FALSE (default) a new plot is created
 #' @param wex relative expansion of the violin.
 #' @param horizontal logical. horizontal or vertical violins
-#' @param main, sub, xlab, ylab graphical parameters passed to plot.
+#' @param main,sub,xlab,ylab graphical parameters passed to plot.
 #' @keywords plot graphics violin
 #' @export
 #' @examples
