@@ -8,7 +8,7 @@
 #' @param ylim y limits
 #' @param names one label, or a vector of labels for the datas must match the number of datas given
 #' @param col Graphical parameter for fill colour of the violin(s) polygon. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
-#' @param border Graphical parameters for the colour of the violin border passed to lines. NA for no border. If border is a vector, it specifies the colour per bean, and colours are reused if necessary.
+#' @param border Graphical parameters for the colour of the violin border passed to lines. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param lty,lwd Graphical parameters for the violin passed to lines and polygon
 #' @param rectCol Graphical parameters to control fill colour of the box. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param lineCol Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.
@@ -17,7 +17,7 @@
 #' @param drawRect logical. the box is drawn if TRUE.
 #' @param at position of each violin. Default to 1:n
 #' @param add logical. if FALSE (default) a new plot is created
-#' @param wex relative expansion of the violin.
+#' @param wex relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary.
 #' @param horizontal logical. horizontal or vertical violins
 #' @param main,sub,xlab,ylab graphical parameters passed to plot.
 #' @keywords plot graphics violin
@@ -59,7 +59,7 @@ function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
                                                data.max))
     smout <- do.call("sm.density", c(list(data, xlim = est.xlim), 
                                      args))
-    hscale <- 0.4/max(smout$estimate) * wex
+    hscale <- 0.4/max(smout$estimate) * ifelse(is.vector(wex), wex[i], wex)
     base[[i]] <- smout$eval.points
     height[[i]] <- smout$estimate * hscale
     t <- range(base[[i]])
@@ -80,7 +80,7 @@ function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
   else {
     label <- names
   }
-  boxwidth <- 0.05 * wex
+  boxwidth <- 0.05 * ifelse(is.vector(wex), wex[i], wex)
   if (!add) 
     plot.new()
   if (!horizontal) {
@@ -97,7 +97,7 @@ function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
       if (drawRect) {
         lines(at[c(i, i)], c(lower[i], upper[i]), lwd = lwd, 
               lty = lty, col = lineCol[i])
-        rect(at[i] - boxwidth/2, q1[i], at[i] + boxwidth/2, 
+        rect(at[i] - ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, q1[i], at[i] + ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, 
              q3[i], col = rectCol[i], border = lineCol[i])
         points(at[i], med[i], pch = pchMed, col = colMed)
       }
@@ -117,8 +117,8 @@ function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
       if (drawRect) {
         lines(c(lower[i], upper[i]), at[c(i, i)], lwd = lwd, 
               lty = lty, col = lineCol[i])
-        rect(q1[i], at[i] - boxwidth/2, q3[i], at[i] + 
-               boxwidth/2, col = rectCol[i], border = lineCol[i])
+        rect(q1[i], at[i] - ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, q3[i], at[i] + 
+              ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, col = rectCol[i], border = lineCol[i])
         points(med[i], at[i], pch = pchMed, col = colMed)
       }
     }
