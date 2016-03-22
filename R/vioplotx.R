@@ -92,13 +92,13 @@ function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
     box()
     for (i in 1:n) {
       polygon(c(at[i] - height[[i]], rev(at[i] + height[[i]])), 
-              c(base[[i]], rev(base[[i]])), col = col[i], border = border[i], 
+              c(base[[i]], rev(base[[i]])), col = ifelse(is.vector(col), col[i], col), border = ifelse(is.vector(border), border[i], border), 
               lty = lty, lwd = lwd)
       if (drawRect) {
         lines(at[c(i, i)], c(lower[i], upper[i]), lwd = lwd, 
-              lty = lty, col = lineCol[i])
+              lty = lty, col = ifelse(is.vector(lineCol), lineCol[i], lineCol))
         rect(at[i] - ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, q1[i], at[i] + ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, 
-             q3[i], col = rectCol[i], border = lineCol[i])
+             q3[i], col = ifelse(is.vector(rectCol), rectCol[i], rectCol), border = ifelse(is.vector(lineCol), lineCol[i], lineCol))
         points(at[i], med[i], pch = pchMed, col = colMed)
       }
     }
@@ -112,13 +112,13 @@ function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
     box()
     for (i in 1:n) {
       polygon(c(base[[i]], rev(base[[i]])), c(at[i] - height[[i]], 
-                                              rev(at[i] + height[[i]])), col = col[i], border = border[i], 
+                                              rev(at[i] + height[[i]])), col = ifelse(is.vector(col), col[i], col), border = ifelse(is.vector(border), border[i], border), 
               lty = lty, lwd = lwd)
       if (drawRect) {
         lines(c(lower[i], upper[i]), at[c(i, i)], lwd = lwd, 
-              lty = lty, col = lineCol[i])
+              lty = lty, col = ifelse(is.vector(lineCol), lineCol[i], lineCol))
         rect(q1[i], at[i] - ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, q3[i], at[i] + 
-              ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, col = rectCol[i], border = lineCol[i])
+              ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, col = ifelse(is.vector(rectCol), rectCol[i], rectCol), border = ifelse(is.vector(lineCol), lineCol[i], lineCol))
         points(med[i], at[i], pch = pchMed, col = colMed)
       }
     }
