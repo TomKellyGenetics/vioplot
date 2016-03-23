@@ -59,7 +59,7 @@ function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
                                                data.max))
     smout <- do.call("sm.density", c(list(data, xlim = est.xlim), 
                                      args))
-    hscale <- 0.4/max(smout$estimate) * ifelse(is.vector(wex), wex[i], wex)
+    hscale <- 0.4/max(smout$estimate) * ifelse(length(wex)>1, wex[i], wex)
     base[[i]] <- smout$eval.points
     height[[i]] <- smout$estimate * hscale
     t <- range(base[[i]])
@@ -80,7 +80,7 @@ function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
   else {
     label <- names
   }
-  boxwidth <- 0.05 * ifelse(is.vector(wex), wex[i], wex)
+  boxwidth <- 0.05 * ifelse(length(wex)>1, wex[i], wex)
   if (!add) 
     plot.new()
   if (!horizontal) {
@@ -92,13 +92,13 @@ function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
     box()
     for (i in 1:n) {
       polygon(c(at[i] - height[[i]], rev(at[i] + height[[i]])), 
-              c(base[[i]], rev(base[[i]])), col = ifelse(is.vector(col), col[i], col), border = ifelse(is.vector(border), border[i], border), 
+              c(base[[i]], rev(base[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border), 
               lty = lty, lwd = lwd)
       if (drawRect) {
         lines(at[c(i, i)], c(lower[i], upper[i]), lwd = lwd, 
-              lty = lty, col = ifelse(is.vector(lineCol), lineCol[i], lineCol))
-        rect(at[i] - ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, q1[i], at[i] + ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, 
-             q3[i], col = ifelse(is.vector(rectCol), rectCol[i], rectCol), border = ifelse(is.vector(lineCol), lineCol[i], lineCol))
+              lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
+        rect(at[i] - ifelse(length(wex)>1, boxwidth[i], boxwidth)/2, q1[i], at[i] + ifelse(length(wex)>1, boxwidth[i], boxwidth)/2, 
+             q3[i], col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
         points(at[i], med[i], pch = pchMed, col = colMed)
       }
     }
@@ -112,13 +112,13 @@ function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
     box()
     for (i in 1:n) {
       polygon(c(base[[i]], rev(base[[i]])), c(at[i] - height[[i]], 
-                                              rev(at[i] + height[[i]])), col = ifelse(is.vector(col), col[i], col), border = ifelse(is.vector(border), border[i], border), 
+                                              rev(at[i] + height[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border), 
               lty = lty, lwd = lwd)
       if (drawRect) {
         lines(c(lower[i], upper[i]), at[c(i, i)], lwd = lwd, 
-              lty = lty, col = ifelse(is.vector(lineCol), lineCol[i], lineCol))
-        rect(q1[i], at[i] - ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, q3[i], at[i] + 
-              ifelse(is.vector(wex), boxwidth[i], boxwidth)/2, col = ifelse(is.vector(rectCol), rectCol[i], rectCol), border = ifelse(is.vector(lineCol), lineCol[i], lineCol))
+              lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
+        rect(q1[i], at[i] - ifelse(length(wex)>1, boxwidth[i], boxwidth)/2, q3[i], at[i] + 
+              ifelse(length(wex)>1, boxwidth[i], boxwidth)/2, col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
         points(med[i], at[i], pch = pchMed, col = colMed)
       }
     }
