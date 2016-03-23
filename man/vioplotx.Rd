@@ -27,7 +27,7 @@ vioplotx(x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
 
 \item{col}{Graphical parameter for fill colour of the violin(s) polygon. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
-\item{border}{Graphical parameters for the colour of the violin border passed to lines. NA for no border. If border is a vector, it specifies the colour per bean, and colours are reused if necessary.}
+\item{border}{Graphical parameters for the colour of the violin border passed to lines. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
 \item{lty, lwd}{Graphical parameters for the violin passed to lines and polygon}
 
@@ -43,7 +43,7 @@ vioplotx(x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
 
 \item{add}{logical. if FALSE (default) a new plot is created}
 
-\item{wex}{relative expansion of the violin.}
+\item{wex}{relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary.}
 
 \item{drawRect}{logical. the box is drawn if TRUE.}
 
