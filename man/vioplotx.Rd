@@ -7,8 +7,8 @@
 vioplotx(x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
   horizontal = FALSE, col = "grey50", border = "black", lty = 1,
   lwd = 1, rectCol = "black", lineCol = "black", colMed = "white",
-  pchMed = 19, at, add = FALSE, wex = 1, drawRect = TRUE, main = NA,
-  sub = NA, xlab = NA, ylab = NA)
+  pchMed = 19, at, add = FALSE, wex = 1, drawRect = TRUE,
+  areaEqual = FALSE, main = NA, sub = NA, xlab = NA, ylab = NA)
 }
 \arguments{
 \item{x}{data vector}
@@ -45,7 +45,9 @@ vioplotx(x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
 
 \item{wex}{relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary.}
 
-\item{drawRect}{logical. the box is drawn if TRUE.}
+\item{drawRect}{logical. The box is drawn if TRUE.}
+
+\item{areaEqual}{logical. Density plots checked for equal area if TRUE. wex must be scalar, relative widths of violins depend on area.}
 
 \item{main, sub, xlab, ylab}{graphical parameters passed to plot.}
 }
