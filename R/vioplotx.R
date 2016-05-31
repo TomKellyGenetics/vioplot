@@ -1,6 +1,6 @@
 #' Enhanced Violin Plot
 #'
-#' Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group.
+#' Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Builds upon \code{\link[vioplot]{vioplot}} and intended to function in largely the same way, with added customisation possible with colours for each aspect of the violin, boxplot, and separate violins.
 #' @param x data vector
 #' @param ... additional data vectors
 #' @param range a factor to calculate the upper/lower adjacent values
@@ -24,7 +24,33 @@
 #' @keywords plot graphics violin
 #' @export
 #' @examples
-#' #vioplotx()
+#' 
+#' #generate example data
+#' data_one <- rnorm(100)
+#' data_two <- rnorm(50, 1, 2)
+#' 
+#' #generate violin plot with similar functionality to vioplot
+#' vioplotx(data_one, data_two, col="magenta")
+#' 
+#' #note vioplox defaults to a greyscale plot
+#' vioplotx(data_one, data_two)
+#' 
+#' #colours can be customised separately, with axis labels, legends, and titles
+#' vioplotx(data_one, data_two, col=c("red","blue"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
+#' legend("topleft", fill=c("red","blue"), legend=c("data one", "data two"))
+#' 
+#' #colours can be customised for the violin fill and border separately
+#' vioplotx(data_one, data_two, col="grey85", border="purple", names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
+#' 
+#' #colours can also be customised for the boxplot rectange and lines (border and whiskers)
+#' vioplotx(data_one, data_two, col="grey85", rectCol="lightblue", lineCol="blue", border="purple", names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
+#' 
+#' #these colours can also be customised separately for each violin
+#' vioplotx(data_one, data_two, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"), lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
+#' 
+#' #this applies to any number of violins, given that colours are provided for each 
+#' vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), col=c("red", "orange", "green", "blue", "violet"), rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"), lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), names=c("data one", "data two", "data three", "data four", "data five"), main="data violin", xlab="data class", ylab="data read")
+#'     
 vioplotx <-
   function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL, 
             horizontal = FALSE, col = "grey50", border = "black", lty = 1, 
