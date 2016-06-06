@@ -22,6 +22,8 @@
 #' @param horizontal logical. horizontal or vertical violins
 #' @param main,sub,xlab,ylab graphical parameters passed to plot.
 #' @keywords plot graphics violin
+#' @import sm
+#' @importFrom zoo rollmean
 #' @export
 #' @examples
 #' 
@@ -50,7 +52,12 @@
 #' 
 #' #this applies to any number of violins, given that colours are provided for each 
 #' vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), col=c("red", "orange", "green", "blue", "violet"), rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"), lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), names=c("data one", "data two", "data three", "data four", "data five"), main="data violin", xlab="data class", ylab="data read")
-#'     
+#'
+#' #The areaEqual parameter scales with width of violins so that they have equal density area (including missing tails) rather than equal maximum width
+#' vioplotx(data_one, data_two, areaEqual=T)
+#' vioplotx(data_one, data_two, areaEqual=T, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"), lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")   
+#' vioplotx(data_one, data_two, areaEqual=T, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), col=c("red", "orange", "green", "blue", "violet"), rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"), lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), names=c("data one", "data two", "data three", "data four", "data five"), main="data violin", xlab="data class", ylab="data read")
+#'                
 vioplotx <-
   function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL, 
             horizontal = FALSE, col = "grey50", border = "black", lty = 1, 
@@ -99,7 +106,7 @@ vioplotx <-
         print("using first element of wex")
         wex<-wex[i]
       }
-      wex <-unlist(area_check)/mean(unlist(area_check))*wex
+      wex <-unlist(area_check)/min(unlist(area_check))*wex
     }
     for (i in 1:n) {
       data <- datas[[i]]
