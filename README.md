@@ -13,6 +13,11 @@ devtools::install_github("TomKellyGenetics/vioplotx")
 
 # Running
 
+See the relevant vignette for more details:
+
+https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_cutomisation.html
+https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_area.html
+
 Vioplotx works in much the same manner as Vioplot
 
 * `vioplotx::vioplotx()` generates a violin plot takes the same arguments as `vioplotx::vioplotx()` to plot a violin for each group of variables.
