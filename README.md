@@ -16,6 +16,7 @@ devtools::install_github("TomKellyGenetics/vioplotx")
 See the relevant vignette for more details:
 
 https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_customisation.html
+https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_forumlae.html
 https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_area.html
 
 Vioplotx works in much the same manner as Vioplot
