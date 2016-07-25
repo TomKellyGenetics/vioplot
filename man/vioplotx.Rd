@@ -4,16 +4,19 @@
 \alias{vioplotx}
 \title{Enhanced Violin Plot}
 \usage{
-vioplotx(x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
-  horizontal = FALSE, col = "grey50", border = "black", lty = 1,
-  lwd = 1, rectCol = "black", lineCol = "black", colMed = "white",
-  pchMed = 19, at, add = FALSE, wex = 1, drawRect = TRUE,
-  areaEqual = FALSE, main = NA, sub = NA, xlab = NA, ylab = NA)
+vioplotx(x, ..., data = NULL, range = 1.5, h = NULL, ylim = NULL,
+  names = NULL, horizontal = FALSE, col = "grey50", border = "black",
+  lty = 1, lwd = 1, rectCol = "black", lineCol = "black",
+  colMed = "white", pchMed = 19, at, add = FALSE, wex = 1,
+  drawRect = TRUE, areaEqual = FALSE, main = NA, sub = NA, xlab = NA,
+  ylab = NA)
 }
 \arguments{
 \item{x}{data vector}
 
 \item{...}{additional data vectors}
+
+\item{data}{a data.frame (or list) from which the variables in formula should be taken.}
 
 \item{range}{a factor to calculate the upper/lower adjacent values}
 
@@ -50,9 +53,14 @@ vioplotx(x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
 \item{areaEqual}{logical. Density plots checked for equal area if TRUE. wex must be scalar, relative widths of violins depend on area.}
 
 \item{main, sub, xlab, ylab}{graphical parameters passed to plot.}
+
+\item{formula}{a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).}
 }
 \description{
 Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Builds upon \code{\link[vioplot]{vioplot}} and intended to function in largely the same way, with added customisation possible with colours for each aspect of the violin, boxplot, and separate violins.
+}
+\details{
+This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} and taking input in a formula as used for \code{\link[boxplot]{graphics}}.
 }
 \examples{
 

@@ -1,8 +1,13 @@
 #' Enhanced Violin Plot
 #'
 #' Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Builds upon \code{\link[vioplot]{vioplot}} and intended to function in largely the same way, with added customisation possible with colours for each aspect of the violin, boxplot, and separate violins.
+#'
+#' This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} and taking input in a formula as used for \code{\link[boxplot]{graphics}}.
+#'
 #' @param x data vector
 #' @param ... additional data vectors
+#' @param formula a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).
+#' @param data a data.frame (or list) from which the variables in formula should be taken.
 #' @param range a factor to calculate the upper/lower adjacent values
 #' @param h the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum
 #' @param ylim y limits
@@ -58,6 +63,7 @@
 #' vioplotx(data_one, data_two, areaEqual=T, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"), lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
 #' vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), areaEqual=T, col=c("red", "orange", "green", "blue", "violet"), rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"), lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), names=c("data one", "data two", "data three", "data four", "data five"), main="data violin", xlab="data class", ylab="data read")
 #'
+
 vioplotx <-
   function (x, ..., data = NULL, range = 1.5, h = NULL, ylim = NULL, names = NULL,
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
@@ -69,15 +75,15 @@ vioplotx <-
         m <- model.frame(x)
       } else {
         if(is.matrix(data)){
-          warning("data must be a dataframe")
+          warning("data must be a dataframe rather than a matrix")
           print("attempting to use matrix input")
           data <- as.data.frame(data)
         }
-        if(is.data.frame(data)){
+        if(is.data.frame(data) || is.list(data)){
           m <- model.frame(x, data = data)
         } else {
-          warning("data must be a dataframe")
-          print("attemption formula without data input")
+          warning("data must be a dataframe or list")
+          print("attempting formula without data input")
           m <- model.frame(x)
         }
       }
