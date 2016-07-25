@@ -26,47 +26,47 @@
 #' @importFrom zoo rollmean
 #' @export
 #' @examples
-#' 
+#'
 #' #generate example data
 #' data_one <- rnorm(100)
 #' data_two <- rnorm(50, 1, 2)
-#' 
+#'
 #' #generate violin plot with similar functionality to vioplot
 #' vioplotx(data_one, data_two, col="magenta")
-#' 
+#'
 #' #note vioplox defaults to a greyscale plot
 #' vioplotx(data_one, data_two)
-#' 
+#'
 #' #colours can be customised separately, with axis labels, legends, and titles
 #' vioplotx(data_one, data_two, col=c("red","blue"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
 #' legend("topleft", fill=c("red","blue"), legend=c("data one", "data two"))
-#' 
+#'
 #' #colours can be customised for the violin fill and border separately
 #' vioplotx(data_one, data_two, col="grey85", border="purple", names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
-#' 
+#'
 #' #colours can also be customised for the boxplot rectange and lines (border and whiskers)
 #' vioplotx(data_one, data_two, col="grey85", rectCol="lightblue", lineCol="blue", border="purple", names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
-#' 
+#'
 #' #these colours can also be customised separately for each violin
 #' vioplotx(data_one, data_two, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"), lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
-#' 
-#' #this applies to any number of violins, given that colours are provided for each 
+#'
+#' #this applies to any number of violins, given that colours are provided for each
 #' vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), col=c("red", "orange", "green", "blue", "violet"), rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"), lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), names=c("data one", "data two", "data three", "data four", "data five"), main="data violin", xlab="data class", ylab="data read")
 #'
 #' #The areaEqual parameter scales with width of violins so that they have equal density area (including missing tails) rather than equal maximum width
 #' vioplotx(data_one, data_two, areaEqual=T)
-#' vioplotx(data_one, data_two, areaEqual=T, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"), lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")   
+#' vioplotx(data_one, data_two, areaEqual=T, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"), lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
 #' vioplotx(data_one, data_two, areaEqual=T, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), col=c("red", "orange", "green", "blue", "violet"), rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"), lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), names=c("data one", "data two", "data three", "data four", "data five"), main="data violin", xlab="data class", ylab="data read")
-#'                
+#'
 vioplotx <-
-  function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL, 
-            horizontal = FALSE, col = "grey50", border = "black", lty = 1, 
-            lwd = 1, rectCol = "black", lineCol = "black", colMed = "white", pchMed = 19, 
-            at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA) 
+  function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
+            horizontal = FALSE, col = "grey50", border = "black", lty = 1,
+            lwd = 1, rectCol = "black", lineCol = "black", colMed = "white", pchMed = 19,
+            at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA)
   {
     datas <- list(x, ...)
     n <- length(datas)
-    if (missing(at)) 
+    if (missing(at))
       at <- 1:n
     upper <- vector(mode = "numeric", length = n)
     lower <- vector(mode = "numeric", length = n)
@@ -79,7 +79,7 @@ vioplotx <-
     baserange <- c(Inf, -Inf)
     args <- list(display = "none")
     boxwex <- wex
-    if (!(is.null(h))) 
+    if (!(is.null(h)))
       args <- c(args, h = h)
     if(areaEqual){
       for (i in 1:n) {
@@ -92,9 +92,9 @@ vioplotx <-
         iqd <- q3[i] - q1[i]
         upper[i] <- min(q3[i] + range * iqd, data.max)
         lower[i] <- max(q1[i] - range * iqd, data.min)
-        est.xlim <- c(min(lower[i], data.min), max(upper[i], 
+        est.xlim <- c(min(lower[i], data.min), max(upper[i],
                                                    data.max))
-        smout <- do.call("sm.density", c(list(data, xlim = est.xlim), 
+        smout <- do.call("sm.density", c(list(data, xlim = est.xlim),
                                          args))
         Avg.pos <- mean(smout$eval.points)
         xt <- diff(smout$eval.points[smout$eval.points<Avg.pos])
@@ -106,7 +106,7 @@ vioplotx <-
         print("using first element of wex")
         wex<-wex[i]
       }
-      wex <-unlist(area_check)/min(unlist(area_check))*wex
+      wex <-unlist(area_check)/max(unlist(area_check))*wex
     }
     for (i in 1:n) {
       data <- datas[[i]]
@@ -118,9 +118,9 @@ vioplotx <-
       iqd <- q3[i] - q1[i]
       upper[i] <- min(q3[i] + range * iqd, data.max)
       lower[i] <- max(q1[i] - range * iqd, data.min)
-      est.xlim <- c(min(lower[i], data.min), max(upper[i], 
+      est.xlim <- c(min(lower[i], data.min), max(upper[i],
                                                  data.max))
-      smout <- do.call("sm.density", c(list(data, xlim = est.xlim), 
+      smout <- do.call("sm.density", c(list(data, xlim = est.xlim),
                                        args))
       hscale <- 0.4/max(smout$estimate) * ifelse(length(wex)>1, wex[i], wex)
       base[[i]] <- smout$eval.points
@@ -130,7 +130,7 @@ vioplotx <-
       baserange[2] <- max(baserange[2], t[2])
     }
     if (!add) {
-      xlim <- if (n == 1) 
+      xlim <- if (n == 1)
         at + c(-0.5, 0.5)
       else range(at) + min(diff(at))/2 * c(-1, 1)
       if (is.null(ylim)) {
@@ -144,7 +144,7 @@ vioplotx <-
       label <- names
     }
     boxwidth <- 0.05 * ifelse(length(boxwex)>1, boxwex[i], boxwex)
-    if (!add) 
+    if (!add)
       plot.new()
     if (!horizontal) {
       if (!add) {
@@ -154,13 +154,13 @@ vioplotx <-
       }
       box()
       for (i in 1:n) {
-        polygon(c(at[i] - height[[i]], rev(at[i] + height[[i]])), 
-                c(base[[i]], rev(base[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border), 
+        polygon(c(at[i] - height[[i]], rev(at[i] + height[[i]])),
+                c(base[[i]], rev(base[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border),
                 lty = lty, lwd = lwd)
         if (drawRect) {
-          lines(at[c(i, i)], c(lower[i], upper[i]), lwd = lwd, 
+          lines(at[c(i, i)], c(lower[i], upper[i]), lwd = lwd,
                 lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
-          rect(at[i] - ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q1[i], at[i] + ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, 
+          rect(at[i] - ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q1[i], at[i] + ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2,
                q3[i], col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
           points(at[i], med[i], pch = pchMed, col = colMed)
         }
@@ -174,19 +174,19 @@ vioplotx <-
       }
       box()
       for (i in 1:n) {
-        polygon(c(base[[i]], rev(base[[i]])), c(at[i] - height[[i]], 
-                                                rev(at[i] + height[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border), 
+        polygon(c(base[[i]], rev(base[[i]])), c(at[i] - height[[i]],
+                                                rev(at[i] + height[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border),
                 lty = lty, lwd = lwd)
         if (drawRect) {
-          lines(c(lower[i], upper[i]), at[c(i, i)], lwd = lwd, 
+          lines(c(lower[i], upper[i]), at[c(i, i)], lwd = lwd,
                 lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
-          rect(q1[i], at[i] - ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q3[i], at[i] + 
+          rect(q1[i], at[i] - ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q3[i], at[i] +
                  ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
           points(med[i], at[i], pch = pchMed, col = colMed)
         }
       }
     }
-    invisible(list(upper = upper, lower = lower, median = med, 
+    invisible(list(upper = upper, lower = lower, median = med,
                    q1 = q1, q3 = q3))
     if(is.na(xlab)==F){
       if(is.na(ylab)==F){
@@ -206,7 +206,7 @@ vioplotx <-
           }
         }
       }
-    } else {  
+    } else {
       if(is.na(ylab)==F){
         if(is.na(main)==F){
           if(is.na(sub)==T){
