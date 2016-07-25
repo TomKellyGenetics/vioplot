@@ -57,10 +57,7 @@ vioplotx(x, ..., data = NULL, range = 1.5, h = NULL, ylim = NULL,
 \item{formula}{a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).}
 }
 \description{
-Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Builds upon \code{\link[vioplot]{vioplot}} and intended to function in largely the same way, with added customisation possible with colours for each aspect of the violin, boxplot, and separate violins.
-}
-\details{
-This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} and taking input in a formula as used for \code{\link[boxplot]{graphics}}.
+Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Builds upon \code{\link[vioplot]{vioplot}} and intended to function in largely the same way, with added customisation possible with colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} and taking input in a formula as used for \code{\link[boxplot]{graphics}}.
 }
 \examples{
 
