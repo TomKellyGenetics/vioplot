@@ -68,7 +68,18 @@ vioplotx <-
       if(is.null(data)){
         m <- model.frame(x)
       } else {
-        m <- model.frame(x, data = data)
+        if(is.matrix(data)){
+          warning("data must be a dataframe")
+          print("attempting to use matrix input")
+          data <- as.data.frame(data)
+        }
+        if(is.data.frame(data)){
+          m <- model.frame(x, data = data)
+        } else {
+          warning("data must be a dataframe")
+          print("attemption formula without data input")
+          m <- model.frame(x)
+        }
       }
       datas <- tapply(m[,1], m[,2], c, simplify = FALSE)
       if (is.null(names)) names <- names(datas)
