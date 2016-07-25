@@ -1,0 +1,127 @@
+---
+title: "Controlling Violin Plot Area"
+author: "Tom Kelly"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vioplotx: Controlling Violin Plot Area}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+While boxplots have become the _de facto_ standard for plotting the distribution of data this is a vast oversimplification and may not show everything needed to evaluate the variation of data. This is particularly important for datasets which do not form a Guassian "Normal" distribution that most researchers have become accustomed to.
+
+While density plots are helpful in this regard, they can be less aesthetically pleasing than boxplots and harder to interpret for those familiar eith boxplots. Often the only ways to compare multiple data types with density use slices of the data with faceting the plotting panes or overlaying density curves with colours and a legend. This approach is jarring for new users and leads to cluttered plots difficult ot present to a wider audience.
+
+##Violin Plots
+
+Therefore violin plots are a powerful tool to assist researchers to visualise data, particularly in the quality checking and exploratory parts of an analysis. Violin plots have many benefits:
+
+- Greater flexbility for plotting variation than boxplots
+- More familiarity to boxplot users than density plots
+- Easier to directly compare data types than existing plots
+
+As shown below for the `iris` dataset, violin plots show distribution information that the boxplot is unable to.
+
+
+```{r, include=F}
+library("vioplotx")
+```
+
+```{r}
+data(iris)
+boxplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"))
+vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"))
+```
+
+##Violin Plot Area
+
+However there are concerns that existing violin plot packages (such as \code{\link[vioplot]{vioplot}}) scales the data to the most aesthetically suitable  width rather than maintaining proportions comparable across data sets. Consider the differing distributions shown below:
+
+```{r, include=FALSE}
+par(mar=rep(1,4))
+```
+
+```{r}
+par(mfrow=c(3, 1))
+par(mar=rep(2, 4))
+plot(density(iris$Sepal.Length[iris$Species=="setosa"]), main="Sepal Length: setosa", col="green")
+plot(density(iris$Sepal.Length[iris$Species=="versicolor"]), main="Sepal Length: versicolor", col="blue")
+plot(density(iris$Sepal.Length[iris$Species=="virginica"]), main="Sepal Length: virginica", col="palevioletred4")
+par(mfrow=c(1, 1))
+```
+
+```{r, include=FALSE}
+par(mar=c(5, 4, 4, 2) + 0.1)
+```
+
+
+#Comparing datasets
+
+Neither of these plots above show the relative distribtions on the same scale, even if we match the x-axis of a density plot the relative heights are obscured and difficult to compare.
+
+```{r, include=FALSE}
+par(mar=rep(2,4))
+```
+
+```{r}
+par(mfrow=c(3, 1))
+par(mar=rep(2, 4))
+xaxis <- c(3, 9)
+yaxis <- c(0, 1.25)
+plot(density(iris$Sepal.Length[iris$Species=="setosa"]), main="Sepal Length: setosa", col="green", xlim=xaxis, ylim=yaxis)
+plot(density(iris$Sepal.Length[iris$Species=="versicolor"]), main="Sepal Length: versicolor", col="blue", xlim=xaxis, ylim=yaxis)
+plot(density(iris$Sepal.Length[iris$Species=="virginica"]), main="Sepal Length: virginica", col="palevioletred4", xlim=xaxis, ylim=yaxis)
+par(mfrow=c(1, 1))
+```
+
+```{r, include=FALSE}
+par(mar=c(5, 4, 4, 2) + 0.1)
+```
+
+
+This can somewhat be addressed by overlaying density plots:
+```{r}
+par(mfrow=c(1, 1))
+xaxis <- c(3, 9)
+yaxis <- c(0, 1.25)
+plot(density(iris$Sepal.Length[iris$Species=="setosa"]), main="Sepal Length", col="green", xlim=xaxis, ylim=yaxis)
+lines(density(iris$Sepal.Length[iris$Species=="versicolor"]), col="blue")
+lines(density(iris$Sepal.Length[iris$Species=="virginica"]), col="palevioletred4")
+legend("topright", fill=c("green", "blue", "palevioletred4"), legend=levels(iris$Species), cex=0.5)
+```
+
+This has the benefit of highlighting the differnt distributions of the data subsets. However, notice here that a figure legend become necessary, plot axis limits need to be defined to display the range of all distribution curves, and the plot quickly becomes cluttered if the number of factors to be compared becomes much larger. 
+
+##Area control in Violin plot
+
+Therefore the `areaEqual` parameter has been included to customise the violin plot to serve a similar purpose:
+
+```{r}
+vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", areaEqual = T)
+```
+
+If we compare this to the original vioplot functionality (defaulting to `areaEqual = False`) the differences between the two are clear.
+
+```{r, include=FALSE}
+par(mar=rep(2, 4))
+```
+
+```{r}
+par(mfrow=c(2,1))
+par(mar=rep(2, 4))
+vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Width)", areaEqual = F)
+vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T)
+par(mfrow=c(1,1))
+```
+
+```{r, include=FALSE}
+par(mar=c(5, 4, 4, 2) + 0.1)
+```
+
+
+Note that `areaEqual` considering the full area of the density distribution before removing the outlier tails. We leave it up to the users discretion which they elect to use. The `areaEqual` functionality is compatible with all of the customisation used in discussed in [the main vioplotx vignette](violin_customistaion.html)
+
+```{r}
+vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T, col=c("lightgreen", "lightblue", "palevioletred"), rectCol=c("green", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), border=c("darkolivegreen4", "royalblue4", "violetred4"))
+```
