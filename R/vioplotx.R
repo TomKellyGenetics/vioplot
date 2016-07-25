@@ -12,8 +12,8 @@
 #' @param lty,lwd Graphical parameters for the violin passed to lines and polygon
 #' @param rectCol Graphical parameters to control fill colour of the box. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param lineCol Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.
-#' @param colMed Graphical parameters to control colour of the median point
-#' @param pchMed Graphical parameters to control shape of the median point
+#' @param colMed Graphical parameters to control colour of the median point. If colMed is a vector, it specifies the colour per violin.
+#' @param pchMed Graphical parameters to control shape of the median point. If pchMed is a vector, it specifies the shape per violin.
 #' @param drawRect logical. The box is drawn if TRUE.
 #' @param areaEqual logical. Density plots checked for equal area if TRUE. wex must be scalar, relative widths of violins depend on area.
 #' @param at position of each violin. Default to 1:n
@@ -162,7 +162,7 @@ vioplotx <-
                 lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
           rect(at[i] - ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q1[i], at[i] + ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2,
                q3[i], col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
-          points(at[i], med[i], pch = pchMed, col = colMed)
+          points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed))
         }
       }
     }
@@ -182,7 +182,7 @@ vioplotx <-
                 lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
           rect(q1[i], at[i] - ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q3[i], at[i] +
                  ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
-          points(med[i], at[i], pch = pchMed, col = colMed)
+          points(med[i], at[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed))
         }
       }
     }

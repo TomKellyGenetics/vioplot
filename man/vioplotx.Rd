@@ -35,9 +35,9 @@ vioplotx(x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
 
 \item{lineCol}{Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
-\item{colMed}{Graphical parameters to control colour of the median point}
+\item{colMed}{Graphical parameters to control colour of the median point. If colMed is a vector, it specifies the colour per violin.}
 
-\item{pchMed}{Graphical parameters to control shape of the median point}
+\item{pchMed}{Graphical parameters to control shape of the median point. If pchMed is a vector, it specifies the shape per violin.}
 
 \item{at}{position of each violin. Default to 1:n}
 
