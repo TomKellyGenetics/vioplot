@@ -59,12 +59,17 @@
 #' vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), areaEqual=T, col=c("red", "orange", "green", "blue", "violet"), rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"), lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), names=c("data one", "data two", "data three", "data four", "data five"), main="data violin", xlab="data class", ylab="data read")
 #'
 vioplotx <-
-  function (x, ..., range = 1.5, h = NULL, ylim = NULL, names = NULL,
+  function (x, ..., data = NULL, range = 1.5, h = NULL, ylim = NULL, names = names(datas),
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
             lwd = 1, rectCol = "black", lineCol = "black", colMed = "white", pchMed = 19,
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA)
   {
-    datas <- list(x, ...)
+    if (inherits(x, "formula")) {
+		  m <- model.frame(x, data = data)
+		  datas <- tapply(m[,1], m[,2], c, simplify = FALSE)
+	  } else {
+		  datas <- list(x, ...)
+	  }
     n <- length(datas)
     if (missing(at))
       at <- 1:n
