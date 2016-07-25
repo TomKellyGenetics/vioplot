@@ -120,7 +120,7 @@ par(mar=c(5, 4, 4, 2) + 0.1)
 ```
 
 
-Note that `areaEqual` is considering the full area of the density distribution before removing the outlier tails. We leave it up to the users discretion which they elect to use. The `areaEqual` functionality is compatible with all of the customisation used in discussed in [the main vioplotx vignette](violin_customistaion.html)
+Note that `areaEqual` is considering the full area of the density distribution before removing the outlier tails. We leave it up to the users discretion which they elect to use. The `areaEqual` functionality is compatible with all of the customisation used in discussed in [the main vioplotx vignette](violin_customisation.html)
 
 ```{r}
 vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T, col=c("lightgreen", "lightblue", "palevioletred"), rectCol=c("green", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), border=c("darkolivegreen4", "royalblue4", "violetred4"))

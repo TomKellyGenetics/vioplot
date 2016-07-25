@@ -1,0 +1,108 @@
+---
+title: "Customising Violin Plots"
+author: "Tom Kelly"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{vioplotx: Customising Violin Plots}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Since boxplots have become the _de facto_ standard for plotting the distribution of data most users are familiar with these and the formula input for dataframes. However this input is not available in the standard `vioplot` package. Thus it has been restored here for enhanced backwards compatibility with `boxplot`.
+
+As shown below for the `iris` dataset, violin plots show distribution information taking formula input that `boxplot` implements but `vioplot` is unable to. This demonstrates the customisation demonstrated in [the main vioplotx vignette using vioplot syntax](violin_customisation.html) with the formula method commonly used for `boxplot`, `t.test`, and `lm`.
+
+```{r, echo=FALSE, message=FALSE}
+library("vioplotx")
+```
+
+```{r, message=FALSE, eval=FALSE}
+data(iris)
+boxplot(Sepal.Length~Species, data = iris)
+```
+
+```{r, message=FALSE, echo=FALSE}
+data(iris)
+boxplot(Sepal.Length~Species, data = iris, main = "Sepal Length")
+```
+
+Whereas performing the same function does not work with `vioplot`.
+
+```{r, message=FALSE, eval=FALSE}
+library("vioplot")
+vioplot(Sepal.Length~Species, data = iris)
+```
+
+```{warning}
+Error in min(data) : invalid 'type' (language) of argument
+```
+
+## Plot Defaults
+
+```{r, message=FALSE, eval=FALSE}
+vioplotx(Sepal.Length~Species, data = iris)
+```
+
+```{r, message=FALSE, echo=FALSE}
+vioplotx(Sepal.Length~Species, data = iris, main = "Sepal Length", col="magenta")
+```
+
+Another concern we see here is that the `vioplot` defaults are not aesthetically pleasing, with a rather glaring colour scheme unsuitable for professional or academic usage. Thus the plot default colours have been changed as shown here:
+
+```{r}
+vioplotx(Sepal.Length~Species, data = iris, main = "Sepal Length")
+```
+
+## Plot colours: Violin Fill
+
+Plot colours can be further customised as with the original vioplot package using the `col` argument:
+
+```{r}
+vioplotx(Sepal.Length~Species, data = iris, main = "Sepal Length", col="lightblue")
+```
+
+###Vectorisation
+
+However the `vioplot` function is unable to colour each violin separately, thus this is enabled with a vectorised `col` in `vioplotx`:
+
+```{r}
+vioplotx(Sepal.Length~Species, data = iris, main = "Sepal Length", col=c("lightgreen", "lightblue", "palevioletred"))
+legend("topleft", legend=c("setosa", "versicolor", "virginica"), fill=c("lightgreen", "lightblue", "palevioletred"), cex = 0.5)
+```
+
+
+## Plot colours: Violin Lines and Boxplot
+
+Colours can also be customised for the violin fill and border separately using the `col` and `border` arguments:
+
+```{r}
+vioplotx(Sepal.Length~Species, data = iris, main = "Sepal Length", col="lightblue", border="royalblue")
+```
+
+Similarly, the arguments `lineCol` and `rectCol` specify the colors of the boxplot outline and rectangle fill. For simplicity the box and whiskers of the boxplot will always have the same colour.
+
+```{r}
+vioplotx(Sepal.Length~Species, data = iris, main = "Sepal Length", rectCol="palevioletred", lineCol="violetred")
+```
+ 
+ The same applies to the colour of the median point with `colMed`:
+ 
+```{r}
+vioplotx(Sepal.Length~Species, data = iris, main = "Sepal Length", colMed="violet")
+```
+ 
+ ### Combined customisation
+ 
+ These can be customised colours can be combined:
+ 
+```{r}
+vioplotx(Sepal.Length~Species, data = iris, main = "Sepal Length", col="lightblue", border="royalblue", rectCol="palevioletred", lineCol="violetred", colMed="violet")
+```
+ 
+### Vectorisation
+
+These color and shape settings can also be customised separately for each violin:
+```{r}
+vioplotx(Sepal.Length~Species, data = iris, main="Sepal Length (Equal Area)", areaEqual = T, col=c("lightgreen", "lightblue", "palevioletred"), border=c("darkolivegreen4", "royalblue4", "violetred4"), rectCol=c("forestgreen", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), colMed=c("green", "cyan", "magenta"), pchMed=c(15, 17, 19))
+```
