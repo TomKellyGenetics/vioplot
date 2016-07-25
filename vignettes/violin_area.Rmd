@@ -24,11 +24,11 @@ Therefore violin plots are a powerful tool to assist researchers to visualise da
 As shown below for the `iris` dataset, violin plots show distribution information that the boxplot is unable to.
 
 
-```{r, include=F}
+```{r, echo=FALSE, message=FALSE}
 library("vioplotx")
 ```
 
-```{r}
+```{r, message=FALSE}
 data(iris)
 boxplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"))
 vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"))
@@ -38,7 +38,7 @@ vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Speci
 
 However there are concerns that existing violin plot packages (such as \code{\link[vioplot]{vioplot}}) scales the data to the most aesthetically suitable  width rather than maintaining proportions comparable across data sets. Consider the differing distributions shown below:
 
-```{r, include=FALSE}
+```{r, echo=FALSE, message=FALSE}
 par(mar=rep(1,4))
 ```
 
@@ -51,7 +51,7 @@ plot(density(iris$Sepal.Length[iris$Species=="virginica"]), main="Sepal Length: 
 par(mfrow=c(1, 1))
 ```
 
-```{r, include=FALSE}
+```{r, echo=FALSE, message=FALSE}
 par(mar=c(5, 4, 4, 2) + 0.1)
 ```
 
@@ -60,7 +60,7 @@ par(mar=c(5, 4, 4, 2) + 0.1)
 
 Neither of these plots above show the relative distribtions on the same scale, even if we match the x-axis of a density plot the relative heights are obscured and difficult to compare.
 
-```{r, include=FALSE}
+```{r, echo=FALSE, message=FALSE}
 par(mar=rep(2,4))
 ```
 
@@ -75,7 +75,7 @@ plot(density(iris$Sepal.Length[iris$Species=="virginica"]), main="Sepal Length: 
 par(mfrow=c(1, 1))
 ```
 
-```{r, include=FALSE}
+```{r, echo=FALSE, message=FALSE}
 par(mar=c(5, 4, 4, 2) + 0.1)
 ```
 
@@ -95,15 +95,15 @@ This has the benefit of highlighting the differnt distributions of the data subs
 
 ##Area control in Violin plot
 
-Therefore the `areaEqual` parameter has been included to customise the violin plot to serve a similar purpose:
+Therefore the `areaEqual` parameter has been echod to customise the violin plot to serve a similar purpose:
 
 ```{r}
 vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", areaEqual = T)
 ```
 
-If we compare this to the original vioplot functionality (defaulting to `areaEqual = False`) the differences between the two are clear.
+If we compare this to the original vioplot functionality (defaulting to `areaEqual = FALSE`) the differences between the two are clear.
 
-```{r, include=FALSE}
+```{r, echo=FALSE, message=FALSE}
 par(mar=rep(2, 4))
 ```
 
@@ -115,7 +115,7 @@ vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Speci
 par(mfrow=c(1,1))
 ```
 
-```{r, include=FALSE}
+```{r, echo=FALSE, message=FALSE}
 par(mar=c(5, 4, 4, 2) + 0.1)
 ```
 
