@@ -65,7 +65,11 @@ vioplotx <-
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA)
   {
     if (inherits(x, "formula")) {
-      m <- model.frame(x, data = data)
+      if(is.null(data)){
+        m <- model.frame(x)
+      } else {
+        m <- model.frame(x, data = data)
+      }
       datas <- tapply(m[,1], m[,2], c, simplify = FALSE)
       if (is.null(names)) names <- names(datas)
     } else {
