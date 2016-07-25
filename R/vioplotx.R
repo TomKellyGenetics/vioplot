@@ -24,6 +24,8 @@
 #' @param wex relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary.
 #' @param horizontal logical. horizontal or vertical violins
 #' @param main,sub,xlab,ylab graphical parameters passed to plot.
+#' @param na.action a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.
+#' @param a logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
 #' @keywords plot graphics violin
 #' @import sm
 #' @importFrom zoo rollmean
@@ -66,7 +68,8 @@ vioplotx <-
   function (x, ..., data = NULL, range = 1.5, h = NULL, ylim = NULL, names = NULL,
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
             lwd = 1, rectCol = "black", lineCol = "black", colMed = "white", pchMed = 19,
-            at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA)
+            at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA,
+            na.action = NULL, na.rm = T)
   {
     if (inherits(x, "formula")) {
       if(is.null(data)){
@@ -90,6 +93,8 @@ vioplotx <-
     } else {
       datas <- list(x, ...)
     }
+    if(is.null(na.action)) na.action <- na.omit
+    if(na.rm) datas <- lapply(datas, na.action)
     n <- length(datas)
     if (missing(at))
       at <- 1:n
