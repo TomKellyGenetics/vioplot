@@ -21,7 +21,7 @@ test_that("plot formula with dataframe input and scalar colour", {
 test_that("plot formula with dataframe input and vector colour", {
   vioplotx(Sepal.Length~Species, data=iris, col=c("lightgreen", "lightblue", "palevioletred"))
 })
-iris <- as.matrix(iris)
-test_that("plot column formula with matrix input", {
-  vioplotx(Sepal.Length~Species, data=iris)
-})
+# iris <- as.matrix(iris)
+# test_that("plot column formula with matrix input", {
+#   vioplotx(Sepal.Length~Species, data=iris)
+# })
