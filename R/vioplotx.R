@@ -64,6 +64,25 @@
 #' vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), areaEqual=T, col=c("red", "orange", "green", "blue", "violet"), rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"), lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), names=c("data one", "data two", "data three", "data four", "data five"), main="data violin", xlab="data class", ylab="data read")
 #'
 
+vioplotx.formula <-
+  function (formula, data = NULL, ..., subset, na.action = NULL)
+  {
+    if (missing(formula) || (length(formula) != 3L))
+      stop("'formula' missing or incorrect")
+    m <- match.call(expand.dots = FALSE)
+    if (is.matrix(eval(m$data, parent.frame())))
+      m$data <- as.data.frame(data)
+    m$... <- NULL
+    m$na.action <- na.action
+    m[[1L]] <- quote(stats::model.frame)
+    mf <- eval(m, parent.frame())
+    response <- attr(attr(mf, "terms"), "response")
+    datas <- split(mf[[response]], mf[-response])
+    for(data in datas) print(names(data))
+    eval(parse(text=paste("vioplotx(", paste(names(datas), collapse = ", "), ", names = names(datas), ...)")))
+  }
+
+
 vioplotx <-
   function (x, ..., data = NULL, range = 1.5, h = NULL, ylim = NULL, names = NULL,
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
@@ -71,31 +90,11 @@ vioplotx <-
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA,
             na.action = NULL, na.rm = T)
   {
-    if (inherits(x, "formula")) {
-      if(is.null(data)){
-        m <- model.frame(x)
-      } else {
-        if(is.matrix(data)){
-          warning("data must be a dataframe rather than a matrix")
-          print("attempting to use matrix input")
-          data <- as.data.frame(data)
-        }
-        if(is.data.frame(data) || is.list(data)){
-          m <- model.frame(x, data = data)
-        } else {
-          warning("data must be a dataframe or list")
-          print("attempting formula without data input")
-          m <- model.frame(x)
-        }
-      }
-      datas <- tapply(m[,1], m[,2], c, simplify = FALSE)
-      if (is.null(names)) names <- names(datas)
-    } else {
-      datas <- list(x, ...)
-    }
+    datas <- list(x, ...)
     if(is.null(na.action)) na.action <- na.omit
     if(na.rm) datas <- lapply(datas, na.action)
     n <- length(datas)
+    if(is.list(datas)) datas <- as.data.frame(datas)
     if (missing(at))
       at <- 1:n
     upper <- vector(mode = "numeric", length = n)
@@ -256,3 +255,4 @@ vioplotx <-
       }
     }
   }
+
