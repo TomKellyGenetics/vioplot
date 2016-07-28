@@ -1,6 +1,6 @@
 #' Enhanced Violin Plot
 #'
-#' Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Builds upon \code{\link[vioplot]{vioplot}} and intended to function in largely the same way, with added customisation possible with colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} and taking input in a formula as used for \code{\link[boxplot]{graphics}}.
+#' Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Builds upon \code{\link[vioplot]{vioplot}} and intended to function in largely the same way, with added customisation possible with colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
 #'
 #' @param x data vector
 #' @param ... additional data vectors
@@ -62,16 +62,23 @@
 #' vioplotx(data_one, data_two, areaEqual=T)
 #' vioplotx(data_one, data_two, areaEqual=T, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"), lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
 #' vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), areaEqual=T, col=c("red", "orange", "green", "blue", "violet"), rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"), lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), names=c("data one", "data two", "data three", "data four", "data five"), main="data violin", xlab="data class", ylab="data read")
-#'
 
+#' @export
+#' @usage NULL
+vioplotx <- function(x, ...) {
+  UseMethod("vioplotx")
+}
+
+#' @rdname vioplotx
+#' @export
 vioplotx.formula <-
-  function (formula, data = NULL, ..., subset, na.action = NULL)
+  function (formula, data = NULL, ..., na.action = NULL)
   {
     if (missing(formula) || (length(formula) != 3L))
       stop("'formula' missing or incorrect")
     m <- match.call(expand.dots = FALSE)
     if (is.matrix(eval(m$data, parent.frame())))
-      m$data <- as.data.frame(data)
+      m$data <- data.frame(as.numeric(data))
     m$... <- NULL
     m$na.action <- na.action
     m[[1L]] <- quote(stats::model.frame)
@@ -83,7 +90,9 @@ vioplotx.formula <-
   }
 
 
-vioplotx <-
+#' @rdname vioplotx
+#' @export
+vioplotx.default <-
   function (x, ..., data = NULL, range = 1.5, h = NULL, ylim = NULL, names = NULL,
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
             lwd = 1, rectCol = "black", lineCol = "black", colMed = "white", pchMed = 19,
