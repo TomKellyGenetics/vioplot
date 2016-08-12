@@ -86,6 +86,7 @@ vioplotx.formula <-
     response <- attr(attr(mf, "terms"), "response")
     datas <- split(mf[[response]], mf[-response])
     for(data in datas) print(names(data))
+    attach(datas)
     eval(parse(text=paste("vioplotx(", paste(names(datas), collapse = ", "), ", names = names(datas), ...)")))
   }
 
@@ -103,7 +104,7 @@ vioplotx.default <-
     if(is.null(na.action)) na.action <- na.omit
     if(na.rm) datas <- lapply(datas, na.action)
     n <- length(datas)
-    if(is.list(datas)) datas <- as.data.frame(datas)
+    #if(is.list(datas)) datas <- as.data.frame(datas)
     if (missing(at))
       at <- 1:n
     upper <- vector(mode = "numeric", length = n)
