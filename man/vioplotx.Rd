@@ -6,7 +6,8 @@
 \alias{vioplotx.formula}
 \title{Enhanced Violin Plot}
 \usage{
-\method{vioplotx}{formula}(formula, data = NULL, ..., na.action = NULL)
+\method{vioplotx}{formula}(formula, data = NULL, ..., names = NULL,
+  na.action = NULL)
 
 \method{vioplotx}{default}(x, ..., data = NULL, range = 1.5, h = NULL,
   ylim = NULL, names = NULL, horizontal = FALSE, col = "grey50",
@@ -24,6 +25,8 @@
 
 \item{data}{a data.frame (or list) from which the variables in formula should be taken.}
 
+\item{names}{one label, or a vector of labels for the datas must match the number of datas given}
+
 \item{na.action}{a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.}
 
 \item{range}{a factor to calculate the upper/lower adjacent values}
@@ -31,8 +34,6 @@
 \item{h}{the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum}
 
 \item{ylim}{y limits}
-
-\item{names}{one label, or a vector of labels for the datas must match the number of datas given}
 
 \item{horizontal}{logical. horizontal or vertical violins}
 

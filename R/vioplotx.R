@@ -72,7 +72,7 @@ vioplotx <- function(x, ...) {
 #' @rdname vioplotx
 #' @export
 vioplotx.formula <-
-  function (formula, data = NULL, ..., na.action = NULL)
+  function (formula, data = NULL, ..., names=NULL, na.action = NULL)
   {
     if (missing(formula) || (length(formula) != 3L))
       stop("'formula' missing or incorrect")
@@ -80,14 +80,15 @@ vioplotx.formula <-
     if (is.matrix(eval(m$data, parent.frame())))
       m$data <- data.frame(as.numeric(data))
     m$... <- NULL
+    m$names <- NULL
     m$na.action <- na.action
     m[[1L]] <- quote(stats::model.frame)
     mf <- eval(m, parent.frame())
     response <- attr(attr(mf, "terms"), "response")
     datas <- split(mf[[response]], mf[-response])
-    for(data in datas) print(names(data))
     attach(datas)
-    eval(parse(text=paste("vioplotx(", paste(names(datas), collapse = ", "), ", names = names(datas), ...)")))
+    if(is.null(names)) names <- names(datas)
+    eval(parse(text=paste("vioplotx(", paste(names(datas), collapse = ", "), ", names = names, ...)")))
   }
 
 
