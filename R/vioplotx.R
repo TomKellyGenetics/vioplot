@@ -89,6 +89,7 @@ vioplotx.formula <-
     attach(datas)
     if(is.null(names)) names <- names(datas)
     eval(parse(text=paste("vioplotx(", paste(names(datas), collapse = ", "), ", names = names, ...)")))
+    detach(datas)
   }
 
 
@@ -103,6 +104,7 @@ vioplotx.default <-
   {
     datas <- list(x, ...)
     if(is.null(na.action)) na.action <- na.omit
+    lapply(datas, function(data) data <- data[!sapply(data, is.infinite)])
     if(na.rm) datas <- lapply(datas, na.action)
     n <- length(datas)
     #if(is.list(datas)) datas <- as.data.frame(datas)
@@ -124,8 +126,8 @@ vioplotx.default <-
     if(areaEqual){
       for (i in 1:n) {
         data <- datas[[i]]
-        data.min <- min(data)
-        data.max <- max(data)
+        data.min <- min(data, na.rm = na.rm)
+        data.max <- max(data, na.rm = na.rm)
         q1[i] <- quantile(data, 0.25)
         q3[i] <- quantile(data, 0.75)
         med[i] <- median(data)
@@ -150,8 +152,8 @@ vioplotx.default <-
     }
     for (i in 1:n) {
       data <- datas[[i]]
-      data.min <- min(data)
-      data.max <- max(data)
+      data.min <- min(data, na.rm = na.rm)
+      data.max <- max(data, na.rm = na.rm)
       q1[i] <- quantile(data, 0.25)
       q3[i] <- quantile(data, 0.75)
       med[i] <- median(data)
