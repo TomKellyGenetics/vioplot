@@ -8,7 +8,7 @@ Description: A violin plot is a combination of a box plot and a kernel density
 Depends:
     sm,
     zoo
-License: BSD
+License: BSD + file LICENSE
 LazyData: true
 RoxygenNote: 5.0.1
 Suggests:
