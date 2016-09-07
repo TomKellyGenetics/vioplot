@@ -27,6 +27,7 @@
 #' @param na.action a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.
 #' @param na.rm logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
 #' @param side defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.
+#' @param plotCentre defaults to "points", plotting a central point at the median. If "line" is given a median line is plotted (subject to side) alternatively.
 #' @keywords plot graphics violin
 #' @import sm
 #' @importFrom zoo rollmean
@@ -101,7 +102,7 @@ vioplotx.default <-
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
             lwd = 1, rectCol = "black", lineCol = "black", colMed = "white", pchMed = 19,
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA,
-            na.action = NULL, na.rm = T, side = "both")
+            na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
     datas <- list(x, ...)
     if(is.null(na.action)) na.action <- na.omit
@@ -127,7 +128,7 @@ vioplotx.default <-
     boxwex <- wex
     if (!(is.null(h)))
       args <- c(args, h = h)
-    #med.dens <- rep(NA, n)
+    if(plotCentre == "line") med.dens <- rep(NA, n)
     if(areaEqual){
       for (i in 1:n) {
         data <- datas[[i]]
@@ -144,10 +145,12 @@ vioplotx.default <-
                                                    data.max))
         smout <- do.call("sm.density", c(list(data, xlim = est.xlim),
                                          args))
-        # med.dat <- do.call("sm.density",
-        #                    c(list(data, xlim=est.xlim,
-        #                           eval.points=med[i], display = "none")))
-        # med.dens[i] <- med.dat$estimate
+        if(plotCentre == "line"){
+          med.dat <- do.call("sm.density",
+                             c(list(data, xlim=est.xlim,
+                                    eval.points=med[i], display = "none")))
+          med.dens[i] <- med.dat$estimate
+        }
         Avg.pos <- mean(smout$eval.points)
         xt <- diff(smout$eval.points[smout$eval.points<Avg.pos])
         yt <- rollmean(smout$eval.points[smout$eval.points<Avg.pos],2)
@@ -165,6 +168,7 @@ vioplotx.default <-
       data.min <- min(data, na.rm = na.rm)
       data.max <- max(data, na.rm = na.rm)
       q1[i] <- quantile(data, 0.25)
+      q2[i] <- quantile(data, 0.5)
       q3[i] <- quantile(data, 0.75)
       med[i] <- median(data)
       iqd <- q3[i] - q1[i]
@@ -180,6 +184,12 @@ vioplotx.default <-
       t <- range(base[[i]])
       baserange[1] <- min(baserange[1], t[1])
       baserange[2] <- max(baserange[2], t[2])
+      if(plotCentre == "line"){
+        med.dat <- do.call("sm.density",
+                           c(list(data, xlim=est.xlim,
+                                  eval.points=med[i], display = "none")))
+        med.dens[i] <- med.dat$estimate *hscale
+      }
     }
     if (!add) {
       xlim <- if (n == 1)
@@ -214,12 +224,14 @@ vioplotx.default <-
                 lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
           rect(at[i] - radj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q1[i], at[i] + ladj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2,
                q3[i], col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
-          points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed))
-          # median line segment
-          # lines(x = c(at[i] - radj*med.dens[i],
-          #             at[i],
-          #             at[i] + ladj*med.dens[i]),
-          #       y = rep(med[i],3))
+          if(plotCentre == "line"){
+            lines(x = c(at[i] - radj*med.dens[i],
+                        at[i],
+                        at[i] + ladj*med.dens[i]),
+                  y = rep(med[i],3))
+          } else {
+            points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed))
+          }
         }
       }
     }
@@ -239,11 +251,14 @@ vioplotx.default <-
                 lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
           rect(q1[i], at[i] - radj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q3[i], at[i] +
                  ladj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
-          points(med[i], at[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed))
-          # lines(y = c(at[i] - radj*med.dens[i],
-          #             at[i],
-          #             at[i] + ladj*med.dens[i]),
-          #       x = rep(med[i],3))
+          if(plotCentre == "line"){
+            lines(y = c(at[i] - radj*med.dens[i],
+                        at[i],
+                        at[i] + ladj*med.dens[i]),
+                  x = rep(med[i],3))
+          } else {
+            points(med[i], at[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed))
+          }
         }
       }
     }
