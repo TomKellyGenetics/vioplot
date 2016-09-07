@@ -15,9 +15,21 @@ devtools::install_github("TomKellyGenetics/vioplotx")
 
 See the relevant vignette for more details:
 
+* Customising colour and shape with scalar inputs or vectors applied separately to each violin.
+
 https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_customisation.html
-https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_forumlae.html
+
+* Formula input enabled with S3 methods.
+
+https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_formulae.html
+
+* Control of violin area for proportional widths
+
 https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_area.html
+
+* Split violins to directly compare paired data.
+
+https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_split.html
 
 Vioplotx works in much the same manner as Vioplot
 
@@ -27,6 +39,9 @@ Vioplotx works in much the same manner as Vioplot
 
 * `vioplotx::vioplotx()` can take vectorised forms of colour variables `col`, `border`, and `rectCol` to modify the colours separately for each violin respectively. This also applies to a new variable `lineCol` to modify the colour of the boxplots. 
 
+* `vioplox::vioplotx.formula()` is enabled to take formula and dataframe inputs as used for boxplot and stats operations.
+
+* additional `areaEqual`, `plotCentre` and `side` options enables further customisation. 
 
 For development history prior to package documentation, see the original repo: https://github.com/TomKellyGenetics/R-violin-plot/commits?author=TomKellyGenetics
 
