@@ -12,10 +12,10 @@
 \method{vioplotx}{default}(x, ..., data = NULL, range = 1.5, h = NULL,
   ylim = NULL, names = NULL, horizontal = FALSE, col = "grey50",
   border = "black", lty = 1, lwd = 1, rectCol = "black",
-  lineCol = "black", colMed = "white", pchMed = 19, at, add = FALSE,
-  wex = 1, drawRect = TRUE, areaEqual = FALSE, main = NA, sub = NA,
-  xlab = NA, ylab = NA, na.action = NULL, na.rm = T, side = "both",
-  plotCentre = "point")
+  lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
+  at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual = FALSE,
+  main = NA, sub = NA, xlab = NA, ylab = NA, na.action = NULL,
+  na.rm = T, side = "both", plotCentre = "point")
 }
 \arguments{
 \item{x}{data vector}
@@ -48,9 +48,9 @@
 
 \item{lineCol}{Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
-\item{colMed}{Graphical parameters to control colour of the median point. If colMed is a vector, it specifies the colour per violin.}
-
 \item{pchMed}{Graphical parameters to control shape of the median point. If pchMed is a vector, it specifies the shape per violin.}
+
+\item{colMed, colMed2}{Graphical parameters to control colour of the median point. If colMed is a vector, it specifies the colour per violin. colMed specifies the fill colour in all cases unless pchMed is 21:25 in which case colMed is the border colour and colMed2 is the fill colour.}
 
 \item{at}{position of each violin. Default to 1:n}
 

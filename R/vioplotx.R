@@ -15,8 +15,8 @@
 #' @param lty,lwd Graphical parameters for the violin passed to lines and polygon
 #' @param rectCol Graphical parameters to control fill colour of the box. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param lineCol Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.
-#' @param colMed Graphical parameters to control colour of the median point. If colMed is a vector, it specifies the colour per violin.
 #' @param pchMed Graphical parameters to control shape of the median point. If pchMed is a vector, it specifies the shape per violin.
+#' @param colMed,colMed2 Graphical parameters to control colour of the median point. If colMed is a vector, it specifies the colour per violin. colMed specifies the fill colour in all cases unless pchMed is 21:25 in which case colMed is the border colour and colMed2 is the fill colour.
 #' @param drawRect logical. The box is drawn if TRUE.
 #' @param areaEqual logical. Density plots checked for equal area if TRUE. wex must be scalar, relative widths of violins depend on area.
 #' @param at position of each violin. Default to 1:n
@@ -100,7 +100,7 @@ vioplotx.formula <-
 vioplotx.default <-
   function (x, ..., data = NULL, range = 1.5, h = NULL, ylim = NULL, names = NULL,
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
-            lwd = 1, rectCol = "black", lineCol = "black", colMed = "white", pchMed = 19,
+            lwd = 1, rectCol = "black", lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA,
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
@@ -230,7 +230,7 @@ vioplotx.default <-
                         at[i] + ladj*med.dens[i]),
                   y = rep(med[i],3))
           } else {
-            points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed))
+            points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed), bg = ifelse(length(colMed2)>1, colMed2[i], colMed2))
           }
         }
       }
@@ -257,7 +257,7 @@ vioplotx.default <-
                         at[i] + ladj*med.dens[i]),
                   x = rep(med[i],3))
           } else {
-            points(med[i], at[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed))
+            points(med[i], at[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed), , bg = ifelse(length(colMed2)>1, colMed2[i], colMed2))
           }
         }
       }
