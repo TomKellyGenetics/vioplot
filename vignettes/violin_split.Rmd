@@ -120,7 +120,7 @@ Here it is aesthetically pleasing and intuitive to interpret categorical differe
 
 
 #### Sources
-The extensions to `violotx` here are based on those provided here:
+These extensions to `vioplotx` here are based on those provided here:
 
 * https://gist.github.com/mbjoseph/5852613
 
