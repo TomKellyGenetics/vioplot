@@ -14,7 +14,7 @@
   border = "black", lty = 1, lwd = 1, rectCol = "black",
   lineCol = "black", colMed = "white", pchMed = 19, at, add = FALSE,
   wex = 1, drawRect = TRUE, areaEqual = FALSE, main = NA, sub = NA,
-  xlab = NA, ylab = NA, na.action = NULL, na.rm = T)
+  xlab = NA, ylab = NA, na.action = NULL, na.rm = T, side = "both")
 }
 \arguments{
 \item{x}{data vector}
@@ -63,7 +63,9 @@
 
 \item{main, sub, xlab, ylab}{graphical parameters passed to plot.}
 
-\item{a}{logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.}
+\item{na.rm}{logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.}
+
+\item{side}{defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be a applied as a scalar across all groups or a vector specifying each.}
 }
 \description{
 Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Builds upon \code{\link[vioplot]{vioplot}} and intended to function in largely the same way, with added customisation possible with colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} and taking input in a formula as used for \code{\link[graphics]{boxplot}}.

@@ -25,7 +25,8 @@
 #' @param horizontal logical. horizontal or vertical violins
 #' @param main,sub,xlab,ylab graphical parameters passed to plot.
 #' @param na.action a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.
-#' @param a logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
+#' @param na.rm logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
+#' @param side defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.
 #' @keywords plot graphics violin
 #' @import sm
 #' @importFrom zoo rollmean
@@ -100,7 +101,7 @@ vioplotx.default <-
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
             lwd = 1, rectCol = "black", lineCol = "black", colMed = "white", pchMed = 19,
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA,
-            na.action = NULL, na.rm = T)
+            na.action = NULL, na.rm = T, side = "both")
   {
     datas <- list(x, ...)
     if(is.null(na.action)) na.action <- na.omit
@@ -113,6 +114,7 @@ vioplotx.default <-
     upper <- vector(mode = "numeric", length = n)
     lower <- vector(mode = "numeric", length = n)
     q1 <- vector(mode = "numeric", length = n)
+    q2 <- vector(mode = "numeric", length = n)
     q3 <- vector(mode = "numeric", length = n)
     med <- vector(mode = "numeric", length = n)
     base <- vector(mode = "list", length = n)
@@ -120,15 +122,19 @@ vioplotx.default <-
     area_check <- vector(mode = "list", length = n)
     baserange <- c(Inf, -Inf)
     args <- list(display = "none")
+    radj <- ifelse(side == "right", 0, 1)
+    ladj <- ifelse(side == "left", 0, 1)
     boxwex <- wex
     if (!(is.null(h)))
       args <- c(args, h = h)
+    #med.dens <- rep(NA, n)
     if(areaEqual){
       for (i in 1:n) {
         data <- datas[[i]]
         data.min <- min(data, na.rm = na.rm)
         data.max <- max(data, na.rm = na.rm)
         q1[i] <- quantile(data, 0.25)
+        q2[i] <- quantile(data, 0.5)
         q3[i] <- quantile(data, 0.75)
         med[i] <- median(data)
         iqd <- q3[i] - q1[i]
@@ -138,6 +144,10 @@ vioplotx.default <-
                                                    data.max))
         smout <- do.call("sm.density", c(list(data, xlim = est.xlim),
                                          args))
+        # med.dat <- do.call("sm.density",
+        #                    c(list(data, xlim=est.xlim,
+        #                           eval.points=med[i], display = "none")))
+        # med.dens[i] <- med.dat$estimate
         Avg.pos <- mean(smout$eval.points)
         xt <- diff(smout$eval.points[smout$eval.points<Avg.pos])
         yt <- rollmean(smout$eval.points[smout$eval.points<Avg.pos],2)
@@ -196,15 +206,20 @@ vioplotx.default <-
       }
       box()
       for (i in 1:n) {
-        polygon(c(at[i] - height[[i]], rev(at[i] + height[[i]])),
+        polygon(c(at[i] - radj*height[[i]], rev(at[i] + ladj*height[[i]])),
                 c(base[[i]], rev(base[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border),
                 lty = lty, lwd = lwd)
         if (drawRect) {
           lines(at[c(i, i)], c(lower[i], upper[i]), lwd = lwd,
                 lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
-          rect(at[i] - ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q1[i], at[i] + ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2,
+          rect(at[i] - radj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q1[i], at[i] + ladj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2,
                q3[i], col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
           points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed))
+          # median line segment
+          # lines(x = c(at[i] - radj*med.dens[i],
+          #             at[i],
+          #             at[i] + ladj*med.dens[i]),
+          #       y = rep(med[i],3))
         }
       }
     }
@@ -216,15 +231,19 @@ vioplotx.default <-
       }
       box()
       for (i in 1:n) {
-        polygon(c(base[[i]], rev(base[[i]])), c(at[i] - height[[i]],
-                                                rev(at[i] + height[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border),
+        polygon(c(base[[i]], rev(base[[i]])), c(at[i] - radj*height[[i]],
+                                                rev(at[i] + ladj*height[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border),
                 lty = lty, lwd = lwd)
         if (drawRect) {
           lines(c(lower[i], upper[i]), at[c(i, i)], lwd = lwd,
                 lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
-          rect(q1[i], at[i] - ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q3[i], at[i] +
-                 ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
+          rect(q1[i], at[i] - radj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q3[i], at[i] +
+                 ladj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
           points(med[i], at[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed))
+          # lines(y = c(at[i] - radj*med.dens[i],
+          #             at[i],
+          #             at[i] + ladj*med.dens[i]),
+          #       x = rep(med[i],3))
         }
       }
     }
