@@ -2,8 +2,8 @@
 #'
 #' Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Builds upon \code{\link[vioplot]{vioplot}} and intended to function in largely the same way, with added customisation possible with colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
 #'
-#' @param x data vector
-#' @param ... additional data vectors
+#' @param x for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.
+#' @param ... additional data vectors or forumla parameters.
 #' @param formula a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).
 #' @param data a data.frame (or list) from which the variables in formula should be taken.
 #' @param range a factor to calculate the upper/lower adjacent values
@@ -104,7 +104,11 @@ vioplotx.default <-
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA,
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
-    datas <- list(x, ...)
+    if(!is.list(x)){
+      datas <- list(x, ...)
+    } else{
+      datas<-lapply(x, unlist)
+    }
     if(is.null(na.action)) na.action <- na.omit
     lapply(datas, function(data) data <- data[!sapply(data, is.infinite)])
     if(na.rm) datas <- lapply(datas, na.action)
@@ -131,7 +135,7 @@ vioplotx.default <-
     if(plotCentre == "line") med.dens <- rep(NA, n)
     if(areaEqual){
       for (i in 1:n) {
-        data <- datas[[i]]
+        data <- unlist(datas[[i]])
         data.min <- min(data, na.rm = na.rm)
         data.max <- max(data, na.rm = na.rm)
         q1[i] <- quantile(data, 0.25)
@@ -164,7 +168,7 @@ vioplotx.default <-
       wex <-unlist(area_check)/max(unlist(area_check))*wex
     }
     for (i in 1:n) {
-      data <- datas[[i]]
+      data <- unlist(datas[[i]])
       data.min <- min(data, na.rm = na.rm)
       data.max <- max(data, na.rm = na.rm)
       q1[i] <- quantile(data, 0.25)
