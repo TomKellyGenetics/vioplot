@@ -10,7 +10,7 @@ Depends:
     zoo
 License: BSD + file LICENSE
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Suggests:
     knitr,
     rmarkdown,
