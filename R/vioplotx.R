@@ -21,10 +21,11 @@
 #' @param areaEqual logical. Density plots checked for equal area if TRUE. wex must be scalar, relative widths of violins depend on area.
 #' @param at position of each violin. Default to 1:n
 #' @param add logical. if FALSE (default) a new plot is created
-#' @param wex relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary.
+#' @param wex relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessarydocu.
 #' @param horizontal logical. horizontal or vertical violins
 #' @param main,sub,xlab,ylab graphical parameters passed to plot.
 #' @param yaxt A character which specifies the y axis type. Specifying "n" suppresses plotting.
+#' @param ylog A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.
 #' @param na.action a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.
 #' @param na.rm logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
 #' @param side defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.
@@ -102,7 +103,8 @@ vioplotx.default <-
   function (x, ..., data = NULL, range = 1.5, h = NULL, ylim = NULL, names = NULL,
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
             lwd = 1, rectCol = "black", lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
-            at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE, main=NA, sub=NA, xlab=NA, ylab=NA, yaxt="s",
+            at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE,
+            main=NA, sub=NA, xlab=NA, ylab=NA, yaxt="s", ylog=FALSE,
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
     if(!is.list(x)){
@@ -110,6 +112,7 @@ vioplotx.default <-
     } else{
       datas<-lapply(x, unlist)
     }
+    if(ylog) datas <- lapply(datas, log)
     if(is.null(na.action)) na.action <- na.omit
     lapply(datas, function(data) data <- data[!sapply(data, is.infinite)])
     if(na.rm) datas <- lapply(datas, na.action)
@@ -216,7 +219,14 @@ vioplotx.default <-
     if (!horizontal) {
       if (!add) {
         plot.window(xlim = xlim, ylim = ylim)
-        if(yaxt !="n")  axis(2)
+        if(yaxt !="n"){
+          if(ylog){
+            log_axis <- sort(c(1, 10^c(seq(-10,10)), 2*10^c(seq(-10,10)), 5*10^c(seq(-10,10))))
+            axis(2, at=log(log_axis), label=log_axis)
+          } else {
+            axis(2)
+          }
+        }
         axis(1, at = at, label = label)
       }
       box()
@@ -244,7 +254,14 @@ vioplotx.default <-
       if (!add) {
         plot.window(xlim = ylim, ylim = xlim)
         axis(1)
-        if(yaxt !="n")  axis(2, at = at, label = label)
+        if(yaxt !="n"){
+          if(ylog){
+            log_axis <- sort(c(1, 10^c(seq(-10,10)), 2*10^c(seq(-10,10)), 5*10^c(seq(-10,10))))
+            axis(2, at=log(log_axis), label=log_axis)
+          } else {
+            axis(2, at = at, label = label)
+          }
+        }
       }
       box()
       for (i in 1:n) {

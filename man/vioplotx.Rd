@@ -15,7 +15,8 @@
   lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
   at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual = FALSE,
   main = NA, sub = NA, xlab = NA, ylab = NA, yaxt = "s",
-  na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
+  ylog = FALSE, na.action = NULL, na.rm = T, side = "both",
+  plotCentre = "point")
 }
 \arguments{
 \item{x}{for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.}
@@ -56,7 +57,7 @@
 
 \item{add}{logical. if FALSE (default) a new plot is created}
 
-\item{wex}{relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary.}
+\item{wex}{relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessarydocu.}
 
 \item{drawRect}{logical. The box is drawn if TRUE.}
 
@@ -65,6 +66,8 @@
 \item{main, sub, xlab, ylab}{graphical parameters passed to plot.}
 
 \item{yaxt}{A character which specifies the y axis type. Specifying "n" suppresses plotting.}
+
+\item{ylog}{A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.}
 
 \item{na.rm}{logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.}
 
