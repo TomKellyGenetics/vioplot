@@ -18,9 +18,9 @@
   na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
 }
 \arguments{
-\item{x}{data vector}
+\item{x}{for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.}
 
-\item{...}{additional data vectors}
+\item{...}{additional data vectors or forumla parameters.}
 
 \item{formula}{a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).}
 
