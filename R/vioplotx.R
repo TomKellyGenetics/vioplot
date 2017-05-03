@@ -113,7 +113,7 @@ vioplotx.default <-
     } else{
       datas<-lapply(x, unlist)
     }
-    if(log == "y" | log == TRUE) ylog <- TRUE
+    if(log == "y" | log == TRUE | ylog == TRUE) ylog <- TRUE
     if(ylog) datas <- lapply(datas, log)
     if(is.null(na.action)) na.action <- na.omit
     lapply(datas, function(data) data <- data[!sapply(data, is.infinite)])
