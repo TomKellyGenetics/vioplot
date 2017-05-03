@@ -108,13 +108,14 @@ vioplotx.default <-
             main=NA, sub=NA, xlab=NA, ylab=NA, yaxt="s", ylog=FALSE, log="",
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
-    if(!is.list(x)){
+      if(!is.list(x)){
       datas <- list(x, ...)
     } else{
       datas<-lapply(x, unlist)
     }
-    if(log == "y" | log == TRUE | ylog == TRUE) ylog <- TRUE
-    if(ylog) datas <- lapply(datas, log)
+    if(is.character(log)) if("y" %in% unlist(strsplit(log, ""))) log <- TRUE
+    if(log == TRUE | ylog == TRUE) ylog <- TRUE
+    if(ylog) datas <- lapply(datas, function(x) log(unlist(x)))
     if(is.null(na.action)) na.action <- na.omit
     lapply(datas, function(data) data <- data[!sapply(data, is.infinite)])
     if(na.rm) datas <- lapply(datas, na.action)
