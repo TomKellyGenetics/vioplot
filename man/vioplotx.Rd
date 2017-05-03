@@ -15,7 +15,7 @@
   lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
   at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual = FALSE,
   main = NA, sub = NA, xlab = NA, ylab = NA, yaxt = "s",
-  ylog = FALSE, na.action = NULL, na.rm = T, side = "both",
+  ylog = FALSE, log = "", na.action = NULL, na.rm = T, side = "both",
   plotCentre = "point")
 }
 \arguments{
@@ -68,6 +68,8 @@
 \item{yaxt}{A character which specifies the y axis type. Specifying "n" suppresses plotting.}
 
 \item{ylog}{A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.}
+
+\item{log}{Logarithmic scale if log = "y" or TRUE. Invokes ylog = TRUE.}
 
 \item{na.rm}{logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.}
 

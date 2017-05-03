@@ -9,6 +9,9 @@
 #' @param range a factor to calculate the upper/lower adjacent values
 #' @param h the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum
 #' @param ylim y limits
+#' @param yaxt A character which specifies the y axis type. Specifying "n" suppresses plotting.
+#' @param ylog A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.
+#' @param log  Logarithmic scale if log = "y" or TRUE. Invokes ylog = TRUE.
 #' @param names one label, or a vector of labels for the datas must match the number of datas given
 #' @param col Graphical parameter for fill colour of the violin(s) polygon. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param border Graphical parameters for the colour of the violin border passed to lines. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.
@@ -24,8 +27,6 @@
 #' @param wex relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessarydocu.
 #' @param horizontal logical. horizontal or vertical violins
 #' @param main,sub,xlab,ylab graphical parameters passed to plot.
-#' @param yaxt A character which specifies the y axis type. Specifying "n" suppresses plotting.
-#' @param ylog A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.
 #' @param na.action a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.
 #' @param na.rm logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
 #' @param side defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.
@@ -104,7 +105,7 @@ vioplotx.default <-
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
             lwd = 1, rectCol = "black", lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE,
-            main=NA, sub=NA, xlab=NA, ylab=NA, yaxt="s", ylog=FALSE,
+            main=NA, sub=NA, xlab=NA, ylab=NA, yaxt="s", ylog=FALSE, log="",
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
     if(!is.list(x)){
@@ -112,6 +113,7 @@ vioplotx.default <-
     } else{
       datas<-lapply(x, unlist)
     }
+    if(log == "y" | log == TRUE) ylog <- TRUE
     if(ylog) datas <- lapply(datas, log)
     if(is.null(na.action)) na.action <- na.omit
     lapply(datas, function(data) data <- data[!sapply(data, is.infinite)])
