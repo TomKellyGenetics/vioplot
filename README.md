@@ -27,6 +27,10 @@ https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_formulae.ht
 
 https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_area.html
 
+* Control of the y-axis including disabling labels and log-scale
+
+https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_ylog.html
+
 * Split violins to directly compare paired data.
 
 https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_split.html
