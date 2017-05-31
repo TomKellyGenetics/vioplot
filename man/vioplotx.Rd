@@ -15,8 +15,8 @@
   lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
   at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual = FALSE,
   main = NA, sub = NA, xlab = NA, ylab = NA, yaxt = "s",
-  ylog = FALSE, log = "", na.action = NULL, na.rm = T, side = "both",
-  plotCentre = "point")
+  ylog = FALSE, log = "", logLab = c(1, 2, 5), na.action = NULL,
+  na.rm = T, side = "both", plotCentre = "point")
 }
 \arguments{
 \item{x}{for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.}
@@ -47,7 +47,7 @@
 
 \item{rectCol}{Graphical parameters to control fill colour of the box. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
-\item{lineCol}{Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.}
+\item{lineCol}{Graphical parameters to control colour of the box outline and whiskers. NA for no border. If lineCol is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
 \item{pchMed}{Graphical parameters to control shape of the median point. If pchMed is a vector, it specifies the shape per violin.}
 
@@ -70,6 +70,8 @@
 \item{ylog}{A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.}
 
 \item{log}{Logarithmic scale if log = "y" or TRUE. Invokes ylog = TRUE.}
+
+\item{logLab}{Increments for labelling y-axis on log-scale, defaults to numbers starting with 1, 2, 5, and 10.}
 
 \item{na.rm}{logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.}
 

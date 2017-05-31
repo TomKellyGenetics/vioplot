@@ -12,12 +12,13 @@
 #' @param yaxt A character which specifies the y axis type. Specifying "n" suppresses plotting.
 #' @param ylog A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.
 #' @param log  Logarithmic scale if log = "y" or TRUE. Invokes ylog = TRUE.
+#' @param logLab Increments for labelling y-axis on log-scale, defaults to numbers starting with 1, 2, 5, and 10.
 #' @param names one label, or a vector of labels for the datas must match the number of datas given
 #' @param col Graphical parameter for fill colour of the violin(s) polygon. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param border Graphical parameters for the colour of the violin border passed to lines. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param lty,lwd Graphical parameters for the violin passed to lines and polygon
 #' @param rectCol Graphical parameters to control fill colour of the box. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
-#' @param lineCol Graphical parameters to control fill colour of the box. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.
+#' @param lineCol Graphical parameters to control colour of the box outline and whiskers. NA for no border. If lineCol is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param pchMed Graphical parameters to control shape of the median point. If pchMed is a vector, it specifies the shape per violin.
 #' @param colMed,colMed2 Graphical parameters to control colour of the median point. If colMed is a vector, it specifies the colour per violin. colMed specifies the fill colour in all cases unless pchMed is 21:25 in which case colMed is the border colour and colMed2 is the fill colour.
 #' @param drawRect logical. The box is drawn if TRUE.
@@ -105,7 +106,7 @@ vioplotx.default <-
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
             lwd = 1, rectCol = "black", lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE,
-            main=NA, sub=NA, xlab=NA, ylab=NA, yaxt="s", ylog=FALSE, log="",
+            main=NA, sub=NA, xlab=NA, ylab=NA, yaxt="s", ylog=FALSE, log="", logLab=c(1,2,5),
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
       if(!is.list(x)){
@@ -115,7 +116,22 @@ vioplotx.default <-
     }
     if(is.character(log)) if("y" %in% unlist(strsplit(log, ""))) log <- TRUE
     if(log == TRUE | ylog == TRUE) ylog <- TRUE
-    if(ylog) datas <- lapply(datas, function(x) log(unlist(x)))
+    if(ylog){
+      #check data is compatible with log scale
+      if(all(unlist(datas) <= 0)){
+        ylog <- FALSE
+        warning("log scale cannot be used with non-positive data")
+      } else {
+        #log-scale data
+        datas <- lapply(datas, function(x) log(unlist(x)))
+        #create axis labels
+        log_axis <- as.vector(outer(1:9, 10^(floor(log(min(unlist(datas)), 10)):ceiling(log(max(unlist(datas)), 10)))))
+        log_axis_label <- ifelse(substr(log_axis, 1, 1) %in% logLab, log_axis, "")
+        #log_axis_label <- ifelse(log(log_axis, 10) %% 1 ==0, log_axis, "")
+        #log_axis <- sort(c(1, 10^c(seq(-10,10)), 2*10^c(seq(-10,10)), 5*10^c(seq(-10,10))))
+        #log_axis_label <- log_axis
+      }
+    }
     if(is.null(na.action)) na.action <- na.omit
     lapply(datas, function(data) data <- data[!sapply(data, is.infinite)])
     if(na.rm) datas <- lapply(datas, na.action)
@@ -224,8 +240,11 @@ vioplotx.default <-
         plot.window(xlim = xlim, ylim = ylim)
         if(yaxt !="n"){
           if(ylog){
-            log_axis <- sort(c(1, 10^c(seq(-10,10)), 2*10^c(seq(-10,10)), 5*10^c(seq(-10,10))))
-            axis(2, at=log(log_axis), label=log_axis)
+            #log_axis <- log_axis[log_axis <= par("usr")[3]]
+            #log_axis_label <- log_axis_label[log_axis <= par("usr")[3]]
+            #log_axis <- log_axis[log_axis >= par("usr")[4]]
+            #log_axis_label <- log_axis_label[log_axis >= par("usr")[4]]
+            axis(2, at=log(log_axis), label=log_axis_label)
           } else {
             axis(2)
           }
@@ -259,8 +278,11 @@ vioplotx.default <-
         axis(1)
         if(yaxt !="n"){
           if(ylog){
-            log_axis <- sort(c(1, 10^c(seq(-10,10)), 2*10^c(seq(-10,10)), 5*10^c(seq(-10,10))))
-            axis(2, at=log(log_axis), label=log_axis)
+            #log_axis <- log_axis[log_axis <= par("usr")[3]]
+            #log_axis_label <- log_axis_label[log_axis <= par("usr")[3]]
+            #log_axis <- log_axis[log_axis >= par("usr")[4]]
+            #log_axis_label <- log_axis_label[log_axis >= par("usr")[4]]
+            axis(2, at=log(log_axis), label=log_axis_label)
           } else {
             axis(2, at = at, label = label)
           }
