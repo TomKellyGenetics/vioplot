@@ -122,14 +122,15 @@ vioplotx.default <-
         ylog <- FALSE
         warning("log scale cannot be used with non-positive data")
       } else {
-        #log-scale data
-        datas <- lapply(datas, function(x) log(unlist(x)))
         #create axis labels
         log_axis <- as.vector(outer(1:9, 10^(floor(log(min(unlist(datas)), 10)):ceiling(log(max(unlist(datas)), 10)))))
         log_axis_label <- ifelse(substr(log_axis, 1, 1) %in% logLab, log_axis, "")
         #log_axis_label <- ifelse(log(log_axis, 10) %% 1 ==0, log_axis, "")
         #log_axis <- sort(c(1, 10^c(seq(-10,10)), 2*10^c(seq(-10,10)), 5*10^c(seq(-10,10))))
         #log_axis_label <- log_axis
+
+        #log-scale data
+        datas <- lapply(datas, function(x) log(unlist(x)))
       }
     }
     if(is.null(na.action)) na.action <- na.omit
@@ -240,10 +241,10 @@ vioplotx.default <-
         plot.window(xlim = xlim, ylim = ylim)
         if(yaxt !="n"){
           if(ylog){
-            #log_axis <- log_axis[log_axis <= par("usr")[3]]
-            #log_axis_label <- log_axis_label[log_axis <= par("usr")[3]]
-            #log_axis <- log_axis[log_axis >= par("usr")[4]]
-            #log_axis_label <- log_axis_label[log_axis >= par("usr")[4]]
+            log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
+            log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
+            log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
+            log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
             axis(2, at=log(log_axis), label=log_axis_label)
           } else {
             axis(2)
@@ -278,10 +279,10 @@ vioplotx.default <-
         axis(1)
         if(yaxt !="n"){
           if(ylog){
-            #log_axis <- log_axis[log_axis <= par("usr")[3]]
-            #log_axis_label <- log_axis_label[log_axis <= par("usr")[3]]
-            #log_axis <- log_axis[log_axis >= par("usr")[4]]
-            #log_axis_label <- log_axis_label[log_axis >= par("usr")[4]]
+            log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
+            log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
+            log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
+            log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
             axis(2, at=log(log_axis), label=log_axis_label)
           } else {
             axis(2, at = at, label = label)
