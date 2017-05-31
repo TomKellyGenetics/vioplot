@@ -241,10 +241,10 @@ vioplotx.default <-
         plot.window(xlim = xlim, ylim = ylim)
         if(yaxt !="n"){
           if(ylog){
-            log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
-            log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
-            log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
-            log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
+            #log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
+            #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
+            #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
+            #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
             axis(2, at=log(log_axis), label=log_axis_label)
           } else {
             axis(2)
@@ -279,10 +279,10 @@ vioplotx.default <-
         axis(1)
         if(yaxt !="n"){
           if(ylog){
-            log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
-            log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
-            log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
-            log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
+            #log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
+            #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
+            #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
+            #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
             axis(2, at=log(log_axis), label=log_axis_label)
           } else {
             axis(2, at = at, label = label)
