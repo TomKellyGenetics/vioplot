@@ -14,9 +14,10 @@
   border = "black", lty = 1, lwd = 1, rectCol = "black",
   lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
   at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual = FALSE,
-  main = NA, sub = NA, xlab = NA, ylab = NA, yaxt = "s",
-  ylog = FALSE, log = "", logLab = c(1, 2, 5), na.action = NULL,
-  na.rm = T, side = "both", plotCentre = "point")
+  main = NA, sub = NA, xlab = NA, ylab = NA, cex = 1, cex.axis = 1,
+  cex.names = NULL, cex.lab = 1, cex.main = 1, cex.sub = 1,
+  yaxt = "s", ylog = FALSE, log = "", logLab = c(1, 2, 5),
+  na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
 }
 \arguments{
 \item{x}{for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.}
@@ -64,6 +65,18 @@
 \item{areaEqual}{logical. Density plots checked for equal area if TRUE. wex must be scalar, relative widths of violins depend on area.}
 
 \item{main, sub, xlab, ylab}{graphical parameters passed to plot.}
+
+\item{cex}{A numerical value giving the amount by which plotting text should be magnified relative to the default.}
+
+\item{cex.axis}{The magnification to be used for y axis annotation relative to the current setting of cex.}
+
+\item{cex.names}{The magnification to be used for x axis annotation relative to the current setting of cex. Takes the value of cex.axis if not given.}
+
+\item{cex.lab}{The magnification to be used for x and y labels relative to the current setting of cex.}
+
+\item{cex.main}{The magnification to be used for main titles relative to the current setting of cex.}
+
+\item{cex.sub}{The magnification to be used for sub-titles relative to the current setting of cex.}
 
 \item{yaxt}{A character which specifies the y axis type. Specifying "n" suppresses plotting.}
 

@@ -28,6 +28,12 @@
 #' @param wex relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessarydocu.
 #' @param horizontal logical. horizontal or vertical violins
 #' @param main,sub,xlab,ylab graphical parameters passed to plot.
+#' @param cex A numerical value giving the amount by which plotting text should be magnified relative to the default.
+#' @param cex.axis The magnification to be used for y axis annotation relative to the current setting of cex.
+#' @param cex.names The magnification to be used for x axis annotation relative to the current setting of cex. Takes the value of cex.axis if not given.
+#' @param cex.lab The magnification to be used for x and y labels relative to the current setting of cex.
+#' @param cex.main The magnification to be used for main titles relative to the current setting of cex.
+#' @param cex.sub The magnification to be used for sub-titles relative to the current setting of cex.
 #' @param na.action a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.
 #' @param na.rm logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
 #' @param side defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.
@@ -106,7 +112,8 @@ vioplotx.default <-
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
             lwd = 1, rectCol = "black", lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE,
-            main=NA, sub=NA, xlab=NA, ylab=NA, yaxt="s", ylog=FALSE, log="", logLab=c(1,2,5),
+            main=NA, sub=NA, xlab=NA, ylab=NA, cex=1, cex.axis=1, cex.names=NULL, cex.lab=1, cex.main=1, cex.sub=1,
+            yaxt="s", ylog=FALSE, log="", logLab=c(1,2,5),
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
       if(!is.list(x)){
@@ -245,12 +252,13 @@ vioplotx.default <-
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            axis(2, at=log(log_axis), label=log_axis_label)
+            axis(2, at=log(log_axis), label=log_axis_label, cex.axis=cex*cex.axis)
           } else {
-            axis(2)
+            axis(2, cex.axis=cex*cex.axis)
           }
         }
-        axis(1, at = at, label = label)
+        if(is.null(cex.names)) cex.names <- cex.axis
+        axis(1, at = at, label = label, cex.axis=cex*cex.names)
       }
       box()
       for (i in 1:n) {
@@ -316,17 +324,17 @@ vioplotx.default <-
       if(is.na(ylab)==F){
         if(is.na(main)==F){
           if(is.na(sub)==T){
-            title(main=main, ylab=ylab, xlab=xlab)
+            title(main=main, ylab=ylab, xlab=xlab, cex.main=cex*cex.main, cex.lab=cex*cex.lab)
           } else{
-            title(main=main, sub=sub, ylab=ylab, xlab=xlab)
+            title(main=main, sub=sub, ylab=ylab, xlab=xlab, cex.main=cex*cex.main, cex.sub=cex*cex.sub, cex.lab=cex*cex.lab)
           }
         }
       } else{
         if(is.na(main)==F){
           if(is.na(sub)==T){
-            title(main=main, xlab=xlab)
+            title(main=main, xlab=xlab, cex.main=cex*cex.main, cex.lab=cex*cex.lab)
           } else{
-            title(main=main, sub=sub, xlab=xlab)
+            title(main=main, sub=sub, xlab=xlab, cex.main=cex*cex.main, cex.sub=cex*cex.sub, cex.lab=cex*cex.lab)
           }
         }
       }
@@ -334,17 +342,17 @@ vioplotx.default <-
       if(is.na(ylab)==F){
         if(is.na(main)==F){
           if(is.na(sub)==T){
-            title(main=main, ylab=ylab)
+            title(main=main, ylab=ylab, cex.main=cex*cex.main, cex.lab=cex*cex.lab)
           } else{
-            title(main=main, sub=sub, ylab=ylab)
+            title(main=main, sub=sub, ylab=ylab, cex.main=cex*cex.main, cex.sub=cex*cex.sub, cex.lab=cex*cex.lab)
           }
         }
       } else{
         if(is.na(main)==F){
           if(is.na(sub)==T){
-            title(main=main)
+            title(main=main, cex.main=cex*cex.main)
           } else{
-            title(main=main, sub=sub)
+            title(main=main, sub=sub, cex.main=cex*cex.main, cex.sub=cex*cex.sub)
           }
         }
       }
