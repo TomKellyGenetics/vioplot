@@ -131,6 +131,7 @@ vioplotx.default <-
       } else {
         #create axis labels
         log_axis <- as.vector(outer(1:9, 10^(floor(log(min(unlist(datas)), 10)):ceiling(log(max(unlist(datas)), 10)))))
+        log_axis <- log_axis[log_axis < max(unlist(datas))]
         log_axis_label <- ifelse(sapply(strsplit(as.character(log_axis), split=""), function(xx) any(logLab %in% xx)), log_axis, "")
         #log_axis_label <- ifelse(log(log_axis, 10) %% 1 ==0, log_axis, "")
         #log_axis <- sort(c(1, 10^c(seq(-10,10)), 2*10^c(seq(-10,10)), 5*10^c(seq(-10,10))))
