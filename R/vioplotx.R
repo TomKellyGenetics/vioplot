@@ -143,7 +143,7 @@ vioplotx.default <-
             yaxt="s", ylog=FALSE, log="", logLab=c(1,2,5),
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
-      if(!is.list(x)){
+    if(!is.list(x)){
       datas <- list(x, ...)
     } else{
       datas<-lapply(x, unlist)
