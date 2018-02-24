@@ -4,3 +4,4 @@
 .appveyor.yml 
 ^appveyor\.yml$
 figures
+cran-comments.md

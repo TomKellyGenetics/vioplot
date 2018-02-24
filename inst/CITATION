@@ -8,7 +8,7 @@ citEntry(entry = "Manual",
   url          = "https://github.com/TomKellyGenetics/vioplot",
 
   textVersion  =
-  paste("S. Thomas Kelly (2018). vioplot: violin plot. R package version 0.3.0",
+  paste("Daniel Adler and  S. Thomas Kelly (2018). vioplot: violin plot. R package version 0.3.0",
          "https://github.com/TomKellyGenetics/vioplot")
 )
 

@@ -2,11 +2,25 @@
 % Please edit documentation in R/vioplot.R
 \name{vioplot}
 \alias{vioplot}
+\alias{vioplot.formula}
+\alias{vioplot.default}
 \title{violin plot}
+\usage{
+\method{vioplot}{formula}(formula, data = NULL, ..., names = NULL,
+  na.action = NULL)
+
+\method{vioplot}{default}(x, ..., data = NULL, range = 1.5, h = NULL,
+  ylim = NULL, names = NULL, horizontal = FALSE, col = "grey50",
+  border = "black", lty = 1, lwd = 1, rectCol = "black",
+  lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
+  at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual = FALSE,
+  main = NA, sub = NA, xlab = NA, ylab = NA, cex = 1, cex.axis = 1,
+  cex.names = NULL, cex.lab = 1, cex.main = 1, cex.sub = 1,
+  yaxt = "s", ylog = FALSE, log = "", logLab = c(1, 2, 5),
+  na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
+}
 \arguments{
 \item{x}{for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.}
-
-\item{col}{Graphical parameter for fill colour of the violin(s) polygon. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
 \item{...}{additional data vectors or forumla parameters.}
 
@@ -14,21 +28,19 @@
 
 \item{data}{a data.frame (or list) from which the variables in formula should be taken.}
 
+\item{names}{one label, or a vector of labels for the datas must match the number of datas given}
+
+\item{na.action}{a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.}
+
 \item{range}{a factor to calculate the upper/lower adjacent values}
 
 \item{h}{the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum}
 
 \item{ylim}{y limits}
 
-\item{yaxt}{A character which specifies the y axis type. Specifying "n" suppresses plotting.}
+\item{horizontal}{logical. horizontal or vertical violins}
 
-\item{ylog}{A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.}
-
-\item{log}{Logarithmic scale if log = "y" or TRUE. Invokes ylog = TRUE.}
-
-\item{logLab}{Increments for labelling y-axis on log-scale, defaults to numbers starting with 1, 2, 5, and 10.}
-
-\item{names}{one label, or a vector of labels for the datas must match the number of datas given}
+\item{col}{Graphical parameter for fill colour of the violin(s) polygon. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
 \item{border}{Graphical parameters for the colour of the violin border passed to lines. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
@@ -42,17 +54,15 @@
 
 \item{colMed, colMed2}{Graphical parameters to control colour of the median point. If colMed is a vector, it specifies the colour per violin. colMed specifies the fill colour in all cases unless pchMed is 21:25 in which case colMed is the border colour and colMed2 is the fill colour.}
 
-\item{drawRect}{logical. The box is drawn if TRUE.}
-
-\item{areaEqual}{logical. Density plots checked for equal area if TRUE. wex must be scalar, relative widths of violins depend on area.}
-
 \item{at}{position of each violin. Default to 1:n}
 
 \item{add}{logical. if FALSE (default) a new plot is created}
 
 \item{wex}{relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessarydocu.}
 
-\item{horizontal}{logical. horizontal or vertical violins}
+\item{drawRect}{logical. The box is drawn if TRUE.}
+
+\item{areaEqual}{logical. Density plots checked for equal area if TRUE. wex must be scalar, relative widths of violins depend on area.}
 
 \item{main, sub, xlab, ylab}{graphical parameters passed to plot.}
 
@@ -68,7 +78,13 @@
 
 \item{cex.sub}{The magnification to be used for sub-titles relative to the current setting of cex.}
 
-\item{na.action}{a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.}
+\item{yaxt}{A character which specifies the y axis type. Specifying "n" suppresses plotting.}
+
+\item{ylog}{A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.}
+
+\item{log}{Logarithmic scale if log = "y" or TRUE. Invokes ylog = TRUE.}
+
+\item{logLab}{Increments for labelling y-axis on log-scale, defaults to numbers starting with 1, 2, 5, and 10.}
 
 \item{na.rm}{logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.}
 
@@ -77,12 +93,26 @@
 \item{plotCentre}{defaults to "points", plotting a central point at the median. If "line" is given a median line is plotted (subject to side) alternatively.}
 }
 \description{
-Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Builds upon \code{\link[vioplot]{vioplot}} (0.2) with added customisation possible with colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
-}
-\details{
-New function  \code{\link[vioplot]{vioplot}} has been developed with different default values. Otherwise, they function identically. This version kept for complete backwards-compatibility.
+Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Includes customisation of colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
 }
 \examples{
+
+# box- vs violin-plot
+par(mfrow=c(2,1))
+mu<-2
+si<-0.6
+bimodal<-c(rnorm(1000,-mu,si),rnorm(1000,mu,si))
+uniform<-runif(2000,-4,4)
+normal<-rnorm(2000,0,3)
+vioplot(bimodal,uniform,normal)
+boxplot(bimodal,uniform,normal)
+
+# add to an existing plot
+x <- rnorm(100)
+y <- rnorm(100)
+plot(x, y, xlim=c(-5,5), ylim=c(-5,5))
+vioplot(x, col="tomato", horizontal=TRUE, at=-4, add=TRUE,lty=2, rectCol="gray")
+vioplot(y, col="cyan", horizontal=FALSE, at=-4, add=TRUE,lty=2)
 
 #generate example data
 data_one <- rnorm(100)
