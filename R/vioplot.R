@@ -25,7 +25,7 @@
 #' @param areaEqual logical. Density plots checked for equal area if TRUE. wex must be scalar, relative widths of violins depend on area.
 #' @param at position of each violin. Default to 1:n
 #' @param add logical. if FALSE (default) a new plot is created
-#' @param wex relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary docu.
+#' @param wex relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary.
 #' @param horizontal logical. horizontal or vertical violins
 #' @param main,sub,xlab,ylab graphical parameters passed to plot.
 #' @param cex A numerical value giving the amount by which plotting text should be magnified relative to the default.

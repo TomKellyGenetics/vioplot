@@ -58,7 +58,7 @@
 
 \item{add}{logical. if FALSE (default) a new plot is created}
 
-\item{wex}{relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary docu.}
+\item{wex}{relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary.}
 
 \item{drawRect}{logical. The box is drawn if TRUE.}
 
