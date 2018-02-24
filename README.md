@@ -1,5 +1,5 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vioplotx)](https://cran.r-project.org/package=vioplotx)
-[![Build Status](https://travis-ci.org/TomKellyGenetics/vioplotx.svg?branch=master)](https://travis-ci.org/juliasilge/janeaustenr)
+[![Build Status](https://travis-ci.org/TomKellyGenetics/vioplotx.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/vioplotx)
 
 
 To get the current released version from CRAN:
