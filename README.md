@@ -54,7 +54,7 @@ Vioplotx works in much the same manner as Vioplot
 
 For development history prior to package documentation, see the original repo: https://github.com/TomKellyGenetics/R-violin-plot/commits?author=TomKellyGenetics
 
-Modifications inspired by the following StackOverFlow threads:
+Modifications inspired by the following StackOverFlow threads and GitHub Gists:
 
 * http://stackoverflow.com/questions/14975853/how-can-i-create-violin-plot-in-different-colours
 
@@ -63,3 +63,5 @@ Modifications inspired by the following StackOverFlow threads:
 * http://stackoverflow.com/questions/20250063/axis-titles-on-vioplot
 
 * http://stackoverflow.com/questions/22410606/violin-plot-with-list-input
+
+* https://gist.github.com/mbjoseph/5852613
