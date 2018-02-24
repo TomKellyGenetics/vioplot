@@ -5,3 +5,4 @@
 ^appveyor\.yml$
 figures
 cran-comments.md
+README.md

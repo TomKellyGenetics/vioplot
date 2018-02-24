@@ -13,7 +13,7 @@
 #' @param ylog A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.
 #' @param log  Logarithmic scale if log = "y" or TRUE. Invokes ylog = TRUE.
 #' @param logLab Increments for labelling y-axis on log-scale, defaults to numbers starting with 1, 2, 5, and 10.
-#' @param names one label, or a vector of labels for the datas must match the number of datas given
+#' @param names one label, or a vector of labels for the data must match the number of data given
 #' @param col Graphical parameter for fill colour of the violin(s) polygon. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param border Graphical parameters for the colour of the violin border passed to lines. NA for no border. If border is a vector, it specifies the colour per violin, and colours are reused if necessary.
 #' @param lty,lwd Graphical parameters for the violin passed to lines and polygon

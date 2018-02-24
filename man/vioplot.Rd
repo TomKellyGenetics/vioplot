@@ -28,7 +28,7 @@
 
 \item{data}{a data.frame (or list) from which the variables in formula should be taken.}
 
-\item{names}{one label, or a vector of labels for the datas must match the number of datas given}
+\item{names}{one label, or a vector of labels for the data must match the number of data given}
 
 \item{na.action}{a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.}
 
