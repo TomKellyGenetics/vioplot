@@ -41,6 +41,9 @@
 #' @keywords plot graphics violin
 #' @import sm
 #' @importFrom zoo rollmean
+#' @importFrom stats median na.omit quantile
+#' @importFrom graphics Axis axis box lines par plot.new plot.window plot.xy points polygon rect title
+#' @importFrom grDevices boxplot.stats dev.flush dev.hold dev.interactive devAskNewPage xy.coords
 #' @export
 #' @examples
 #'
@@ -277,13 +280,13 @@ vioplotx.default <-
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            axis(2, at=log(log_axis), label=log_axis_label, cex.axis=cex*cex.axis)
+            axis(2, at=log(log_axis), labels=log_axis_label, cex.axis=cex*cex.axis)
           } else {
             axis(2, cex.axis=cex*cex.axis)
           }
         }
         if(is.null(cex.names)) cex.names <- cex.axis
-        axis(1, at = at, label = label, cex.axis=cex*cex.names)
+        axis(1, at = at, labels = label, cex.axis=cex*cex.names)
       }
       box()
       for (i in 1:n) {
@@ -316,9 +319,9 @@ vioplotx.default <-
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            axis(2, at=log(log_axis), label=log_axis_label)
+            axis(2, at=log(log_axis), labels=log_axis_label)
           } else {
-            axis(2, at = at, label = label)
+            axis(2, at = at, labels = label)
           }
         }
       }
