@@ -4,7 +4,7 @@ author: "Tom Kelly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document
 vignette: >
-  %\VignetteIndexEntry{vioplotx: Customising Violin Plots}
+  %\VignetteIndexEntry{vioplot: Customising Violin Plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -22,7 +22,7 @@ Therefore violin plots are a powerful tool to assist researchers to visualise da
 As shown below for the `iris` dataset, violin plots show distribution information that the boxplot is unable to.
 
 ```{r, echo=FALSE, message=FALSE}
-library("vioplotx")
+library("vioplot")
 ```
 
 ```{r, message=FALSE, eval=FALSE}
@@ -35,7 +35,7 @@ vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Specie
 ```{r, message=FALSE, echo=FALSE}
 data(iris)
 boxplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length")
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col="magenta")
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col="magenta")
 ```
 
 ## Plot Defaults
@@ -43,7 +43,7 @@ vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Speci
 However as we can see here the plot defaults are not aesthetically pleasing, with a rather glaring colour scheme unsuitable for professional or academic usage. Thus the plot default colours have been changed as shown here:
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length")
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length")
 ```
 
 ## Plot colours: Violin Fill
@@ -51,15 +51,15 @@ vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Speci
 Plot colours can be further customised as with the original vioplot package using the `col` argument:
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col="lightblue")
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col="lightblue")
 ```
 
 ###Vectorisation
 
-However the `vioplot` function is unable to colour each violin separately, thus this is enabled with a vectorised `col` in `vioplotx`:
+However the `vioplot` function is unable to colour each violin separately, thus this is enabled with a vectorised `col` in `vioplot`:
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col=c("lightgreen", "lightblue", "palevioletred"))
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col=c("lightgreen", "lightblue", "palevioletred"))
 legend("topleft", legend=c("setosa", "versicolor", "virginica"), fill=c("lightgreen", "lightblue", "palevioletred"), cex = 0.5)
 ```
 
@@ -69,19 +69,19 @@ legend("topleft", legend=c("setosa", "versicolor", "virginica"), fill=c("lightgr
 Colours can also be customised for the violin fill and border separately using the `col` and `border` arguments:
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col="lightblue", border="royalblue")
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col="lightblue", border="royalblue")
 ```
 
 Similarly, the arguments `lineCol` and `rectCol` specify the colors of the boxplot outline and rectangle fill. For simplicity the box and whiskers of the boxplot will always have the same colour.
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", rectCol="palevioletred", lineCol="violetred")
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", rectCol="palevioletred", lineCol="violetred")
 ```
  
  The same applies to the colour of the median point with `colMed`:
  
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", colMed="violet")
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", colMed="violet")
 ```
  
  ### Combined customisation
@@ -89,14 +89,14 @@ vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Speci
  These can be customised colours can be combined:
  
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col="lightblue", border="royalblue", rectCol="palevioletred", lineCol="violetred", colMed="violet")
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col="lightblue", border="royalblue", rectCol="palevioletred", lineCol="violetred", colMed="violet")
 ```
  
 ### Vectorisation
 
 These color and shape settings can also be customised separately for each violin:
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T, col=c("lightgreen", "lightblue", "palevioletred"), border=c("darkolivegreen4", "royalblue4", "violetred4"), rectCol=c("forestgreen", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), colMed=c("green", "cyan", "magenta"), pchMed=c(15, 17, 19))
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T, col=c("lightgreen", "lightblue", "palevioletred"), border=c("darkolivegreen4", "royalblue4", "violetred4"), rectCol=c("forestgreen", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), colMed=c("green", "cyan", "magenta"), pchMed=c(15, 17, 19))
 ```
 
-This should be sufficient to customise the violin plot but further examples are given in [the areaEqual vioplotx vignette](violin_area.html) including how violin plots are useful for comparing variation when data does not follow the same distribution. This document also compares the violin plot with other established methods to plot data variation.
+This should be sufficient to customise the violin plot but further examples are given in [the areaEqual vioplot vignette](violin_area.html) including how violin plots are useful for comparing variation when data does not follow the same distribution. This document also compares the violin plot with other established methods to plot data variation.

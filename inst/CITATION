@@ -1,15 +1,15 @@
-citHeader("To cite the enhanced vioplotx package in publications use:")
+citHeader("To cite the enhanced vioplot package in publications use:")
 
 citEntry(entry = "Manual",
   title        = "vioplot: violin plot",
   author       = personList(as.person("Daniel Adler"),as.person("S. Thomas Kelly")),
   year         = "2018",
   note         = "R package version 0.3.0",
-  url          = "https://github.com/TomKellyGenetics/vioplotx",
+  url          = "https://github.com/TomKellyGenetics/vioplot",
 
   textVersion  =
   paste("S. Thomas Kelly (2018). vioplot: violin plot. R package version 0.3.0",
-         "https://github.com/TomKellyGenetics/vioplotx")
+         "https://github.com/TomKellyGenetics/vioplot")
 )
 
 citFooter(paste("Please also acknowledge the original package: \n citation(", "vioplot", ")", sep="\""))

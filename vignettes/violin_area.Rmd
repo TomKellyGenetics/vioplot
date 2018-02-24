@@ -4,7 +4,7 @@ author: "Tom Kelly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document
 vignette: >
-  %\VignetteIndexEntry{vioplotx: Controlling Violin Plot Area}
+  %\VignetteIndexEntry{vioplot: Controlling Violin Plot Area}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -25,13 +25,13 @@ As shown below for the `iris` dataset, violin plots show distribution informatio
 
 
 ```{r, echo=FALSE, message=FALSE}
-library("vioplotx")
+library("vioplot")
 ```
 
 ```{r, message=FALSE}
 data(iris)
 boxplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"))
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"))
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"))
 ```
 
 ##Violin Plot Area
@@ -98,7 +98,7 @@ This has the benefit of highlighting the differnt distributions of the data subs
 Therefore the `areaEqual` parameter has been echod to customise the violin plot to serve a similar purpose:
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", areaEqual = T)
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", areaEqual = T)
 ```
 
 If we compare this to the original vioplot functionality (defaulting to `areaEqual = FALSE`) the differences between the two are clear.
@@ -110,8 +110,8 @@ par(mar=rep(2, 4))
 ```{r}
 par(mfrow=c(2,1))
 par(mar=rep(2, 4))
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Width)", areaEqual = F)
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T)
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Width)", areaEqual = F)
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T)
 par(mfrow=c(1,1))
 ```
 
@@ -120,17 +120,17 @@ par(mar=c(5, 4, 4, 2) + 0.1)
 ```
 
 
-Note that `areaEqual` is considering the full area of the density distribution before removing the outlier tails. We leave it up to the users discretion which they elect to use. The `areaEqual` functionality is compatible with all of the customisation used in discussed in [the main vioplotx vignette](violin_customisation.html)
+Note that `areaEqual` is considering the full area of the density distribution before removing the outlier tails. We leave it up to the users discretion which they elect to use. The `areaEqual` functionality is compatible with all of the customisation used in discussed in [the main vioplot vignette](violin_customisation.html)
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T, col=c("lightgreen", "lightblue", "palevioletred"), rectCol=c("green", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), border=c("darkolivegreen4", "royalblue4", "violetred4"))
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T, col=c("lightgreen", "lightblue", "palevioletred"), rectCol=c("green", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), border=c("darkolivegreen4", "royalblue4", "violetred4"))
 ```
 
 The violin width can further be scaled with `wex`, which maintains the proportions across the datasets if `areaEqual = TRUE`:
 
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T, col=c("lightgreen", "lightblue", "palevioletred"), rectCol=c("green", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), border=c("darkolivegreen4", "royalblue4", "violetred4"), wex=1.25)
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T, col=c("lightgreen", "lightblue", "palevioletred"), rectCol=c("green", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), border=c("darkolivegreen4", "royalblue4", "violetred4"), wex=1.25)
 ```
 
 ## Comparing distributions
@@ -138,6 +138,6 @@ vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Speci
 Notice the utility of `areaEqual` for cases where different datasets have different underlying distributions:
 
 ```{r}
-vioplotx(rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), rlnorm(200, 0, 0.5), rnbinom(200, 10, 0.9), rlogis(20, 0, 0.5), areaEqual = F, main="Equal Width", xlab="distribution", ylab="data value", names=c("normal", "poisson", "binomial", "log-normal", "neg-binomial", "logistic"))
-vioplotx(rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), rlnorm(200, 0, 0.5), rnbinom(200, 10, 0.9), rlogis(20, 0, 0.5), areaEqual = T, main="Equal Area", xlab="distribution", ylab="data value", names=c("normal", "poisson", "binomial", "log-normal", "neg-binomial", "logistic"))
+vioplot(rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), rlnorm(200, 0, 0.5), rnbinom(200, 10, 0.9), rlogis(20, 0, 0.5), areaEqual = F, main="Equal Width", xlab="distribution", ylab="data value", names=c("normal", "poisson", "binomial", "log-normal", "neg-binomial", "logistic"))
+vioplot(rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), rlnorm(200, 0, 0.5), rnbinom(200, 10, 0.9), rlogis(20, 0, 0.5), areaEqual = T, main="Equal Area", xlab="distribution", ylab="data value", names=c("normal", "poisson", "binomial", "log-normal", "neg-binomial", "logistic"))
 ```

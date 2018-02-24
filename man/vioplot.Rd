@@ -80,7 +80,7 @@
 Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Builds upon \code{\link[vioplot]{vioplot}} (0.2) with added customisation possible with colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
 }
 \details{
-New function  \code{\link[vioplot]{vioplotx}} has been developed with different default values. Otherwise, they function identically. This version kept for complete backwards-compatibility.
+New function  \code{\link[vioplot]{vioplot}} has been developed with different default values. Otherwise, they function identically. This version kept for complete backwards-compatibility.
 }
 \examples{
 
@@ -89,32 +89,32 @@ data_one <- rnorm(100)
 data_two <- rnorm(50, 1, 2)
 
 #generate violin plot with similar functionality to vioplot
-vioplotx(data_one, data_two, col="magenta")
+vioplot(data_one, data_two, col="magenta")
 
 #note vioplox defaults to a greyscale plot
-vioplotx(data_one, data_two)
+vioplot(data_one, data_two)
 
 #colours can be customised separately, with axis labels, legends, and titles
-vioplotx(data_one, data_two, col=c("red","blue"), names=c("data one", "data two"),
+vioplot(data_one, data_two, col=c("red","blue"), names=c("data one", "data two"),
    main="data violin", xlab="data class", ylab="data read")
 legend("topleft", fill=c("red","blue"), legend=c("data one", "data two"))
 
 #colours can be customised for the violin fill and border separately
-vioplotx(data_one, data_two, col="grey85", border="purple", names=c("data one", "data two"),
+vioplot(data_one, data_two, col="grey85", border="purple", names=c("data one", "data two"),
    main="data violin", xlab="data class", ylab="data read")
 
 #colours can also be customised for the boxplot rectange and lines (border and whiskers)
-vioplotx(data_one, data_two, col="grey85", rectCol="lightblue", lineCol="blue",
+vioplot(data_one, data_two, col="grey85", rectCol="lightblue", lineCol="blue",
    border="purple", names=c("data one", "data two"),
    main="data violin", xlab="data class", ylab="data read")
 
 #these colours can also be customised separately for each violin
-vioplotx(data_one, data_two, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"),
+vioplot(data_one, data_two, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"),
    lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"),
    main="data violin", xlab="data class", ylab="data read")
 
 #this applies to any number of violins, given that colours are provided for each
-vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4),
+vioplot(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4),
    col=c("red", "orange", "green", "blue", "violet"),
    rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"),
    lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"),
@@ -124,14 +124,14 @@ vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 1
 
 #The areaEqual parameter scales with width of violins
 #Violins will have equal density area (including missing tails) rather than equal maximum width
-vioplotx(data_one, data_two, areaEqual=TRUE)
+vioplot(data_one, data_two, areaEqual=TRUE)
 
-vioplotx(data_one, data_two, areaEqual=TRUE,
+vioplot(data_one, data_two, areaEqual=TRUE,
    col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"),
    lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"),
    main="data violin", xlab="data class", ylab="data read")
 
-vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4),
+vioplot(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4),
    areaEqual=TRUE, col=c("red", "orange", "green", "blue", "violet"),
    rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"),
    lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"),

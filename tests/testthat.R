@@ -1,4 +1,4 @@
 library(testthat)
-library(vioplotx)
+library(vioplot)
 
-test_check("vioplotx")
+test_check("vioplot")

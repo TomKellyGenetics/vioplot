@@ -4,7 +4,7 @@ author: "Tom Kelly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document
 vignette: >
-  %\VignetteIndexEntry{vioplotx: Controlling Violin Plot Area}
+  %\VignetteIndexEntry{vioplot: Controlling Violin Plot Area}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -25,13 +25,13 @@ As shown below for the `iris` dataset, violin plots show distribution informatio
 
 
 ```{r, echo=FALSE, message=FALSE}
-library("vioplotx")
+library("vioplot")
 ```
 
 ```{r, message=FALSE}
 data(iris)
 boxplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"))
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"))
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"))
 ```
 
 ##Violin y-axis
@@ -41,14 +41,14 @@ vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Speci
 However the existing violin plot packages (such as \code{\link[vioplot]{vioplot}}) do not support log-scale of the y-axis. This has been ammended with the `ylog` argument.
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", ylog = T, ylim=c(log(1), log(10)))
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", ylog = T, ylim=c(log(1), log(10)))
 ```
 
 This can also be invoked with the `log="y"` argument compatble with `boxplot`:
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", log = T, ylim=c(log(1), log(10)))
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", log = "y", ylim=c(log(1), log(10)))
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", log = T, ylim=c(log(1), log(10)))
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", log = "y", ylim=c(log(1), log(10)))
 ```
 
 ###custom y-axes
@@ -56,20 +56,20 @@ vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Speci
 The y-axes can also be removed with `yaxt="n"` to enable customised y-axes:
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", yaxt="n")
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", ylog = T, yaxt="n", ylim=c(log(1), log(10)))
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", yaxt="n")
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", ylog = T, yaxt="n", ylim=c(log(1), log(10)))
 ```
 
 Thus custom axes can be added to violin plots. As shown on a linear scale:
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", yaxt="n")
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", yaxt="n")
 axis(2, at=1:10, labels=1:10)
 ```
 
 As well as for on a log scale:
 
 ```{r}
-vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", yaxt="n", log="y", ylim=c(log(4), log(9)))
+vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", yaxt="n", log="y", ylim=c(log(4), log(9)))
 axis(2, at=log(1:10), labels=1:10)
 ```

@@ -23,7 +23,7 @@ As shown below for the `iris` dataset, violin plots show distribution informatio
 
 
 ```{r, echo=FALSE, message=FALSE}
-library("vioplotx")
+library("vioplot")
 ```
 We set up the data with two categories (Sepal Width) as follows:
 
@@ -58,7 +58,7 @@ par(mfrow=c(1,1))
 First we plot Sepal Length on its own:
 
 ```{r}
-vioplotx(Sepal.Length~Species, data=iris)
+vioplot(Sepal.Length~Species, data=iris)
 ```
 
 
@@ -66,8 +66,8 @@ An indirect comparision can be achieved with par:
 
 ```{r}
 par(mfrow=c(2,1))
-vioplotx(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line")
-vioplotx(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line")
+vioplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line")
+vioplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line")
 par(mfrow=c(1,1))
 ```
 
@@ -76,8 +76,8 @@ par(mfrow=c(1,1))
 A more direct comparision can be made with the `side` argument and `add = TRUE` on the second plot:
 
 ```{r}
-vioplotx(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line", side = "right")
-vioplotx(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line", side = "left", add = T)
+vioplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line", side = "right")
+vioplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line", side = "left", add = T)
 title(xlab = "Species", ylab = "Sepal Length")
 legend("topleft", fill = c("lightblue", "palevioletred"), legend = c("small", "large"), title = "Sepal Width")
 ```
@@ -88,8 +88,8 @@ The line median option is more suitable for side by side comparisions but the po
 
 
 ```{r}
-vioplotx(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "point", side = "right", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
-vioplotx(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "point", side = "left", pchMed = 21, colMed = "lightblue4", colMed2 = "lightblue2", add = T)
+vioplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "point", side = "right", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
+vioplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "point", side = "left", pchMed = 21, colMed = "lightblue4", colMed2 = "lightblue2", add = T)
 title(xlab = "Species", ylab = "Sepal Length")
 legend("topleft", fill = c("lightblue", "palevioletred"), legend = c("small", "large"), title = "Sepal Width")
 ```
@@ -97,8 +97,8 @@ legend("topleft", fill = c("lightblue", "palevioletred"), legend = c("small", "l
 It may be necessary to include a `points` command to fix the median being overwritten by the following plots:
 
 ```{r}
-vioplotx(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "point", side = "right", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
-vioplotx(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "point", side = "left", pchMed = 21, colMed = "lightblue4", colMed2 = "lightblue2", add = T)
+vioplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "point", side = "right", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
+vioplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "point", side = "left", pchMed = 21, colMed = "lightblue4", colMed2 = "lightblue2", add = T)
 points(1:length(levels(iris$Species)), as.numeric(sapply(levels(iris$Species), function(species) median(iris_large[grep(species, iris_large$Species),]$Sepal.Length))), pch = 21, col = "palevioletred4", bg = "palevioletred2")
 title(xlab = "Species", ylab = "Sepal Length")
 legend("topleft", fill = c("lightblue", "palevioletred"), legend = c("small", "large"), title = "Sepal Width")
@@ -108,8 +108,8 @@ Similarly points could be added where a line has been used previously:
 
 
 ```{r}
-vioplotx(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line", side = "right", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
-vioplotx(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line", side = "left", pchMed = 21, colMed = "lightblue4", colMed2 = "lightblue2", add = T)
+vioplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line", side = "right", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
+vioplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line", side = "left", pchMed = 21, colMed = "lightblue4", colMed2 = "lightblue2", add = T)
 points(1:length(levels(iris$Species)), as.numeric(sapply(levels(iris$Species), function(species) median(iris_large[grep(species, iris_large$Species),]$Sepal.Length))), pch = 21, col = "palevioletred4", bg = "palevioletred2")
 points(1:length(levels(iris$Species)), as.numeric(sapply(levels(iris$Species), function(species) median(iris_small[grep(species, iris_small$Species),]$Sepal.Length))), pch = 21, col = "lightblue4", bg = "lightblue2")
 title(xlab = "Species", ylab = "Sepal Length")
@@ -120,7 +120,7 @@ Here it is aesthetically pleasing and intuitive to interpret categorical differe
 
 
 #### Sources
-These extensions to `vioplotx` here are based on those provided here:
+These extensions to `vioplot` here are based on those provided here:
 
 * https://gist.github.com/mbjoseph/5852613
 

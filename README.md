@@ -1,6 +1,6 @@
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vioplotx)](https://cran.r-project.org/package=vioplotx)
-[![Travis Build Status](https://travis-ci.org/TomKellyGenetics/vioplotx.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/vioplotx)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TomKellyGenetics/vioplotx?branch=master&svg=true)](https://ci.appveyor.com/project/TomKellyGenetics/vioplotx)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vioplot)](https://cran.r-project.org/package=vioplot)
+[![Travis Build Status](https://travis-ci.org/TomKellyGenetics/vioplot.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/vioplot)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TomKellyGenetics/vioplot?branch=master&svg=true)](https://ci.appveyor.com/project/TomKellyGenetics/vioplot)
 
 
 To get the current released version from CRAN:
@@ -13,7 +13,7 @@ To get the modified version from github:
 
 ```R
 # install.packages("devtools")
-devtools::install_github("TomKellyGenetics/vioplotx")
+devtools::install_github("TomKellyGenetics/vioplot")
 ```
 
 # Running
@@ -22,33 +22,33 @@ See the relevant vignette for more details:
 
 * Customising colour and shape with scalar inputs or vectors applied separately to each violin.
 
-https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_customisation.html
+https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_customisation.html
 
 * Formula input enabled with S3 methods.
 
-https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_formulae.html
+https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_formulae.html
 
 * Control of violin area for proportional widths
 
-https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_area.html
+https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_area.html
 
 * Control of the y-axis including disabling labels and log-scale
 
-https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_ylog.html
+https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_ylog.html
 
 * Split violins to directly compare paired data.
 
-https://rawgit.com/TomKellyGenetics/vioplotx/master/vignettes/violin_split.html
+https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_split.html
 
 Vioplotx works in much the same manner as Vioplot
 
-* `vioplotx::vioplotx()` generates a violin plot takes the same arguments as `vioplotx::vioplotx()` to plot a violin for each group of variables.
+* `vioplot::vioplot()` generates a violin plot takes the same arguments as `vioplot::vioplot()` to plot a violin for each group of variables.
 
-* `vioplotx::vioplotx()` also takes additional arguments to specify `main`, `sub`, `xlab`, and `ylab` as used in `plot` or `title`
+* `vioplot::vioplot()` also takes additional arguments to specify `main`, `sub`, `xlab`, and `ylab` as used in `plot` or `title`
 
-* `vioplotx::vioplotx()` can take vectorised forms of colour variables `col`, `border`, and `rectCol` to modify the colours separately for each violin respectively. This also applies to a new variable `lineCol` to modify the colour of the boxplots. 
+* `vioplot::vioplot()` can take vectorised forms of colour variables `col`, `border`, and `rectCol` to modify the colours separately for each violin respectively. This also applies to a new variable `lineCol` to modify the colour of the boxplots. 
 
-* `vioplox::vioplotx.formula()` is enabled to take formula and dataframe inputs as used for boxplot and stats operations.
+* `vioplox::vioplot.formula()` is enabled to take formula and dataframe inputs as used for boxplot and stats operations.
 
 * additional `areaEqual`, `plotCentre` and `side` options enables further customisation. 
 

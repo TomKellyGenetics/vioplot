@@ -1,4 +1,4 @@
-library("vioplotx")
+library("vioplot")
 context("unequal group size")
 
 data(iris)
@@ -11,12 +11,12 @@ table(index)
 iris$Species <- factor(names(table(iris$Species))[index])
 
 test_that("list input", {
-  vioplotx(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"])
+  vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"])
 })
 
 
 test_that("formulae input", {
-  vioplotx(iris$Sepal.Length~iris$Species)
-  vioplotx(Sepal.Length~Species, data=iris)
+  vioplot(iris$Sepal.Length~iris$Species)
+  vioplot(Sepal.Length~Species, data=iris)
 })
 
