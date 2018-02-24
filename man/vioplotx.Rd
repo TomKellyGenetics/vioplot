@@ -108,25 +108,48 @@ vioplotx(data_one, data_two, col="magenta")
 vioplotx(data_one, data_two)
 
 #colours can be customised separately, with axis labels, legends, and titles
-vioplotx(data_one, data_two, col=c("red","blue"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
+vioplotx(data_one, data_two, col=c("red","blue"), names=c("data one", "data two"),
+   main="data violin", xlab="data class", ylab="data read")
 legend("topleft", fill=c("red","blue"), legend=c("data one", "data two"))
 
 #colours can be customised for the violin fill and border separately
-vioplotx(data_one, data_two, col="grey85", border="purple", names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
+vioplotx(data_one, data_two, col="grey85", border="purple", names=c("data one", "data two"),
+   main="data violin", xlab="data class", ylab="data read")
 
 #colours can also be customised for the boxplot rectange and lines (border and whiskers)
-vioplotx(data_one, data_two, col="grey85", rectCol="lightblue", lineCol="blue", border="purple", names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
+vioplotx(data_one, data_two, col="grey85", rectCol="lightblue", lineCol="blue",
+   border="purple", names=c("data one", "data two"),
+   main="data violin", xlab="data class", ylab="data read")
 
 #these colours can also be customised separately for each violin
-vioplotx(data_one, data_two, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"), lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
+vioplotx(data_one, data_two, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"),
+   lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"),
+   main="data violin", xlab="data class", ylab="data read")
 
 #this applies to any number of violins, given that colours are provided for each
-vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), col=c("red", "orange", "green", "blue", "violet"), rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"), lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), names=c("data one", "data two", "data three", "data four", "data five"), main="data violin", xlab="data class", ylab="data read")
+vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4),
+   col=c("red", "orange", "green", "blue", "violet"),
+   rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"),
+   lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"),
+   border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"),
+   names=c("data one", "data two", "data three", "data four", "data five"),
+   main="data violin", xlab="data class", ylab="data read")
 
 #The areaEqual parameter scales with width of violins so that they have equal density area (including missing tails) rather than equal maximum width
-vioplotx(data_one, data_two, areaEqual=T)
-vioplotx(data_one, data_two, areaEqual=T, col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"), lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"), main="data violin", xlab="data class", ylab="data read")
-vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4), areaEqual=T, col=c("red", "orange", "green", "blue", "violet"), rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"), lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"), names=c("data one", "data two", "data three", "data four", "data five"), main="data violin", xlab="data class", ylab="data read")
+vioplotx(data_one, data_two, areaEqual=TRUE)
+
+vioplotx(data_one, data_two, areaEqual=TRUE,
+   col=c("skyblue", "plum"), rectCol=c("lightblue", "palevioletred"),
+   lineCol="blue", border=c("royalblue", "purple"), names=c("data one", "data two"),
+   main="data violin", xlab="data class", ylab="data read")
+
+vioplotx(data_one, data_two, rnorm(200, 3, 0.5), rpois(200, 2.5),  rbinom(100, 10, 0.4),
+   areaEqual=TRUE, col=c("red", "orange", "green", "blue", "violet"),
+   rectCol=c("palevioletred", "peachpuff", "lightgreen", "lightblue", "plum"),
+   lineCol=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"),
+   border=c("red4", "orangered", "forestgreen", "royalblue", "mediumorchid"),
+   names=c("data one", "data two", "data three", "data four", "data five"),
+   main="data violin", xlab="data class", ylab="data read")
 }
 \keyword{graphics}
 \keyword{plot}
