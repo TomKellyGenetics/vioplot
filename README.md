@@ -1,5 +1,6 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vioplotx)](https://cran.r-project.org/package=vioplotx)
-[![Build Status](https://travis-ci.org/TomKellyGenetics/vioplotx.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/vioplotx)
+[![Travis Build Status](https://travis-ci.org/TomKellyGenetics/vioplotx.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/vioplotx)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TomKellyGenetics/vioplotx?branch=master&svg=true)](https://ci.appveyor.com/project/TomKellyGenetics/vioplotx)
 
 
 To get the current released version from CRAN:
