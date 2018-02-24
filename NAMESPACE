@@ -5,3 +5,6 @@ S3method(vioplotx,formula)
 export(vioplotx)
 import(sm)
 importFrom(zoo,rollmean)
+
+importFrom("graphics", "axis", "box", "lines", "plot.new", "plot.window", "points", "polygon", "rect", "title")
+importFrom("stats", "median", "na.omit", "quantile")
