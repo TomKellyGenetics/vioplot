@@ -1,9 +1,9 @@
 Package: vioplot
 Title: violin plot
-Version: 0.2.0.9000
+Version: 0.3.0
 Author: Daniel Adler <dadler@uni-goettingen.de>
 Maintainer: Tom Kelly <tom.kelly@postgrad.otago.ac.nz>
-Description: A violin plot is a combination of a box plot and a kernel density plot
+Description: A violin plot is a combination of a box plot and a kernel density plot. This package allows extensive customisation of violin plots. 
 Depends:
     sm,
     zoo
