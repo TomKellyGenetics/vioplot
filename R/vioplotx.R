@@ -82,7 +82,8 @@
 #'    names=c("data one", "data two", "data three", "data four", "data five"),
 #'    main="data violin", xlab="data class", ylab="data read")
 #'
-#' #The areaEqual parameter scales with width of violins so that they have equal density area (including missing tails) rather than equal maximum width
+#' #The areaEqual parameter scales with width of violins
+#' #Violins will have equal density area (including missing tails) rather than equal maximum width
 #' vioplotx(data_one, data_two, areaEqual=TRUE)
 #'
 #' vioplotx(data_one, data_two, areaEqual=TRUE,
