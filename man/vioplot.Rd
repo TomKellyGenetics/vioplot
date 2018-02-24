@@ -22,7 +22,7 @@
 \arguments{
 \item{x}{for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.}
 
-\item{...}{additional data vectors or forumla parameters.}
+\item{...}{additional data vectors or formula parameters.}
 
 \item{formula}{a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).}
 
@@ -58,7 +58,7 @@
 
 \item{add}{logical. if FALSE (default) a new plot is created}
 
-\item{wex}{relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessarydocu.}
+\item{wex}{relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary docu.}
 
 \item{drawRect}{logical. The box is drawn if TRUE.}
 

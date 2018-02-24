@@ -3,7 +3,7 @@
 #' Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Includes customisation of colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
 #'
 #' @param x for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.
-#' @param ... additional data vectors or forumla parameters.
+#' @param ... additional data vectors or formula parameters.
 #' @param formula a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).
 #' @param data a data.frame (or list) from which the variables in formula should be taken.
 #' @param range a factor to calculate the upper/lower adjacent values
@@ -25,7 +25,7 @@
 #' @param areaEqual logical. Density plots checked for equal area if TRUE. wex must be scalar, relative widths of violins depend on area.
 #' @param at position of each violin. Default to 1:n
 #' @param add logical. if FALSE (default) a new plot is created
-#' @param wex relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessarydocu.
+#' @param wex relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary docu.
 #' @param horizontal logical. horizontal or vertical violins
 #' @param main,sub,xlab,ylab graphical parameters passed to plot.
 #' @param cex A numerical value giving the amount by which plotting text should be magnified relative to the default.
