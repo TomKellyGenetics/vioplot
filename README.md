@@ -2,6 +2,9 @@
 [![Travis Build Status](https://travis-ci.org/TomKellyGenetics/vioplot.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/vioplot)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TomKellyGenetics/vioplot?branch=master&svg=true)](https://ci.appveyor.com/project/TomKellyGenetics/vioplot)
 
+#vioplot version 0.3
+
+##Installation
 
 To get the current released version from CRAN:
 
@@ -9,7 +12,7 @@ To get the current released version from CRAN:
 install.packages("vioplot")
 ```
 
-To get the modified version from github:
+To get the development version from github:
 
 ```R
 # install.packages("devtools")
