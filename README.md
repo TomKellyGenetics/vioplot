@@ -40,19 +40,21 @@ https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_ylog.html
 
 https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_split.html
 
-Vioplotx works in much the same manner as Vioplot
+vioplot (0.3)  is backwards-compatible with vioplot (0.2). The following features are supported:
 
-* `vioplot::vioplot()` generates a violin plot takes the same arguments as `vioplot::vioplot()` to plot a violin for each group of variables.
+* `vioplot()` generates a violin plot by ploting a violin for each group of variables.
 
-* `vioplot::vioplot()` also takes additional arguments to specify `main`, `sub`, `xlab`, and `ylab` as used in `plot` or `title`
+* `vioplot()` also takes additional arguments to specify `main`, `sub`, `xlab`, and `ylab` as used in `plot` or `title`
 
-* `vioplot::vioplot()` can take vectorised forms of colour variables `col`, `border`, and `rectCol` to modify the colours separately for each violin respectively. This also applies to a new variable `lineCol` to modify the colour of the boxplots. 
+* `:vioplot()` can take vectorised forms of colour variables `col`, `border`, and `rectCol` to modify the colours separately for each violin respectively. This also applies to a new variable `lineCol` to modify the colour of the boxplots. 
 
-* `vioplox::vioplot.formula()` is enabled to take formula and dataframe inputs as used for boxplot and stats operations.
+* `vioplot.formula()` is enabled to take formula and dataframe inputs as used for boxplot and stats operations.
 
 * additional `areaEqual`, `plotCentre` and `side` options enables further customisation. 
 
-For development history prior to package documentation, see the original repo: https://github.com/TomKellyGenetics/R-violin-plot/commits?author=TomKellyGenetics
+See the NEWS.md file for more detail on added features in the 0.3 release.
+
+For development history of version 0.3.0 prior to package documentation, see the original repo: https://github.com/TomKellyGenetics/R-violin-plot/commits?author=TomKellyGenetics
 
 Modifications inspired by the following StackOverFlow threads and GitHub Gists:
 
