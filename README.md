@@ -46,7 +46,7 @@ vioplot (0.3)  is backwards-compatible with vioplot (0.2). The following feature
 
 * `vioplot()` also takes additional arguments to specify `main`, `sub`, `xlab`, and `ylab` as used in `plot` or `title`
 
-* `:vioplot()` can take vectorised forms of colour variables `col`, `border`, and `rectCol` to modify the colours separately for each violin respectively. This also applies to a new variable `lineCol` to modify the colour of the boxplots. 
+* `vioplot()` can take vectorised forms of colour variables `col`, `border`, and `rectCol` to modify the colours separately for each violin respectively. This also applies to a new variable `lineCol` to modify the colour of the boxplots. 
 
 * `vioplot.formula()` is enabled to take formula and dataframe inputs as used for boxplot and stats operations.
 
