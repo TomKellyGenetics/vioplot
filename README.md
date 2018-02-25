@@ -19,7 +19,7 @@ To get the development version from github:
 devtools::install_github("TomKellyGenetics/vioplot")
 ```
 
-# Running
+## Running
 
 See the relevant vignette for more details:
 
@@ -43,6 +43,8 @@ https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_ylog.html
 
 https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_split.html
 
+## Functionality
+
 vioplot (0.3)  is backwards-compatible with vioplot (0.2). The following features are supported:
 
 * `vioplot()` generates a violin plot by ploting a violin for each group of variables.
@@ -56,6 +58,8 @@ vioplot (0.3)  is backwards-compatible with vioplot (0.2). The following feature
 * additional `areaEqual`, `plotCentre` and `side` options enables further customisation. 
 
 See the NEWS.md file for more detail on added features in the 0.3 release.
+
+## Development and sources
 
 For development history of version 0.3.0 prior to package documentation, see the original repo: https://github.com/TomKellyGenetics/R-violin-plot/commits?author=TomKellyGenetics
 
