@@ -74,3 +74,32 @@ Modifications inspired by the following StackOverFlow threads and GitHub Gists:
 * http://stackoverflow.com/questions/22410606/violin-plot-with-list-input
 
 * https://gist.github.com/mbjoseph/5852613
+
+### Attribution
+
+This repository is a proposed submission for an updated version of the vioplot originally released by Daniel Adler (University of Göttingen, Germany) on CRAN. This package has been orphaned on CRAN and is no longer actively maintained. I acknowledge with contributions of Daniel Adler as the original developer and Tom Elliot (University of Auckland, New Zealand) for a pull request and welcome further contributions to improve or maintain this package. 
+
+This package update was developed and released open-source (in accordance with the original package BSD License) while as a PhD candidate at the University of Otago (Dunedin, New Zealand) contact as <tom.kelly[at]postgrad.otago.ac.nz>. I can still be contacted at this address (as prospective maintainer) although my present address and affiliation is (RIKEN Centre for Integative Medical Sciences, Yokohama, Japan) where I can be contacted as a postdoctoral researcher <tom.kelly[at]riken.jp>.
+
+### Citation
+
+The following information can be retrieved from within an R session by using `citation(vioplot)`. Please acknowledge as follows if features included in this version are used.
+
+To cite the enhanced vioplot package in publications use:
+
+  Daniel Adler and S. Thomas Kelly (2018). vioplot: violin plot. R package version 0.3.0
+  https://github.com/TomKellyGenetics/vioplot
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {vioplot: violin plot},
+    author = {Daniel Adler and S. Thomas Kelly},
+    year = {2018},
+    note = {R package version 0.3.0},
+    url = {https://github.com/TomKellyGenetics/vioplot},
+  }
+
+Please also acknowledge the original package: citation("vioplot")
+
+
