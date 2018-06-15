@@ -4,5 +4,8 @@
 .appveyor.yml 
 ^appveyor\.yml$
 figures
+vignettes/*html
 cran-comments.md
 README.md
+revdep
+LICENSE
