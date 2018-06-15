@@ -1,2 +1,4 @@
 language: R
 cache: packages
+before_install:
+  - Rscript -e 'biocLite(c("multtest"));if (!all(c("multtest") %in% installed.packages())) { q(status = 1, save = "no")}'
