@@ -1,4 +1,4 @@
 language: R
 cache: packages
 before_install:
-  - Rscript -e 'source("https://bioconductor.org/biocLite.R");biocLite(c("multtest"));if (!all(c("multtest") %in% installed.packages())) { q(status = 1, save = "no")}'
+  - Rscript -e 'source("https://bioconductor.org/biocLite.R", ask = FALSE);biocLite(c("multtest"))'
