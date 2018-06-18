@@ -13,7 +13,7 @@ Since boxplots have become the _de facto_ standard for plotting the distribution
 
 As shown below for the `iris` dataset, violin plots show distribution information taking formula input that `boxplot` implements but `vioplot` is unable to. This demonstrates the customisation demonstrated in [the main vioplot vignette using vioplot syntax](violin_customisation.html) with the formula method commonly used for `boxplot`, `t.test`, and `lm`.
 
-```{r, echo=FALSE, message=FALSE}
+```{r}
 library("vioplot")
 ```
 
@@ -27,9 +27,10 @@ data(iris)
 boxplot(Sepal.Length~Species, data = iris, main = "Sepal Length")
 ```
 
-Whereas performing the same function does not work with `vioplot`.
+Whereas performing the same function does not work with `vioplot` (0.2).
 
 ```{r, message=FALSE, eval=FALSE}
+devtools::install_version("vioplot", version = "0.2")
 library("vioplot")
 vioplot(Sepal.Length~Species, data = iris)
 ```

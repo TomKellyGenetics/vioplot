@@ -22,7 +22,7 @@ As shown below for the `iris` dataset, violin plots show distribution informatio
 ###General Set up
 
 
-```{r, echo=FALSE, message=FALSE}
+```{r}
 library("vioplot")
 ```
 We set up the data with two categories (Sepal Width) as follows:

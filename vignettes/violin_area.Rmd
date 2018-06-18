@@ -24,7 +24,7 @@ Therefore violin plots are a powerful tool to assist researchers to visualise da
 As shown below for the `iris` dataset, violin plots show distribution information that the boxplot is unable to.
 
 
-```{r, echo=FALSE, message=FALSE}
+```{r}
 library("vioplot")
 ```
 
