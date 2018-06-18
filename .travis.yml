@@ -2,3 +2,8 @@ language: R
 cache: packages
 before_install:
   - Rscript -e 'source("https://bioconductor.org/biocLite.R");biocLite(c("multtest", "survival", "MASS"), ask = FALSE)'
+r_packages:
+  - covr
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'
