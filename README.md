@@ -6,6 +6,7 @@
 [![Travis Build Status](https://travis-ci.org/TomKellyGenetics/vioplot.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/vioplot)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TomKellyGenetics/vioplot?branch=master&svg=true)](https://ci.appveyor.com/project/TomKellyGenetics/vioplot)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![codecov](https://codecov.io/gh/TomKellyGenetics/igraph.extensions/branch/master/graph/badge.svg)](https://codecov.io/gh/TomKellyGenetics/igraph.extensions)
 
 ### Violin Plots in R
 
