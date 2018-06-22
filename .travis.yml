@@ -7,3 +7,7 @@ r_packages:
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
+
+ignore:
+  - LICENSE
+  - vignettes/*html
