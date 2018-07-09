@@ -54,9 +54,9 @@ Plot colours can be further customised as with the original vioplot package usin
 vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col="lightblue")
 ```
 
-###Vectorisation
+### Vectorisation
 
-However the `vioplot` function is unable to colour each violin separately, thus this is enabled with a vectorised `col` in `vioplot`:
+However the `vioplot` (0.2) function is unable to colour each violin separately, thus this is enabled with a vectorised `col` in `vioplot` (0.3):
 
 ```{r}
 vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main = "Sepal Length", col=c("lightgreen", "lightblue", "palevioletred"))
