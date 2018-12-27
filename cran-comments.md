@@ -7,7 +7,7 @@ Since this package has been orphaned since 2005 (12 years to date), I propose to
 Additional features have been added with backwards-compatibility with vioplot 0.2 and added compatibility with formula inputs (as used for beanplot and boxplot).
 
 ## Test environments
-* local elementary OS 0.4 (Ubuntu 16.04) install R (3.4.2)
+* local elementary OS 0.4 (Ubuntu 16.04) install R 3.4.2
 * local Windows 7 install, R 3.2.1
 * local Mac OS (10.13.6) R 3.5.1
 * ubuntu 14.04 (on travis-ci), R 3.4.2
@@ -15,12 +15,4 @@ Additional features have been added with backwards-compatibility with vioplot 0.
 * win-builder
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 
-
-There was 1 NOTE:
-
-#NOTES
-
-##License
-
-Deprecated License has been kept to conform with License of the orphaned vioplot (0.2) package released by Daniel Adler <dadler@uni-goettingen.de>. This is required as it is in the current version of the package (currently on CRAN).
+There were no ERRORs or WARNINGs or NOTEs. 
