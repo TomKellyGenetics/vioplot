@@ -1,3 +1,4 @@
+^LICENSE\.md$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .travis.yml
@@ -8,4 +9,3 @@ vignettes/*html
 cran-comments.md
 README.md
 revdep
-LICENSE
