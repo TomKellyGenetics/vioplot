@@ -2,7 +2,11 @@
 title: "Split Violin Plots"
 author: "Tom Kelly"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_document
+output: rmarkdown::html_vignette
+fig_width: 6 
+fig_height: 3 
+fig_align: 'center'
+fig_keep: 'last'
 vignette: >
   %\VignetteIndexEntry{vioplox: Split Violin Plots}
   %\VignetteEngine{knitr::rmarkdown}
@@ -22,7 +26,7 @@ As shown below for the `iris` dataset, violin plots show distribution informatio
 ###General Set up
 
 
-```{r}
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
 library("vioplot")
 ```
 We set up the data with two categories (Sepal Width) as follows:
@@ -39,43 +43,47 @@ iris_small <- iris[iris$Sepal.Width <= mean(iris$Sepal.Width), ]
 
 First we plot Sepal Length on its own:
 
-```{r}
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
 boxplot(Sepal.Length~Species, data=iris, col="grey")
 ```
 
 
 An indirect comparision can be achieved with par:
 
-```{r}
-par(mfrow=c(2,1))
+```{r,  fig.align = 'center', fig.height = 6, fig.width = 6, fig.keep = 'last'}
+{
+  par(mfrow=c(2,1))
 boxplot(Sepal.Length~Species, data=iris_small, col = "lightblue")
 boxplot(Sepal.Length~Species, data=iris_large, col = "palevioletred")
 par(mfrow=c(1,1))
+}
 ```
 
 ### Violin Plots
 
 First we plot Sepal Length on its own:
 
-```{r}
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
 vioplot(Sepal.Length~Species, data=iris)
 ```
 
 
 An indirect comparision can be achieved with par:
 
-```{r}
-par(mfrow=c(2,1))
+```{r,  fig.align = 'center', fig.height = 6, fig.width = 6, fig.keep = 'last'}
+{
+  par(mfrow=c(2,1))
 vioplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line")
 vioplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line")
 par(mfrow=c(1,1))
+}
 ```
 
 ### Split Violin Plots
 
 A more direct comparision can be made with the `side` argument and `add = TRUE` on the second plot:
 
-```{r}
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
 vioplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line", side = "right")
 vioplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line", side = "left", add = T)
 title(xlab = "Species", ylab = "Sepal Length")
@@ -87,7 +95,7 @@ legend("topleft", fill = c("lightblue", "palevioletred"), legend = c("small", "l
 The line median option is more suitable for side by side comparisions but the point option is still available also:
 
 
-```{r}
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
 vioplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "point", side = "right", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
 vioplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "point", side = "left", pchMed = 21, colMed = "lightblue4", colMed2 = "lightblue2", add = T)
 title(xlab = "Species", ylab = "Sepal Length")
@@ -96,7 +104,7 @@ legend("topleft", fill = c("lightblue", "palevioletred"), legend = c("small", "l
 
 It may be necessary to include a `points` command to fix the median being overwritten by the following plots:
 
-```{r}
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
 vioplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "point", side = "right", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
 vioplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "point", side = "left", pchMed = 21, colMed = "lightblue4", colMed2 = "lightblue2", add = T)
 points(1:length(levels(iris$Species)), as.numeric(sapply(levels(iris$Species), function(species) median(iris_large[grep(species, iris_large$Species),]$Sepal.Length))), pch = 21, col = "palevioletred4", bg = "palevioletred2")
@@ -107,7 +115,7 @@ legend("topleft", fill = c("lightblue", "palevioletred"), legend = c("small", "l
 Similarly points could be added where a line has been used previously:
 
 
-```{r}
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
 vioplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line", side = "right", pchMed = 21, colMed = "palevioletred4", colMed2 = "palevioletred2")
 vioplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line", side = "left", pchMed = 21, colMed = "lightblue4", colMed2 = "lightblue2", add = T)
 points(1:length(levels(iris$Species)), as.numeric(sapply(levels(iris$Species), function(species) median(iris_large[grep(species, iris_large$Species),]$Sepal.Length))), pch = 21, col = "palevioletred4", bg = "palevioletred2")

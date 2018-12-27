@@ -2,7 +2,7 @@
 title: "Customising Violin Plots"
 author: "Tom Kelly"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_document
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{vioplot: Customising Violin Plots}
   %\VignetteEngine{knitr::rmarkdown}

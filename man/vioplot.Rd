@@ -12,12 +12,13 @@
 \method{vioplot}{default}(x, ..., data = NULL, range = 1.5, h = NULL,
   ylim = NULL, names = NULL, horizontal = FALSE, col = "grey50",
   border = "black", lty = 1, lwd = 1, rectCol = "black",
-  lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
-  at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual = FALSE,
-  main = NA, sub = NA, xlab = NA, ylab = NA, cex = 1, cex.axis = 1,
-  cex.names = NULL, cex.lab = 1, cex.main = 1, cex.sub = 1,
-  yaxt = "s", ylog = FALSE, log = "", logLab = c(1, 2, 5),
-  na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
+  lineCol = "black", pchMed = 19, colMed = "white",
+  colMed2 = "grey 75", at, add = FALSE, wex = 1, drawRect = TRUE,
+  areaEqual = FALSE, main = NA, sub = NA, xlab = NA, ylab = NA,
+  cex = 1, cex.axis = 1, cex.names = NULL, cex.lab = 1,
+  cex.main = 1, cex.sub = 1, yaxt = "s", ylog = FALSE, log = "",
+  logLab = c(1, 2, 5), na.action = NULL, na.rm = T, side = "both",
+  plotCentre = "point")
 }
 \arguments{
 \item{x}{for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.}
