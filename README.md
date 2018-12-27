@@ -33,23 +33,23 @@ See the relevant vignette for more details:
 
 * Customising colour and shape with scalar inputs or vectors applied separately to each violin.
 
-https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_customisation.html
+https://rawgit.com/TomKellyGenetics/vioplot/vignettes/vignettes/violin_customisation.html
 
 * Formula input enabled with S3 methods.
 
-https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_formulae.html
+https://rawgit.com/TomKellyGenetics/vioplot/vignettes/vignettes/violin_formulae.html
 
 * Control of violin area for proportional widths
 
-https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_area.html
+https://rawgit.com/TomKellyGenetics/vioplot/vignettes/vignettes/violin_area.html
 
 * Control of the y-axis including disabling labels and log-scale
 
-https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_ylog.html
+https://rawgit.com/TomKellyGenetics/vioplot/vignettes/vignettes/violin_ylog.html
 
 * Split violins to directly compare paired data.
 
-https://rawgit.com/TomKellyGenetics/vioplot/master/vignettes/violin_split.html
+https://rawgit.com/TomKellyGenetics/vioplot/vignettes/vignettes/violin_split.html
 
 ## Functionality
 
