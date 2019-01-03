@@ -38,13 +38,13 @@ vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Specie
 
 ###Logarithmic scale
 
-However the existing violin plot packages (such as \code{\link[vioplot]{vioplot}}) do not support log-scale of the y-axis. This has been ammended with the `ylog` argument.
+However the existing violin plot packages (such as \code{\link[vioplot]{vioplot}}) do not support log-scale of the y-axis. This has been amended with the `ylog` argument.
 
 ```{r}
 vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", ylog = T, ylim=c(log(1), log(10)))
 ```
 
-This can also be invoked with the `log="y"` argument compatble with `boxplot`:
+This can also be invoked with the `log="y"` argument compatible with `boxplot`:
 
 ```{r}
 vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", log = T, ylim=c(log(1), log(10)))

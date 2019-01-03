@@ -48,7 +48,7 @@ boxplot(Sepal.Length~Species, data=iris, col="grey")
 ```
 
 
-An indirect comparision can be achieved with par:
+An indirect comparison can be achieved with par:
 
 ```{r,  fig.align = 'center', fig.height = 6, fig.width = 6, fig.keep = 'last'}
 {
@@ -68,7 +68,7 @@ vioplot(Sepal.Length~Species, data=iris)
 ```
 
 
-An indirect comparision can be achieved with par:
+An indirect comparison can be achieved with par:
 
 ```{r,  fig.align = 'center', fig.height = 6, fig.width = 6, fig.keep = 'last'}
 {

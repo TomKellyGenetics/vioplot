@@ -14,5 +14,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat
+Language: en-GB
 VignetteBuilder: knitr
 Encoding: UTF-8
