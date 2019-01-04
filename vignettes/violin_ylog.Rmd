@@ -4,7 +4,7 @@ author: "Tom Kelly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{vioplot: Controlling Violin Plot Area}
+  %\VignetteIndexEntry{vioplot: Controlling y-axis Plotting}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

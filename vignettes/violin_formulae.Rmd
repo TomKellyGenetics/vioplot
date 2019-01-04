@@ -1,10 +1,10 @@
 ---
-title: "Customising Violin Plots"
+title: "Customising Violin Plots with Formula Input"
 author: "Tom Kelly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{vioplot: Customising Violin Plots}
+  %\VignetteIndexEntry{vioplot: Customising Violin Plots with Formula Input}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
