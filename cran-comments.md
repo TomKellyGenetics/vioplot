@@ -15,4 +15,10 @@ Additional features have been added with backwards-compatibility with vioplot 0.
 * win-builder
 
 ## R CMD check results
-There were no ERRORs or WARNINGs or NOTEs. 
+There were no ERRORs or WARNINGs
+
+##NOTE
+
+Maintainer differs as described above.
+
+All other issues have been addressed, including those in the vioplot (0.2) release. 
