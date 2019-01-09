@@ -134,7 +134,7 @@ These extensions to `vioplot` here are based on those provided here:
 
 These have previously been discussed on the following sites:
 
-* http://mbjoseph.github.io/2013/06/24/violin.html
+* https://mbjoseph.github.io/posts/2018-12-23-split-violin-plots/
 
 * http://tagteam.harvard.edu/hub_feeds/1981/feed_items/209875
 

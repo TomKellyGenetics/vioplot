@@ -35,7 +35,7 @@ library("vioplot")
 vioplot(Sepal.Length~Species, data = iris)
 ```
 
-```{warning}
+```
 Error in min(data) : invalid 'type' (language) of argument
 ```
 
