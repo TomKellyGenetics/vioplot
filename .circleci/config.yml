@@ -1,4 +1,7 @@
-osx_image: xcode8.2
+jobs:
+  build:
+    macos:
+      xcode: "9.0"
 
 
 defaults: &steps
