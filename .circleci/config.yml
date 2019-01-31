@@ -18,7 +18,7 @@ machine:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/front-end/node_modules/.bin"
 dependencies:
   pre:
-    - apt-get install tcl libtcl-8.6 libtk-8.6
+    - apt-get install -q -y tcl libtcl-8.6 libtk-8.6
 
 defaults: &steps
   steps:
