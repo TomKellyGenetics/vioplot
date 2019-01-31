@@ -1,13 +1,13 @@
 language: r
 sudo: required
-addons:
-  apt:
-    packages:
-      - tcl
-      - libtcl
-      - libtk
-      - libtcltk
-      - libtcltk-ruby
+#addons:
+#  apt:
+#    packages:
+#      - tcl
+#      - libtcl
+#      - libtk
+#      - libtcltk
+#      - libtcltk-ruby
 
 machine:
   python:
