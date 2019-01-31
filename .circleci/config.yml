@@ -3,8 +3,10 @@ sudo: required
 addons:
   apt:
     packages:
-      - libtcl-8.6
-      - libtk-8.6
+      - libtcl
+      - libtk
+      - libtcltk
+      - libtcltk-ruby
 
 machine:
   python:
@@ -13,9 +15,9 @@ machine:
     version: 8.1.4
   environment:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/front-end/node_modules/.bin"
-dependencies:
-  pre:
-    - apt-get install libtcl-8.6 libtk-8.6
+#dependencies:
+#  pre:
+#    - apt-get install libtcl-8.6 libtk-8.6
 
 defaults: &steps
   steps:
