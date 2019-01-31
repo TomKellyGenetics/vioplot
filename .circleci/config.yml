@@ -1,3 +1,10 @@
+language: r
+addons:
+  apt:
+    packages:
+      - libtcl-8.5
+      - libtk-8.5
+
 defaults: &steps
   steps:
     - checkout
