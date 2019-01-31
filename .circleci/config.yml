@@ -18,7 +18,7 @@ machine:
     PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/front-end/node_modules/.bin"
 dependencies:
   pre:
-    - apt-get -q -y install tcl libtcl libtk
+    - apt-get -y install tcl libtcl libtk
 
 defaults: &steps
   steps:
