@@ -51,6 +51,7 @@ defaults: &steps
         when: always
 
 version: 2
+jobs:
   "r-release":
      docker:
        - image: rocker/tidyverse:latest
