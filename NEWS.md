@@ -4,7 +4,7 @@
 
 - formula inputs
 
-vioplot is not compatible with all inputs of boxplot or beanplot, including formula inputs (implemented as S3 methods.
+vioplot is now compatible with all inputs of boxplot or beanplot, including formula inputs (implemented as S3 methods).
 
 - plot customisation
 

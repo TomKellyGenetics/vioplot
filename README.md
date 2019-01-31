@@ -4,6 +4,7 @@
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vioplot)](https://cran.r-project.org/package=vioplot)
 [![Travis Build Status](https://travis-ci.org/TomKellyGenetics/vioplot.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/vioplot)
+[![CircleCI](https://circleci.com/gh/TomKellyGenetics/vioplot.svg?style=svg)](https://circleci.com/gh/TomKellyGenetics/vioplot)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/TomKellyGenetics/vioplot?branch=master&svg=true)](https://ci.appveyor.com/project/TomKellyGenetics/vioplot)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![codecov](https://codecov.io/gh/TomKellyGenetics/vioplot/branch/master/graph/badge.svg)](https://codecov.io/gh/TomKellyGenetics/vioplot)
