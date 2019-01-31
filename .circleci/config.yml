@@ -52,15 +52,14 @@ defaults: &steps
 
 version: 2
 jobs:
+  "mac-os"
+    macos:
+      xcode: "9.0"
   "r-release":
-      macos:
-        xcode: "9.0"
      docker:
        - image: rocker/tidyverse:latest
      <<: *steps
   "r-devel":
-      macos:
-        xcode: "9.0"
      docker:
        - image: rocker/tidyverse:devel
      <<: *steps  "r-release":
