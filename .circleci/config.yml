@@ -52,7 +52,7 @@ defaults: &steps
 
 version: 2
 jobs:
-  "mac-os"
+  "mac-os":
      build:
        macos:
          xcode: "9.0"
