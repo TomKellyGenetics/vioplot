@@ -17,7 +17,7 @@ defaults: &steps
 
     - run:
         name: Install dependancy libraries
-        command: apt-get -y install tcl libtcl libtk
+        command: apt-get -y install tcl
 
     - run:
         name: Set environmental variables
