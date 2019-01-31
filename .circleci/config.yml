@@ -38,6 +38,10 @@ defaults: &steps
     ## install dependencies ------------------
 
     - run:
+        name: install libraries
+        command: apt-get install tcl
+
+    - run:
         name: Install devtools and dependencies
         command: |
           Rscript \
