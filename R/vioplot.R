@@ -204,7 +204,7 @@ vioplot.default <-
   {
     #assign graphical parameters if not given
     for(ii in 1:length(names(par()))){
-      if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[ii]))
+      if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[[ii]]))
     }
     if(!is.list(x)){
       datas <- list(x, ...)
@@ -349,13 +349,15 @@ vioplot.default <-
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            Axis(log_axis, at=log(log_axis), labels=log_axis_label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            Axis(log_axis, at=log(log_axis), labels=log_axis_label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            if(is.null(cex.names)) cex.names <- cex.axis
+            Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
           } else {
             Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            if(is.null(cex.names)) cex.names <- cex.axis
+            Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
           }
         }
-        if(is.null(cex.names)) cex.names <- cex.axis
-        Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
       }
       if (frame.plot) {
        box(lty = lty, lwd = lwd)
@@ -382,21 +384,20 @@ vioplot.default <-
     }
     else {
       if (!add) {
-        plot.window(xlim, ylim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
-        axis(1)
+        plot.window(ylim, xlim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+        axis(2)
         if(yaxt !="n"){
           if(ylog){
             #log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            axis(2, at=log(log_axis), labels=log_axis_label, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            axis(1, at=log(log_axis), labels=log_axis_label, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
           } else {
-            axis(2, at = at, labels = label, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            Axis(unlist(datas), side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
           }
         }
       }
-      panel.last
       if (frame.plot) {
         box(lty = lty, lwd = lwd)
       }
@@ -420,6 +421,7 @@ vioplot.default <-
         }
       }
     }
+    panel.last
     if (ann) {
         title(main = main, sub = sub, xlab = xlab, ylab = ylab, line = line, outer = outer, xpd = xpd, cex.main = cex.main, col.main = col.main, font.main = font.main)
     }
