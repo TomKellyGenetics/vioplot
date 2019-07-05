@@ -6,18 +6,32 @@
 \alias{vioplot.default}
 \title{violin plot}
 \usage{
-\method{vioplot}{formula}(formula, data = NULL, ..., names = NULL,
-  na.action = NULL)
+\method{vioplot}{formula}(formula, data = NULL, ..., xlab = NA,
+  ylab = NA, names = NULL, na.action = NULL)
 
 \method{vioplot}{default}(x, ..., data = NULL, range = 1.5, h = NULL,
   ylim = NULL, names = NULL, horizontal = FALSE, col = "grey50",
   border = "black", lty = 1, lwd = 1, rectCol = "black",
   lineCol = "black", pchMed = 19, colMed = "white",
   colMed2 = "grey 75", at, add = FALSE, wex = 1, drawRect = TRUE,
-  areaEqual = FALSE, main = NA, sub = NA, xlab = NA, ylab = NA,
-  cex = 1, cex.axis = 1, cex.names = NULL, cex.lab = 1,
-  cex.main = 1, cex.sub = 1, yaxt = "s", ylog = FALSE, log = "",
-  logLab = c(1, 2, 5), na.action = NULL, na.rm = T, side = "both",
+  areaEqual = FALSE, axes = TRUE, frame.plot = axes,
+  panel.first = NULL, panel.last = NULL, asp = NA, main = "",
+  sub = "", xlab = NA, ylab = NA, line = NA, outer = FALSE,
+  adj = NA, ann = par("ann"), ask = NA, bg = NA, bty = NA,
+  cex = 1, cex.axis = 1, cex.lab = 1, cex.main = 1,
+  cex.names = NULL, cex.sub = 1, cin = NA, col.axis = NA,
+  col.lab = NA, col.main = NA, col.sub = NA, cra = NA, crt = NA,
+  csi = NA, cxy = NA, din = NA, err = NA, family = NA, fg = NA,
+  fig = NA, fin = NA, font = NA, font.axis = NA, font.lab = NA,
+  font.main = NA, font.sub = NA, lab = NA, las = NA, lend = NA,
+  lheight = NA, ljoin = NA, lmitre = NA, mai = NA, mar = NA,
+  mex = NA, mfcol = NA, mfg = NA, mfrow = NA, mgp = NA,
+  mkh = NA, new = NA, oma = NA, omd = NA, omi = NA, page = NA,
+  pch = NA, pin = NA, plt = NA, ps = NA, pty = NA, smo = NA,
+  srt = NA, tck = NA, tcl = NA, usr = NA, xaxp = NA,
+  xaxs = "r", xaxt = "s", xpd = NA, yaxp = NA, yaxs = "r",
+  yaxt = "s", ylbias = NA, ylog = FALSE, log = "", logLab = c(1,
+  2, 5), na.action = NULL, na.rm = T, side = "both",
   plotCentre = "point")
 }
 \arguments{
@@ -71,11 +85,11 @@
 
 \item{cex.axis}{The magnification to be used for y axis annotation relative to the current setting of cex.}
 
-\item{cex.names}{The magnification to be used for x axis annotation relative to the current setting of cex. Takes the value of cex.axis if not given.}
-
 \item{cex.lab}{The magnification to be used for x and y labels relative to the current setting of cex.}
 
 \item{cex.main}{The magnification to be used for main titles relative to the current setting of cex.}
+
+\item{cex.names}{The magnification to be used for x axis annotation relative to the current setting of cex. Takes the value of cex.axis if not given.}
 
 \item{cex.sub}{The magnification to be used for sub-titles relative to the current setting of cex.}
 
