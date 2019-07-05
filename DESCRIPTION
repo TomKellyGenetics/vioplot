@@ -11,6 +11,8 @@ License: BSD
 LazyData: true
 RoxygenNote: 6.1.1
 Suggests:
+    ggplot2,
+    RColorBrewer,
     knitr,
     rmarkdown,
     testthat

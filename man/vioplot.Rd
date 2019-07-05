@@ -106,6 +106,8 @@
 \item{side}{defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.}
 
 \item{plotCentre}{defaults to "points", plotting a central point at the median. If "line" is given a median line is plotted (subject to side) alternatively.}
+
+\item{...}{Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}} )).}
 }
 \description{
 Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Includes customisation of colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
@@ -136,6 +138,13 @@ vioplot(Sepal.Length~Species, data = iris, main = "Sepal Length",
 legend("topleft", legend=c("setosa", "versicolor", "virginica"),
        fill=c("lightgreen", "lightblue", "palevioletred"), cex = 0.5)
 
+data("diamonds", package = "ggplot2")
+palette <- RColorBrewer::brewer.pal(9, "Pastel1")
+par(mfrow=c(3, 1))
+vioplot(price ~ cut, data = diamonds, las = 1, col = palette)
+vioplot(price ~ clarity, data = diamonds, las = 2, col = palette)
+vioplot(price ~ color, data = diamonds, las = 2, col = palette)
+par(mfrow=c(3, 1))
 
 #generate example data
 data_one <- rnorm(100)

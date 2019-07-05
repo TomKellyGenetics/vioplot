@@ -38,6 +38,7 @@
 #' @param na.rm logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
 #' @param side defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.
 #' @param plotCentre defaults to "points", plotting a central point at the median. If "line" is given a median line is plotted (subject to side) alternatively.
+#' @param ... Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).
 #' @keywords plot graphics violin
 #' @import sm
 #' @importFrom zoo rollmean
@@ -71,6 +72,13 @@
 #' legend("topleft", legend=c("setosa", "versicolor", "virginica"),
 #'        fill=c("lightgreen", "lightblue", "palevioletred"), cex = 0.5)
 #'
+#' data("diamonds", package = "ggplot2")
+#' palette <- RColorBrewer::brewer.pal(9, "Pastel1")
+#' par(mfrow=c(3, 1))
+#' vioplot(price ~ cut, data = diamonds, las = 1, col = palette)
+#' vioplot(price ~ clarity, data = diamonds, las = 2, col = palette)
+#' vioplot(price ~ color, data = diamonds, las = 2, col = palette)
+#' par(mfrow=c(3, 1))
 #'
 #' #generate example data
 #' data_one <- rnorm(100)
@@ -326,12 +334,12 @@ vioplot.default <-
     boxwidth <- 0.05 * ifelse(length(boxwex)>1, boxwex[i], boxwex)
     if (!add){
       plot.new()
-      plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab)
+      plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
     }
     panel.first
     if (!horizontal) {
       if (!add) {
-        plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab)
+        plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
         if(yaxt !="n"){
           if(ylog){
             #log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
@@ -371,7 +379,7 @@ vioplot.default <-
     }
     else {
       if (!add) {
-        plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab)
+        plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
         axis(1)
         if(yaxt !="n"){
           if(ylog){
