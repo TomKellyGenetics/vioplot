@@ -198,7 +198,7 @@ vioplot.default <-
             cxy=NA, din=NA, err=NA, family=NA, fg=NA, fig=NA, fin=NA, font=NA, font.axis=NA, font.lab=NA,
             font.main=NA, font.sub=NA, lab=NA, las=NA, lend=NA, lheight=NA, ljoin=NA, lmitre=NA, mai=NA, mar=NA, mex=NA, mfcol=NA, mfg=NA, mfrow=NA, mgp=NA, mkh=NA, new=NA, oma=NA,
             omd=NA, omi=NA, page=NA, pch=NA, pin=NA, plt=NA, ps=NA, pty=NA, smo=NA, srt=NA, tck=NA, tcl=NA,
-            usr=NA, xaxp=NA, xaxs="r", xaxt="s", xpd=NA, yaxp=NA, yaxs="r", yaxt="s", ylbias=NA,
+            usr=NA, xlog = NA, xaxp=NA, xaxs="r", xaxt="s", xpd=NA, yaxp=NA, yaxs="r", yaxt="s", ylbias=NA,
             ylog=FALSE, log="", logLab=c(1,2,5),
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
@@ -369,7 +369,7 @@ vioplot.default <-
           if(plotCentre == "line"){
             lines(x = c(at[i] - radj*med.dens[i],
                         at[i],
-                        at[i] + ladj*med.dens[i], lend = lend, ljoin = ljoin, lmitre = lmitre),
+                        at[i] + ladj*med.dens[i]),
                   y = rep(med[i],3))
           } else {
             points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed), bg = ifelse(length(colMed2)>1, colMed2[i], colMed2), cex = cex, lwd = lwd, lty = lty)

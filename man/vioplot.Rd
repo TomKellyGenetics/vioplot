@@ -28,7 +28,7 @@
   mex = NA, mfcol = NA, mfg = NA, mfrow = NA, mgp = NA,
   mkh = NA, new = NA, oma = NA, omd = NA, omi = NA, page = NA,
   pch = NA, pin = NA, plt = NA, ps = NA, pty = NA, smo = NA,
-  srt = NA, tck = NA, tcl = NA, usr = NA, xaxp = NA,
+  srt = NA, tck = NA, tcl = NA, usr = NA, xlog = NA, xaxp = NA,
   xaxs = "r", xaxt = "s", xpd = NA, yaxp = NA, yaxs = "r",
   yaxt = "s", ylbias = NA, ylog = FALSE, log = "", logLab = c(1,
   2, 5), na.action = NULL, na.rm = T, side = "both",
