@@ -212,7 +212,10 @@ vioplot.default <-
       datas<-lapply(x, unlist)
     }
     if(is.character(log)) if("y" %in% unlist(strsplit(log, ""))) log <- TRUE
-    if(log == TRUE | ylog == TRUE) ylog <- TRUE
+    if(log == TRUE | ylog == TRUE){
+      ylog <- TRUE
+      log <- "y"
+    }
     if(ylog){
       #check data is compatible with log scale
       if(all(unlist(datas) <= 0)){
@@ -334,12 +337,12 @@ vioplot.default <-
     boxwidth <- 0.05 * ifelse(length(boxwex)>1, boxwex[i], boxwex)
     if (!add){
       plot.new()
-      plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+      plot.window(xlim, ylim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
     }
     panel.first
     if (!horizontal) {
       if (!add) {
-        plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+        plot.window(xlim, ylim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
         if(yaxt !="n"){
           if(ylog){
             #log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
@@ -379,7 +382,7 @@ vioplot.default <-
     }
     else {
       if (!add) {
-        plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+        plot.window(xlim, ylim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
         axis(1)
         if(yaxt !="n"){
           if(ylog){
