@@ -211,27 +211,14 @@ vioplot.default <-
     } else{
       datas<-lapply(x, unlist)
     }
-    if(is.character(log)) if("y" %in% unlist(strsplit(log, ""))) log <- TRUE
-    if(log == TRUE | ylog == TRUE){
-      ylog <- TRUE
-      log <- "y"
-    }
     if(ylog){
       #check data is compatible with log scale
       if(all(unlist(datas) <= 0)){
         ylog <- FALSE
         warning("log scale cannot be used with non-positive data")
       } else {
-        #create axis labels
-        log_axis <- as.vector(outer(1:9, 10^(floor(log(min(unlist(datas)), 10)):ceiling(log(max(unlist(datas)), 10)))))
-        log_axis <- log_axis[log_axis < max(unlist(datas))]
-        log_axis_label <- ifelse(sapply(strsplit(as.character(log_axis), split=""), function(xx) any(logLab %in% xx)), log_axis, "")
-        #log_axis_label <- ifelse(log(log_axis, 10) %% 1 ==0, log_axis, "")
-        #log_axis <- sort(c(1, 10^c(seq(-10,10)), 2*10^c(seq(-10,10)), 5*10^c(seq(-10,10))))
-        #log_axis_label <- log_axis
-
         #log-scale data
-        datas <- lapply(datas, function(x) log(unlist(x)))
+        datas <- datas #lapply(datas, function(x) log(unlist(x)))
       }
     }
     if(is.null(na.action)) na.action <- na.omit
@@ -348,6 +335,8 @@ vioplot.default <-
     if (!horizontal) {
       if (!add) {
         plot.window(xlim, ylim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+        xaxp <- par()$xaxp
+        yaxp <- par()$yaxp
         if(yaxt !="n"){
           if(ylog){
             #log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
@@ -395,6 +384,8 @@ vioplot.default <-
       }
       if (!add) {
         plot.window(ylim, xlim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+        xaxp <- par()$xaxp
+        yaxp <- par()$yaxp
         if(yaxt !="n"){
           if(xlog){
             #log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
