@@ -38,6 +38,7 @@
 #' @param na.rm logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
 #' @param side defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.
 #' @param plotCentre defaults to "points", plotting a central point at the median. If "line" is given a median line is plotted (subject to side) alternatively.
+#' @param ... Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).
 #' @keywords plot graphics violin
 #' @import sm
 #' @importFrom zoo rollmean
@@ -63,6 +64,21 @@
 #' plot(x, y, xlim=c(-5,5), ylim=c(-5,5))
 #' vioplot(x, col="tomato", horizontal=TRUE, at=-4, add=TRUE,lty=2, rectCol="gray")
 #' vioplot(y, col="cyan", horizontal=FALSE, at=-4, add=TRUE,lty=2)
+#'
+#' # formula input
+#' data("iris")
+#' vioplot(Sepal.Length~Species, data = iris, main = "Sepal Length",
+#'         col=c("lightgreen", "lightblue", "palevioletred"))
+#' legend("topleft", legend=c("setosa", "versicolor", "virginica"),
+#'        fill=c("lightgreen", "lightblue", "palevioletred"), cex = 0.5)
+#'
+#' data("diamonds", package = "ggplot2")
+#' palette <- RColorBrewer::brewer.pal(9, "Pastel1")
+#' par(mfrow=c(3, 1))
+#' vioplot(price ~ cut, data = diamonds, las = 1, col = palette)
+#' vioplot(price ~ clarity, data = diamonds, las = 2, col = palette)
+#' vioplot(price ~ color, data = diamonds, las = 2, col = palette)
+#' par(mfrow=c(3, 1))
 #'
 #' #generate example data
 #' data_one <- rnorm(100)
@@ -128,7 +144,7 @@ vioplot <- function(x, ...) {
 #' @rdname vioplot
 #' @export
 vioplot.formula <-
-  function (formula, data = NULL, ..., names=NULL, na.action = NULL)
+  function (formula, data = NULL, ..., xlab = NA, ylab = NA, names=NULL, na.action = NULL)
   {
     if (missing(formula) || (length(formula) != 3L))
       stop("'formula' missing or incorrect")
@@ -136,15 +152,34 @@ vioplot.formula <-
     if (is.matrix(eval(m$data, parent.frame())))
       m$data <- data.frame(as.numeric(data))
     m$... <- NULL
+    m$xlab <- NULL
+    m$ylab <- NULL
     m$names <- NULL
     m$na.action <- na.action
     m[[1L]] <- quote(stats::model.frame)
     mf <- eval(m, parent.frame())
     response <- attr(attr(mf, "terms"), "response")
     datas <- split(mf[[response]], mf[-response])
+    if(is.null(names)) names <- names(datas)
+    names(datas) <- gsub(" ", ".", names(datas))
+    vars <- unlist(strsplit(as.character(formula), "~"))
+    vars <- gsub(" " , "", vars)
+    vars <- gsub("+" , "", vars)
+    params <- ", names = names, ...)"
+    if(is.na(ylab)){
+      ylab <- vars[2]
+      params <- paste0(", ylab = ylab", params)
+    } else {
+      params <- paste0(", ylab = ylab", params)
+    }
+    if(is.na(xlab)){
+      xlab <- vars[3]
+      params <- paste0(", xlab = xlab", params)
+    } else {
+      params <- paste0(", xlab = xlab", params)
+    }
     with(datas, expr = {
-        if(is.null(names)) names <- names(datas)
-        eval(parse(text=paste("vioplot(", paste(names(datas), collapse = ", "), ", names = names, ...)")))
+      eval(parse(text=paste("vioplot(", paste(names(datas), collapse = ", "), params)))
     })
   }
 
@@ -156,10 +191,21 @@ vioplot.default <-
             horizontal = FALSE, col = "grey50", border = "black", lty = 1,
             lwd = 1, rectCol = "black", lineCol = "black", pchMed = 19, colMed = "white", colMed2 = "grey 75",
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE,
-            main=NA, sub=NA, xlab=NA, ylab=NA, cex=1, cex.axis=1, cex.names=NULL, cex.lab=1, cex.main=1, cex.sub=1,
-            yaxt="s", ylog=FALSE, log="", logLab=c(1,2,5),
+            axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA,
+            main="", sub="", xlab=NA, ylab=NA, line = NA, outer = FALSE,
+            adj=NA, ann = par("ann"), ask=NA, bg=NA, bty=NA, cex=1, cex.axis=1, cex.lab=1, cex.main=1,
+            cex.names=NULL, cex.sub=1, cin=NA, col.axis=NA, col.lab=NA, col.main=NA, col.sub=NA, cra=NA, crt=NA, csi=NA,
+            cxy=NA, din=NA, err=NA, family=NA, fg=NA, fig=NA, fin=NA, font=NA, font.axis=NA, font.lab=NA,
+            font.main=NA, font.sub=NA, lab=NA, las=NA, lend=NA, lheight=NA, ljoin=NA, lmitre=NA, mai=NA, mar=NA, mex=NA, mfcol=NA, mfg=NA, mfrow=NA, mgp=NA, mkh=NA, new=NA, oma=NA,
+            omd=NA, omi=NA, page=NA, pch=NA, pin=NA, plt=NA, ps=NA, pty=NA, smo=NA, srt=NA, tck=NA, tcl=NA,
+            usr=NA, xaxp=NA, xaxs="r", xaxt="s", xpd=NA, yaxp=NA, yaxs="r", yaxt="s", ylbias=NA,
+            ylog=FALSE, log="", logLab=c(1,2,5),
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
+    #assign graphical parameters if not given
+    for(ii in 1:length(names(par()))){
+      if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[ii]))
+    }
     if(!is.list(x)){
       datas <- list(x, ...)
     } else{
@@ -286,49 +332,54 @@ vioplot.default <-
       label <- names
     }
     boxwidth <- 0.05 * ifelse(length(boxwex)>1, boxwex[i], boxwex)
-    if (!add)
+    if (!add){
       plot.new()
+      plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+    }
+    panel.first
     if (!horizontal) {
       if (!add) {
-        plot.window(xlim = xlim, ylim = ylim)
+        plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
         if(yaxt !="n"){
           if(ylog){
             #log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            axis(2, at=log(log_axis), labels=log_axis_label, cex.axis=cex*cex.axis)
+            Axis(log_axis, at=log(log_axis), labels=log_axis_label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
           } else {
-            axis(2, cex.axis=cex*cex.axis)
+            Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
           }
         }
         if(is.null(cex.names)) cex.names <- cex.axis
-        axis(1, at = at, labels = label, cex.axis=cex*cex.names)
+        Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
       }
-      box()
+      if (frame.plot) {
+       box(lty = lty, lwd = lwd)
+      }
       for (i in 1:n) {
         polygon(c(at[i] - radj*height[[i]], rev(at[i] + ladj*height[[i]])),
                 c(base[[i]], rev(base[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border),
-                lty = lty, lwd = lwd)
+                lty = lty, lwd = lwd, xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
         if (drawRect) {
           lines(at[c(i, i)], c(lower[i], upper[i]), lwd = lwd,
-                lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
+                lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol), lend = lend, ljoin = ljoin, lmitre = lmitre)
           rect(at[i] - radj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q1[i], at[i] + ladj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2,
-               q3[i], col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
+               q3[i], col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol), xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
           if(plotCentre == "line"){
             lines(x = c(at[i] - radj*med.dens[i],
                         at[i],
-                        at[i] + ladj*med.dens[i]),
+                        at[i] + ladj*med.dens[i], lend = lend, ljoin = ljoin, lmitre = lmitre),
                   y = rep(med[i],3))
           } else {
-            points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed), bg = ifelse(length(colMed2)>1, colMed2[i], colMed2))
+            points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed), bg = ifelse(length(colMed2)>1, colMed2[i], colMed2), cex = cex, lwd = lwd, lty = lty)
           }
         }
       }
     }
     else {
       if (!add) {
-        plot.window(xlim = ylim, ylim = xlim)
+        plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
         axis(1)
         if(yaxt !="n"){
           if(ylog){
@@ -336,70 +387,39 @@ vioplot.default <-
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            axis(2, at=log(log_axis), labels=log_axis_label)
+            axis(2, at=log(log_axis), labels=log_axis_label, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
           } else {
-            axis(2, at = at, labels = label)
+            axis(2, at = at, labels = label, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
           }
         }
       }
-      box()
+      panel.last
+      if (frame.plot) {
+        box(lty = lty, lwd = lwd)
+      }
       for (i in 1:n) {
         polygon(c(base[[i]], rev(base[[i]])), c(at[i] - radj*height[[i]],
                                                 rev(at[i] + ladj*height[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border),
-                lty = lty, lwd = lwd)
+                lty = lty, lwd = lwd, xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
         if (drawRect) {
           lines(c(lower[i], upper[i]), at[c(i, i)], lwd = lwd,
-                lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol))
+                lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol), lend = lend, ljoin = ljoin, lmitre = lmitre)
           rect(q1[i], at[i] - radj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q3[i], at[i] +
-                 ladj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol))
+                 ladj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol), xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
           if(plotCentre == "line"){
             lines(y = c(at[i] - radj*med.dens[i],
                         at[i],
                         at[i] + ladj*med.dens[i]),
                   x = rep(med[i],3))
           } else {
-            points(med[i], at[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed), , bg = ifelse(length(colMed2)>1, colMed2[i], colMed2))
+            points(med[i], at[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed), , bg = ifelse(length(colMed2)>1, colMed2[i], colMed2), cex = cex, lwd = lwd, lty = lty)
           }
         }
       }
+    }
+    if (ann) {
+        title(main = main, sub = sub, xlab = xlab, ylab = ylab, line = line, outer = outer, xpd = xpd, cex.main = cex.main, col.main = col.main, font.main = font.main)
     }
     invisible(list(upper = upper, lower = lower, median = med,
                    q1 = q1, q3 = q3))
-    if(is.na(xlab)==F){
-      if(is.na(ylab)==F){
-        if(is.na(main)==F){
-          if(is.na(sub)==T){
-            title(main=main, ylab=ylab, xlab=xlab, cex.main=cex*cex.main, cex.lab=cex*cex.lab)
-          } else{
-            title(main=main, sub=sub, ylab=ylab, xlab=xlab, cex.main=cex*cex.main, cex.sub=cex*cex.sub, cex.lab=cex*cex.lab)
-          }
-        }
-      } else{
-        if(is.na(main)==F){
-          if(is.na(sub)==T){
-            title(main=main, xlab=xlab, cex.main=cex*cex.main, cex.lab=cex*cex.lab)
-          } else{
-            title(main=main, sub=sub, xlab=xlab, cex.main=cex*cex.main, cex.sub=cex*cex.sub, cex.lab=cex*cex.lab)
-          }
-        }
-      }
-    } else {
-      if(is.na(ylab)==F){
-        if(is.na(main)==F){
-          if(is.na(sub)==T){
-            title(main=main, ylab=ylab, cex.main=cex*cex.main, cex.lab=cex*cex.lab)
-          } else{
-            title(main=main, sub=sub, ylab=ylab, cex.main=cex*cex.main, cex.sub=cex*cex.sub, cex.lab=cex*cex.lab)
-          }
-        }
-      } else{
-        if(is.na(main)==F){
-          if(is.na(sub)==T){
-            title(main=main, cex.main=cex*cex.main)
-          } else{
-            title(main=main, sub=sub, cex.main=cex*cex.main, cex.sub=cex*cex.sub)
-          }
-        }
-      }
-    }
   }
