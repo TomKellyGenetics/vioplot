@@ -211,6 +211,21 @@ vioplot.default <-
     } else{
       datas<-lapply(x, unlist)
     }
+    if(is.character(log)) if("y" %in% unlist(strsplit(log, ""))) log <- TRUE
+    log <- ifelse(log == TRUE, "y", "")
+    if(log == 'x' | log == 'xy' | xlog == TRUE){
+      if(horizontal | log == "xy"){
+        log <- TRUE
+      } else {
+        log <- FALSE
+        ylog <- FALSE
+      }
+      xlog <- FALSE
+    }
+    if(log == TRUE | ylog == TRUE){
+      ylog <- TRUE
+      log <- "y"
+    }
     if(ylog){
       #check data is compatible with log scale
       if(all(unlist(datas) <= 0)){
