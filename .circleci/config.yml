@@ -12,8 +12,9 @@ jobs:
             - r-pkg-cache--
       - checkout
       - run:
-          name: install tk
-          command: 'sudo apt-get install tk'
+          name: install ubuntu dependencies
+          command: |
+            sudo apt update && sudo apt upgrade -y && sudo apt-get install tk
       - run:
           name: Install package dependencies
           command: |
