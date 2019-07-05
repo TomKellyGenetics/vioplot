@@ -64,6 +64,14 @@
 #' vioplot(x, col="tomato", horizontal=TRUE, at=-4, add=TRUE,lty=2, rectCol="gray")
 #' vioplot(y, col="cyan", horizontal=FALSE, at=-4, add=TRUE,lty=2)
 #'
+#' # formula input
+#' data("iris")
+#' vioplot(Sepal.Length~Species, data = iris, main = "Sepal Length",
+#'         col=c("lightgreen", "lightblue", "palevioletred"))
+#' legend("topleft", legend=c("setosa", "versicolor", "virginica"),
+#'        fill=c("lightgreen", "lightblue", "palevioletred"), cex = 0.5)
+#'
+#'
 #' #generate example data
 #' data_one <- rnorm(100)
 #' data_two <- rnorm(50, 1, 2)
