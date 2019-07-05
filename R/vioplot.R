@@ -188,7 +188,7 @@ vioplot.default <-
   {
     #assign graphical parameters if not given
     for(ii in 1:length(names(par()))){
-      if(is.na(get(names(par())[ii]))) assign(names(par()[ii]), unlist(par()[ii]))
+      if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[ii]))
     }
     if(!is.list(x)){
       datas <- list(x, ...)
