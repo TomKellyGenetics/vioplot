@@ -6,6 +6,8 @@ Minor release with improvements to passing parameters.
 
 - improved passing of graphical parameters to title, and axis
 
+- axes for log-scale are automatically generated and horizontal plots are supported
+
 Examples for formula input added for convenience (this method is recommended).
 
 # vioplot 0.3.1 (2019)
