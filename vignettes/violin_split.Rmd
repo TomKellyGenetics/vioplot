@@ -8,7 +8,7 @@ fig_height: 3
 fig_align: 'center'
 fig_keep: 'last'
 vignette: >
-  %\VignetteIndexEntry{vioplox: Split Violin Plots}
+  %\VignetteIndexEntry{vioplot: Split Violin Plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
