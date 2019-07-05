@@ -128,7 +128,7 @@ vioplot <- function(x, ...) {
 #' @rdname vioplot
 #' @export
 vioplot.formula <-
-  function (formula, data = NULL, ..., names=NULL, na.action = NULL)
+  function (formula, data = NULL, ..., xlab, ylab, names=NULL, na.action = NULL)
   {
     if (missing(formula) || (length(formula) != 3L))
       stop("'formula' missing or incorrect")
@@ -144,11 +144,23 @@ vioplot.formula <-
     datas <- split(mf[[response]], mf[-response])
     if(is.null(names)) names <- names(datas)
     names(datas) <- gsub(" ", ".", names(datas))
+    vars <- unlist(strsplit(as.character(formula), "~"))
+    vars <- gsub(" " , "", vars)
+    vars <- gsub("+" , "", vars)
+    print(vars)
+    params <- ", names = names, ...)"
+    if(missing(ylab)){
+      ylab <- vars[2]
+      params <- paste0(", ylab = ylab", params)
+    }
+    if(missing(xlab)){
+      xlab <- vars[3]
+      params <- paste0(", xlab = xlab", params)
+    }
     with(datas, expr = {
-        eval(parse(text=paste("vioplot(", paste(names(datas), collapse = ", "), ", names = names, ...)")))
+      eval(parse(text=paste("vioplot(", paste(names(datas), collapse = ", "), params)))
     })
   }
-
 
 #' @rdname vioplot
 #' @export
