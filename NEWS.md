@@ -1,3 +1,17 @@
+# vioplot 0.3.2 (2019)
+
+Minor release with improvements to passing parameters.
+
+- improved handling for formula input: levels for names and variable names for axes labels
+
+- improved passing of graphical parameters to title, and axis
+
+Examples for formula input added for convenience (this method is recommended).
+
+# vioplot 0.3.1 (2019)
+
+Minor release with continuous integration testing, improved vignettes, and License. Compatible with GitHub and CRAN Release.
+
 # vioplot 0.3 (2018)
 
 Violin plots have been considerably improved with backwards-compatibility with vioplot 0.2 (2005).
