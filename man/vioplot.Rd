@@ -107,7 +107,7 @@
 
 \item{plotCentre}{defaults to "points", plotting a central point at the median. If "line" is given a median line is plotted (subject to side) alternatively.}
 
-\item{...}{Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}} )).}
+\item{...}{Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).}
 }
 \description{
 Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Includes customisation of colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
