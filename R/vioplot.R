@@ -142,8 +142,9 @@ vioplot.formula <-
     mf <- eval(m, parent.frame())
     response <- attr(attr(mf, "terms"), "response")
     datas <- split(mf[[response]], mf[-response])
+    if(is.null(names)) names <- names(datas)
+    names(datas) <- gsub(" ", ".", names(datas))
     with(datas, expr = {
-        if(is.null(names)) names <- names(datas)
         eval(parse(text=paste("vioplot(", paste(names(datas), collapse = ", "), ", names = names, ...)")))
     })
   }
