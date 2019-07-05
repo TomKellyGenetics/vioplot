@@ -12,9 +12,11 @@ jobs:
             - r-pkg-cache--
       - checkout
       - run:
+          name: install tk
+          command: 'sudo apt-get install tk'
+      - run:
           name: Install package dependencies
           command: |
-            sudo apt-get install tk
             mkdir -p ~/R/Library
             Rscript -e 'install.packages("remotes")'
             Rscript -e 'remotes::install_deps(dependencies = TRUE)'
