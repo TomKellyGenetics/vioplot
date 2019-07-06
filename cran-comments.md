@@ -13,4 +13,7 @@ There were no ERRORs or WARNINGs or NOTEs
 Minor release with changes to passing graphical parameters (in response to issues on GitHub and emails from users).
 
 #NOTE
-Maintainers email address has changed to reflect new affiliation. Access to previous contact will expire.
+Maintainers email address has changed to reflect new affiliation. Access to previous contact will expire. Autoreply from previous email will confirm this.
+
+Latest R version on test environments is R 3.6.0. Note that R version 3.6.1 only available from source at the time of submission.
+
