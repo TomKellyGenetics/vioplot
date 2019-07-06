@@ -1,9 +1,11 @@
 language: R
 cache: packages
 before_install:
-  - Rscript -e 'source("https://bioconductor.org/biocLite.R");biocLite(c("multtest", "survival", "MASS"), ask = FALSE)'
+  - sudo apt-get install tk
 r_packages:
   - covr
+  - sm
+  - zoo
 
 warnings_are_errors: false
 
