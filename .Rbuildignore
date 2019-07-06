@@ -12,3 +12,6 @@ vignettes/*html
 cran-comments.md
 README.md
 revdep
+^.*\.png
+^.*\.pkg
+^\.circleci/config\.yml$

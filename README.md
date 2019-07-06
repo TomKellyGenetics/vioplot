@@ -90,7 +90,7 @@ Modifications inspired by the following StackOverFlow threads and GitHub Gists:
 
 This repository is a proposed submission for an updated version of the vioplot originally released by Daniel Adler (University of Göttingen, Germany) on CRAN. This package has been orphaned on CRAN and is no longer actively maintained. I acknowledge with contributions of Daniel Adler as the original developer and Tom Elliot (University of Auckland, New Zealand) for a pull request and welcome further contributions to improve or maintain this package. 
 
-This package update was developed and released open-source (in accordance with the original package BSD License) while as a PhD candidate at the University of Otago (Dunedin, New Zealand) contact as <tom.kelly[at]postgrad.otago.ac.nz>. I can still be contacted at this address (as prospective maintainer) although my present address and affiliation is (RIKEN Centre for Integrative Medical Sciences, Yokohama, Japan) where I can be contacted as a postdoctoral researcher <tom.kelly[at]riken.jp>.
+This package update was developed and released open-source (in accordance with the original package BSD License) while as a PhD candidate at the University of Otago (Dunedin, New Zealand). I can be contacted at my present address and affiliation is (RIKEN Centre for Integrative Medical Sciences, Yokohama, Japan) at <tom.kelly[at]riken.jp>.
 
 ### Citation
 

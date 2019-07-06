@@ -81,7 +81,7 @@ Colours can also be customised for the violin fill and border separately using t
 vioplot(Sepal.Length~Species, data = iris, main = "Sepal Length", col="lightblue", border="royalblue")
 ```
 
-Similarly, the arguments `lineCol` and `rectCol` specify the colors of the boxplot outline and rectangle fill. For simplicity the box and whiskers of the boxplot will always have the same colour.
+Similarly, the arguments `lineCol` and `rectCol` specify the colours of the boxplot outline and rectangle fill. For simplicity the box and whiskers of the boxplot will always have the same colour.
 
 ```{r}
 vioplot(Sepal.Length~Species, data = iris, main = "Sepal Length", rectCol="palevioletred", lineCol="violetred")
@@ -103,7 +103,7 @@ vioplot(Sepal.Length~Species, data = iris, main = "Sepal Length", col="lightblue
  
 ### Vectorisation
 
-These color and shape settings can also be customised separately for each violin:
+These colour and shape settings can also be customised separately for each violin:
 ```{r}
 vioplot(Sepal.Length~Species, data = iris, main="Sepal Length", col=c("lightgreen", "lightblue", "palevioletred"), border=c("darkolivegreen4", "royalblue4", "violetred4"), rectCol=c("forestgreen", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), colMed=c("green", "cyan", "magenta"), pchMed=c(15, 17, 19))
 ```

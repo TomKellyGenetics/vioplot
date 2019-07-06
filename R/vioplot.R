@@ -38,7 +38,7 @@
 #' @param na.rm logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
 #' @param side defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.
 #' @param plotCentre defaults to "points", plotting a central point at the median. If "line" is given a median line is plotted (subject to side) alternatively.
-#' @param ... Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).
+#' @param axes,frame.plot,panel.first,panel.last,asp,line,outer,adj,ann,ask,bg,bty,cin,col.axis,col.lab,col.main,col.sub,cra,crt,csi,cxy,din,err,family,fg,fig,fin,font,font.axis,font.lab,font.main,font.sub,lab,las,lend,lheight,ljoin,lmitre,mai,mar,mex,mfcol,mfg,mfrow,mgp,mkh,new,oma,omd,omi,page,pch,pin,plt,ps,pty,smo,srt,tck,tcl,usr,xlog,xaxp,xaxs,xaxt,xpd,yaxp,yaxs,ylbias Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).
 #' @keywords plot graphics violin
 #' @import sm
 #' @importFrom zoo rollmean
@@ -198,13 +198,13 @@ vioplot.default <-
             cxy=NA, din=NA, err=NA, family=NA, fg=NA, fig=NA, fin=NA, font=NA, font.axis=NA, font.lab=NA,
             font.main=NA, font.sub=NA, lab=NA, las=NA, lend=NA, lheight=NA, ljoin=NA, lmitre=NA, mai=NA, mar=NA, mex=NA, mfcol=NA, mfg=NA, mfrow=NA, mgp=NA, mkh=NA, new=NA, oma=NA,
             omd=NA, omi=NA, page=NA, pch=NA, pin=NA, plt=NA, ps=NA, pty=NA, smo=NA, srt=NA, tck=NA, tcl=NA,
-            usr=NA, xaxp=NA, xaxs="r", xaxt="s", xpd=NA, yaxp=NA, yaxs="r", yaxt="s", ylbias=NA,
+            usr=NA, xlog = NA, xaxp=NA, xaxs="r", xaxt="s", xpd=NA, yaxp=NA, yaxs="r", yaxt="s", ylbias=NA,
             ylog=FALSE, log="", logLab=c(1,2,5),
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
     #assign graphical parameters if not given
     for(ii in 1:length(names(par()))){
-      if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[ii]))
+      if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[[ii]]))
     }
     if(!is.list(x)){
       datas <- list(x, ...)
@@ -212,23 +212,28 @@ vioplot.default <-
       datas<-lapply(x, unlist)
     }
     if(is.character(log)) if("y" %in% unlist(strsplit(log, ""))) log <- TRUE
-    if(log == TRUE | ylog == TRUE) ylog <- TRUE
+    log <- ifelse(log == TRUE, "y", "")
+    if(log == 'x' | log == 'xy' | xlog == TRUE){
+      if(horizontal | log == "xy"){
+        log <- TRUE
+      } else {
+        log <- FALSE
+        ylog <- FALSE
+      }
+      xlog <- FALSE
+    }
+    if(log == TRUE | ylog == TRUE){
+      ylog <- TRUE
+      log <- "y"
+    }
     if(ylog){
       #check data is compatible with log scale
       if(all(unlist(datas) <= 0)){
         ylog <- FALSE
         warning("log scale cannot be used with non-positive data")
       } else {
-        #create axis labels
-        log_axis <- as.vector(outer(1:9, 10^(floor(log(min(unlist(datas)), 10)):ceiling(log(max(unlist(datas)), 10)))))
-        log_axis <- log_axis[log_axis < max(unlist(datas))]
-        log_axis_label <- ifelse(sapply(strsplit(as.character(log_axis), split=""), function(xx) any(logLab %in% xx)), log_axis, "")
-        #log_axis_label <- ifelse(log(log_axis, 10) %% 1 ==0, log_axis, "")
-        #log_axis <- sort(c(1, 10^c(seq(-10,10)), 2*10^c(seq(-10,10)), 5*10^c(seq(-10,10))))
-        #log_axis_label <- log_axis
-
         #log-scale data
-        datas <- lapply(datas, function(x) log(unlist(x)))
+        datas <- datas #lapply(datas, function(x) log(unlist(x)))
       }
     }
     if(is.null(na.action)) na.action <- na.omit
@@ -325,6 +330,7 @@ vioplot.default <-
         ylim <- baserange
       }
     }
+    print(ylim)
     if (is.null(names)) {
       label <- 1:n
     }
@@ -334,25 +340,33 @@ vioplot.default <-
     boxwidth <- 0.05 * ifelse(length(boxwex)>1, boxwex[i], boxwex)
     if (!add){
       plot.new()
-      plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
-    }
+      if(!horizontal){
+        plot.window(xlim, ylim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+      } else {
+        plot.window(ylim, xlim, log = ifelse(log == "y", "x", ""), asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = ylog, ylog = xlog)
+      }
+          }
     panel.first
     if (!horizontal) {
       if (!add) {
-        plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+        plot.window(xlim, ylim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+        xaxp <- par()$xaxp
+        yaxp <- par()$yaxp
         if(yaxt !="n"){
           if(ylog){
             #log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            Axis(log_axis, at=log(log_axis), labels=log_axis_label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            if(is.null(cex.names)) cex.names <- cex.axis
+            Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
           } else {
-            Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            if(is.null(cex.names)) cex.names <- cex.axis
+            Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
           }
         }
-        if(is.null(cex.names)) cex.names <- cex.axis
-        Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
       }
       if (frame.plot) {
        box(lty = lty, lwd = lwd)
@@ -369,7 +383,7 @@ vioplot.default <-
           if(plotCentre == "line"){
             lines(x = c(at[i] - radj*med.dens[i],
                         at[i],
-                        at[i] + ladj*med.dens[i], lend = lend, ljoin = ljoin, lmitre = lmitre),
+                        at[i] + ladj*med.dens[i]),
                   y = rep(med[i],3))
           } else {
             points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed), bg = ifelse(length(colMed2)>1, colMed2[i], colMed2), cex = cex, lwd = lwd, lty = lty)
@@ -378,22 +392,31 @@ vioplot.default <-
       }
     }
     else {
+      if(log == "y" || ylog == TRUE){
+        log <- "x"
+        xlog <- TRUE
+        ylog <- FALSE
+      }
       if (!add) {
-        plot.window(xlim, ylim, log, asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
-        axis(1)
+        plot.window(ylim, xlim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+        xaxp <- par()$xaxp
+        yaxp <- par()$yaxp
         if(yaxt !="n"){
-          if(ylog){
+          if(xlog){
             #log_axis_label <- log_axis_label[log_axis >= exp(par("usr")[3])]
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            axis(2, at=log(log_axis), labels=log_axis_label, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            Axis(unlist(datas), side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            if(is.null(cex.names)) cex.names <- cex.axis
+            Axis(1:length(datas), at = at, labels = label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
           } else {
-            axis(2, at = at, labels = label, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            Axis(unlist(datas), side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+            if(is.null(cex.names)) cex.names <- cex.axis
+            Axis(1:length(datas), at = at, labels = label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
           }
         }
       }
-      panel.last
       if (frame.plot) {
         box(lty = lty, lwd = lwd)
       }
@@ -417,6 +440,7 @@ vioplot.default <-
         }
       }
     }
+    panel.last
     if (ann) {
         title(main = main, sub = sub, xlab = xlab, ylab = ylab, line = line, outer = outer, xpd = xpd, cex.main = cex.main, col.main = col.main, font.main = font.main)
     }
