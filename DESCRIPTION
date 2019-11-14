@@ -10,6 +10,8 @@ Depends:
     sm,
     zoo
 License: BSD_3_clause + file LICENSE
+URL: https://github.com/TomKellyGenetics/vioplot
+BugReports: https://github.com/TomKellyGenetics/vioplot/issues
 LazyData: true
 RoxygenNote: 6.1.1
 Suggests:
