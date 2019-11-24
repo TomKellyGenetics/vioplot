@@ -3,9 +3,11 @@
 #' Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Includes customisation of colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
 #'
 #' @param x for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.
-#' @param ... additional data vectors or formula parameters.
+#' @param ... additional data vectors or formula parameters. For the formula method, named arguments to be passed to the default method.
 #' @param formula a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).
 #' @param data a data.frame (or list) from which the variables in formula should be taken.
+#' @param subset	an optional vector specifying a subset of observations to be used for plotting.
+#' @param drop, sep, lex.order defines groups to plot from formula, passed to  \code{\link[base]{split.default}}, see there.
 #' @param range a factor to calculate the upper/lower adjacent values
 #' @param h the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum
 #' @param ylim y limits
@@ -144,43 +146,29 @@ vioplot <- function(x, ...) {
 #' @rdname vioplot
 #' @export
 vioplot.formula <-
-  function (formula, data = NULL, ..., xlab = NA, ylab = NA, names=NULL, na.action = NULL)
+  function (formula, data = NULL, ..., subset,  na.action = NULL,
+            add = FALSE, ann = !add, horizontal = FALSE,
+            xlab = mklab(y_var = horizontal), ylab = mklab(y_var = !horizontal), names=NULL,
+            drop = FALSE, sep = ".", lex.order = FALSE)
   {
     if (missing(formula) || (length(formula) != 3L))
       stop("'formula' missing or incorrect")
+    if (missing(xlab) || missing(ylab))
+      mklab <- function(y_var) if (y_var)
+        names(mf)[response]
+    else paste(names(mf)[-response], collapse = " : ")
     m <- match.call(expand.dots = FALSE)
     if (is.matrix(eval(m$data, parent.frame())))
-      m$data <- data.frame(as.numeric(data))
-    m$... <- NULL
-    m$xlab <- NULL
-    m$ylab <- NULL
-    m$names <- NULL
+      m$data <- as.data.frame(data)
+    m$... <- m$drop <- m$sep <- m$lex.order <- NULL
+    m$xlab <- m$ylab <- m$add <- m$ann <- m$horizontal <- NULL
     m$na.action <- na.action
-    m[[1L]] <- quote(stats::model.frame)
+    m[[1L]] <- quote(stats::model.frame.default)
     mf <- eval(m, parent.frame())
     response <- attr(attr(mf, "terms"), "response")
-    datas <- split(mf[[response]], mf[-response])
-    if(is.null(names)) names <- names(datas)
-    names(datas) <- gsub(" ", ".", names(datas))
-    vars <- unlist(strsplit(as.character(formula), "~"))
-    vars <- gsub(" " , "", vars)
-    vars <- gsub("+" , "", vars)
-    params <- ", names = names, ...)"
-    if(is.na(ylab)){
-      ylab <- vars[2]
-      params <- paste0(", ylab = ylab", params)
-    } else {
-      params <- paste0(", ylab = ylab", params)
-    }
-    if(is.na(xlab)){
-      xlab <- vars[3]
-      params <- paste0(", xlab = xlab", params)
-    } else {
-      params <- paste0(", xlab = xlab", params)
-    }
-    with(datas, expr = {
-      eval(parse(text=paste("vioplot(", paste(names(datas), collapse = ", "), params)))
-    })
+    vioplot(split(mf[[response]], mf[-response], drop = drop,
+                  sep = sep, lex.order = lex.order), xlab = xlab, ylab = ylab,
+            add = add, ann = ann, horizontal = horizontal, ...)
   }
 
 
@@ -210,6 +198,9 @@ vioplot.default <-
       datas <- list(x, ...)
     } else{
       datas<-lapply(x, unlist)
+      if(is.null(names)){
+        names <- names(datas)
+      }
     }
     if(is.character(log)) if("y" %in% unlist(strsplit(log, ""))) log <- TRUE
     log <- ifelse(log == TRUE, "y", "")
