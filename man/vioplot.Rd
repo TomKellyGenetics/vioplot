@@ -6,8 +6,10 @@
 \alias{vioplot.default}
 \title{violin plot}
 \usage{
-\method{vioplot}{formula}(formula, data = NULL, ..., xlab = NA,
-  ylab = NA, names = NULL, na.action = NULL)
+\method{vioplot}{formula}(formula, data = NULL, ..., subset,
+  na.action = NULL, add = FALSE, ann = !add, horizontal = FALSE,
+  xlab = mklab(y_var = horizontal), ylab = mklab(y_var = !horizontal),
+  names = NULL, drop = FALSE, sep = ".", lex.order = FALSE)
 
 \method{vioplot}{default}(x, ..., data = NULL, range = 1.5, h = NULL,
   ylim = NULL, names = NULL, horizontal = FALSE, col = "grey50",
@@ -37,23 +39,29 @@
 \arguments{
 \item{x}{for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.}
 
-\item{...}{additional data vectors or formula parameters.}
+\item{...}{additional data vectors or formula parameters. For the formula method, named arguments to be passed to the default method.}
 
 \item{formula}{a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).}
 
 \item{data}{a data.frame (or list) from which the variables in formula should be taken.}
 
-\item{names}{one label, or a vector of labels for the data must match the number of data given}
+\item{subset}{an optional vector specifying a subset of observations to be used for plotting.}
 
 \item{na.action}{a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.}
+
+\item{add}{logical. if FALSE (default) a new plot is created}
+
+\item{horizontal}{logical. horizontal or vertical violins}
+
+\item{names}{one label, or a vector of labels for the data must match the number of data given}
+
+\item{drop, }{sep, lex.order defines groups to plot from formula, passed to  \code{\link[base]{split.default}}, see there.}
 
 \item{range}{a factor to calculate the upper/lower adjacent values}
 
 \item{h}{the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum}
 
 \item{ylim}{y limits}
-
-\item{horizontal}{logical. horizontal or vertical violins}
 
 \item{col}{Graphical parameter for fill colour of the violin(s) polygon. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
@@ -70,8 +78,6 @@
 \item{colMed, colMed2}{Graphical parameters to control colour of the median point. If colMed is a vector, it specifies the colour per violin. colMed specifies the fill colour in all cases unless pchMed is 21:25 in which case colMed is the border colour and colMed2 is the fill colour.}
 
 \item{at}{position of each violin. Default to 1:n}
-
-\item{add}{logical. if FALSE (default) a new plot is created}
 
 \item{wex}{relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary.}
 

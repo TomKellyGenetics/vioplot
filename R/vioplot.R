@@ -162,12 +162,13 @@ vioplot.formula <-
       m$data <- as.data.frame(data)
     m$... <- m$drop <- m$sep <- m$lex.order <- NULL
     m$xlab <- m$ylab <- m$add <- m$ann <- m$horizontal <- NULL
+    m$names <- NULL
     m$na.action <- na.action
     m[[1L]] <- quote(stats::model.frame.default)
     mf <- eval(m, parent.frame())
     response <- attr(attr(mf, "terms"), "response")
     vioplot(split(mf[[response]], mf[-response], drop = drop,
-                  sep = sep, lex.order = lex.order), xlab = xlab, ylab = ylab,
+            sep = sep, lex.order = lex.order), xlab = xlab, ylab = ylab, names = names,
             add = add, ann = ann, horizontal = horizontal, ...)
   }
 
