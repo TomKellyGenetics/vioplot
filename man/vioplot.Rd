@@ -20,8 +20,8 @@
   panel.first = NULL, panel.last = NULL, asp = NA, main = "",
   sub = "", xlab = NA, ylab = NA, line = NA, outer = FALSE,
   adj = par()$adj, ann = par()$ann, ask = par()$ask, bg = par()$bg,
-  bty = par()$bty, cex = par()$cex, cex.axis = par()$cex,
-  cex.lab = par()$cex, cex.main = par()$cex,
+  bty = par()$bty, cex = par()$cex, cex.axis = par()$cex.axis,
+  cex.lab = par()$cex.lab, cex.main = par()$cex.main,
   cex.names = par()$cex.axis, cex.sub = par()$cex.sub,
   cin = par()$cin, col.axis = par()$col.axis,
   col.lab = par()$col.lab, col.main = par()$col.main,
@@ -29,7 +29,7 @@
   csi = par()$csi, cxy = par()$cxy, din = par()$din,
   err = par()$err, family = par()$family, fg = par()$fg,
   fig = par()$fig, fin = par()$fin, font = par()$font,
-  font.axis = par()$font/axis, font.lab = par()$font.lab,
+  font.axis = par()$font.axis, font.lab = par()$font.lab,
   font.main = par()$font.main, font.sub = par()$font.sub,
   lab = par()$lab, las = par()$las, lend = par()$lend,
   lheight = par()$lheight, ljoin = par()$ljoin,
@@ -66,7 +66,7 @@
 
 \item{names}{one label, or a vector of labels for the data must match the number of data given}
 
-\item{drop, }{sep, lex.order defines groups to plot from formula, passed to  \code{\link[base]{split.default}}, see there.}
+\item{drop, sep, lex.order}{defines groups to plot from formula, passed to  \code{\link[base]{split.default}}, see there.}
 
 \item{range}{a factor to calculate the upper/lower adjacent values}
 

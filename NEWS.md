@@ -1,3 +1,11 @@
+# vioplot 0.3.3 (2019)
+
+Minor release with improvements to passing parameters.
+
+- improved passing of base R plotting parameters
+
+- resolves issues with variable names and factor levels in formula inputs
+
 # vioplot 0.3.2 (2019)
 
 Minor release with improvements to passing parameters.

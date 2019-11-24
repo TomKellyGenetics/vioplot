@@ -1,6 +1,6 @@
 # vioplot
 
-## Version 0.3.2
+## Version 0.3.3
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vioplot)](https://cran.r-project.org/package=vioplot)
 [![Travis Build Status](https://travis-ci.org/TomKellyGenetics/vioplot.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/vioplot)

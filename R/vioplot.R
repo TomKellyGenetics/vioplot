@@ -7,7 +7,7 @@
 #' @param formula a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).
 #' @param data a data.frame (or list) from which the variables in formula should be taken.
 #' @param subset	an optional vector specifying a subset of observations to be used for plotting.
-#' @param drop, sep, lex.order defines groups to plot from formula, passed to  \code{\link[base]{split.default}}, see there.
+#' @param drop,sep,lex.order defines groups to plot from formula, passed to  \code{\link[base]{split.default}}, see there.
 #' @param range a factor to calculate the upper/lower adjacent values
 #' @param h the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum
 #' @param ylim y limits
