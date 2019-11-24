@@ -182,11 +182,12 @@ vioplot.default <-
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE,
             axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA,
             main="", sub="", xlab=NA, ylab=NA, line = NA, outer = FALSE,
-            adj=par()$adj, ann = par()$ann, ask=par()$ask, bg=par()$bg, bty=par()$bty, cex=par()$cex, cex.axis=par()$cex, cex.lab=par()$cex, cex.main=par()$cex,
+            adj=par()$adj, ann = par()$ann, ask=par()$ask, bg=par()$bg, bty=par()$bty,
+            cex=par()$cex, cex.axis=par()$cex.axis, cex.lab=par()$cex.lab, cex.main=par()$cex.main,
             cex.names=par()$cex.axis, cex.sub=par()$cex.sub, cin=par()$cin, col.axis=par()$col.axis,
             col.lab=par()$col.lab, col.main=par()$col.main, col.sub=par()$col.sub, cra=par()$cra, crt=par()$crt, csi=par()$csi,
             cxy=par()$cxy, din=par()$din, err=par()$err, family=par()$family, fg=par()$fg, fig=par()$fig,
-            fin=par()$fin, font=par()$font, font.axis=par()$font/axis, font.lab=par()$font.lab,
+            fin=par()$fin, font=par()$font, font.axis=par()$font.axis, font.lab=par()$font.lab,
             font.main=par()$font.main, font.sub=par()$font.sub, lab=par()$lab, las=par()$las,
             lend=par()$lend, lheight=par()$lheight, ljoin=par()$ljoin, lmitre=par()$lmitre,
             mai=par()$mai, mar=par()$mar, mex=par()$mex, mfcol=par()$mfcol, mfg=par()$mfg, mfrow=par()$mfrow,
@@ -197,13 +198,10 @@ vioplot.default <-
             ylog=par()$ylog, yaxp=par()$yaxp, yaxs=par()$yaxs, yaxt=par()$yaxt, ylbias=par()$ylbias,
             log="", logLab=c(1,2,5),
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
-#xlim, ylim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+#xlim, ylim, log = log, asp = asp, bty = bty, cex = cex, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
 
   {
     #assign graphical parameters if not given
-    for(ii in 1:length(names(par()))){
-      if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[[ii]]))
-    }
     if(!is.list(x)){
       datas <- list(x, ...)
     } else{
@@ -341,15 +339,15 @@ vioplot.default <-
     if (!add){
       plot.new()
       if(!horizontal){
-        plot.window(xlim, ylim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+        plot.window(xlim, ylim, log = log, asp = asp, bty = bty, cex = cex, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
       } else {
-        plot.window(ylim, xlim, log = ifelse(log == "y", "x", ""), asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = ylog, ylog = xlog)
+        plot.window(ylim, xlim, log = ifelse(log == "y", "x", ""), asp = asp, bty = bty, cex = cex, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = ylog, ylog = xlog)
       }
           }
     panel.first
     if (!horizontal) {
       if (!add) {
-        plot.window(xlim, ylim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+        plot.window(xlim, ylim, log = log, asp = asp, bty = bty, cex = cex, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
         xaxp <- par()$xaxp
         yaxp <- par()$yaxp
         if(yaxt !="n"){
@@ -398,7 +396,7 @@ vioplot.default <-
         ylog <- FALSE
       }
       if (!add) {
-        plot.window(ylim, xlim, log = log, asp = asp, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
+        plot.window(ylim, xlim, log = log, asp = asp, bty = bty, cex = cex, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
         xaxp <- par()$xaxp
         yaxp <- par()$yaxp
         if(yaxt !="n"){
@@ -447,3 +445,4 @@ vioplot.default <-
     invisible(list(upper = upper, lower = lower, median = med,
                    q1 = q1, q3 = q3))
   }
+
