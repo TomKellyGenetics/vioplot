@@ -351,11 +351,11 @@ vioplot.default <-
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
             Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
             if(is.null(cex.names)) cex.names <- cex.axis
-            Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
           } else {
             Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
             if(is.null(cex.names)) cex.names <- cex.axis
-            Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+            Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
           }
         }
       }
@@ -398,11 +398,11 @@ vioplot.default <-
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            Axis(unlist(datas), side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            Axis(unlist(datas), side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
             if(is.null(cex.names)) cex.names <- cex.axis
             Axis(1:length(datas), at = at, labels = label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
           } else {
-            Axis(unlist(datas), side = 1, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+            Axis(unlist(datas), side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
             if(is.null(cex.names)) cex.names <- cex.axis
             Axis(1:length(datas), at = at, labels = label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
           }
