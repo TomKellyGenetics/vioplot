@@ -330,7 +330,6 @@ vioplot.default <-
         ylim <- baserange
       }
     }
-    print(ylim)
     if (is.null(names)) {
       label <- 1:n
     }

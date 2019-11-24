@@ -1,7 +1,11 @@
 Package: vioplot
 Title: Violin Plot
 Version: 0.3.2.9001
+<<<<<<< HEAD
 Date: 2019-07-15
+=======
+Date: 2019-02-05
+>>>>>>> 94d84a2b9d2b984bf400a1763ff2d6aa825142a7
 Authors@R: c(person("Daniel", "Adler", email = "dadler@uni-goettingen.de", role = c("aut", "cph")),
            person("S. Thomas", "Kelly", email = "tom.kelly@riken.jp", role = c("aut", "cre")),
            person("Tom M.", "Elliott", email = "tom.elliott@auckland.ac.nz", role = c("ctb")))
@@ -10,6 +14,8 @@ Depends:
     sm,
     zoo
 License: BSD_3_clause + file LICENSE
+URL: https://github.com/TomKellyGenetics/vioplot
+BugReports: https://github.com/TomKellyGenetics/vioplot/issues
 LazyData: true
 RoxygenNote: 6.1.1
 Suggests:
