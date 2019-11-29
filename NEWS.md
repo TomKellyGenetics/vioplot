@@ -1,4 +1,4 @@
-# vioplot 0.3.3.1 (2019)
+# vioplot 0.3.4 (2019)
 
 Bug fixes.
 
