@@ -182,26 +182,22 @@ vioplot.default <-
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE,
             axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA,
             main="", sub="", xlab=NA, ylab=NA, line = NA, outer = FALSE,
-            adj=par()$adj, ann = par()$ann, ask=par()$ask, bg=par()$bg, bty=par()$bty,
-            cex=par()$cex, cex.axis=par()$cex.axis, cex.lab=par()$cex.lab, cex.main=par()$cex.main,
-            cex.names=par()$cex.axis, cex.sub=par()$cex.sub, cin=par()$cin, col.axis=par()$col.axis,
-            col.lab=par()$col.lab, col.main=par()$col.main, col.sub=par()$col.sub, cra=par()$cra, crt=par()$crt, csi=par()$csi,
-            cxy=par()$cxy, din=par()$din, err=par()$err, family=par()$family, fg=par()$fg, fig=par()$fig,
-            fin=par()$fin, font=par()$font, font.axis=par()$font.axis, font.lab=par()$font.lab,
-            font.main=par()$font.main, font.sub=par()$font.sub, lab=par()$lab, las=par()$las,
-            lend=par()$lend, lheight=par()$lheight, ljoin=par()$ljoin, lmitre=par()$lmitre,
-            mai=par()$mai, mar=par()$mar, mex=par()$mex, mfcol=par()$mfcol, mfg=par()$mfg, mfrow=par()$mfrow,
-            mgp=par()$pmg, mkh=par()$mkh, new=par()$new, oma=par()$oma,omd=par()$omd, omi=par()$omi,
-            page=par()$page, pch=par()$pch, pin=par()$pin, plt=par()$plt, ps=par()$ps,
-            pty=par()$pty, smo=par()$smo, srt=par()$srt, tck=par()$tck, tcl=par()$tcl,usr=par()$usr,
-            xlog=par()$xlog, xaxp=par()$xaxp, xaxs=par()$xaxs, xaxt=par()$xaxt, xpd=par()$xpd,
-            ylog=par()$ylog, yaxp=par()$yaxp, yaxs=par()$yaxs, yaxt=par()$yaxt, ylbias=par()$ylbias,
+            xlog = NA, ylog=NA, adj=NA, ann = NA, ask=NA, bg=NA, bty=NA,
+            cex=NA, cex.axis=NA, cex.lab=NA, cex.main=NA, cex.names=NULL, cex.sub=NA,
+            cin=NA, col.axis=NA, col.lab=NA, col.main=NA, col.sub=NA,
+            cra=NA, crt=NA, csi=NA,cxy=NA, din=NA, err=NA, family=NA, fg=NA,
+            fig=NA, fin=NA, font=NA, font.axis=NA, font.lab=NA, font.main=NA, font.sub=NA,
+            lab=NA, las=NA, lend=NA, lheight=NA, ljoin=NA, lmitre=NA, mai=NA, mar=NA, mex=NA,
+            mfcol=NA, mfg=NA, mfrow=NA, mgp=NA, mkh=NA, new=NA, oma=NA, omd=NA, omi=NA,
+            page=NA, pch=NA, pin=NA, plt=NA, ps=NA, pty=NA, smo=NA, srt=NA, tck=NA, tcl=NA,
+            usr=NA, xaxp=NA, xaxs=NA, xaxt=NA, xpd=NA, yaxp=NA, yaxs=NA, yaxt=NA, ylbias=NA,
             log="", logLab=c(1,2,5),
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
-#xlim, ylim, log = log, asp = asp, bty = bty, cex = cex, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = xlog, ylog = ylog)
-
   {
     #assign graphical parameters if not given
+    for(ii in 1:length(names(par()))){
+      if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[[ii]]))
+    }
     if(!is.list(x)){
       datas <- list(x, ...)
     } else{

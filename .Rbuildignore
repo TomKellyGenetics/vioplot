@@ -16,3 +16,4 @@ revdep
 ^.*\.png
 ^.*\.pkg
 ^\.circleci/config\.yml$
+^todo.txt

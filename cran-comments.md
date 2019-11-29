@@ -11,6 +11,8 @@
 There were no ERRORs or WARNINGs or NOTEs
 
 ## Updates
-Minor release with changes to passing graphical parameters (in response to issues on GitHub and emails from users).
+Minor bug fixes. Previous version caused changes to base parameters
+and plotting behaviour. Some changes reverted.
 
 #NOTE
+None.

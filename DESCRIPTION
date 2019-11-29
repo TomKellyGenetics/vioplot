@@ -1,7 +1,7 @@
 Package: vioplot
 Title: Violin Plot
-Version: 0.3.3.9009
-Date: 2019-11-24
+Version: 0.3.4
+Date: 2019-11-30
 Authors@R: c(person("Daniel", "Adler", email = "dadler@uni-goettingen.de", role = c("aut", "cph")),
            person("S. Thomas", "Kelly", email = "tom.kelly@riken.jp", role = c("aut", "cre")),
            person("Tom M.", "Elliott", email = "tom.elliott@auckland.ac.nz", role = c("ctb")))
@@ -13,7 +13,7 @@ License: BSD_3_clause + file LICENSE
 URL: https://github.com/TomKellyGenetics/vioplot
 BugReports: https://github.com/TomKellyGenetics/vioplot/issues
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.1
 Suggests:
     ggplot2,
     RColorBrewer,

@@ -1,3 +1,11 @@
+# vioplot 0.3.4 (2019)
+
+Bug fixes.
+
+- avoids altering base plotting parameters `par()`
+
+- resolves issues calling log inputs without an explicit `log` parameter as text
+
 # vioplot 0.3.3 (2019)
 
 Minor release with improvements to passing parameters.
