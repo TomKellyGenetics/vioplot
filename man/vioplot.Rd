@@ -3,10 +3,19 @@
 \name{vioplot}
 \alias{vioplot}
 \alias{violinplot}
+\alias{vioplot.list}
+\alias{vioplot.data.frame}
+\alias{vioplot.matrix}
 \alias{vioplot.formula}
 \alias{vioplot.default}
 \title{Violin Plot}
 \usage{
+\method{vioplot}{list}(x, ...)
+
+\method{vioplot}{data.frame}(x, ...)
+
+\method{vioplot}{matrix}(x, use.cols = TRUE, ...)
+
 \method{vioplot}{formula}(
   formula,
   data = NULL,

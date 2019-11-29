@@ -145,6 +145,48 @@ vioplot <- function(x, ...) {
   UseMethod("vioplot")
 }
 
+#' Draw a Violin plot for each Column (Row) of a Matrix
+#'
+#' Interpreting the columns (or rows) of a matrix as different groups, draw a boxplot for each.
+#'
+#' @aliases violin.matrix violinplot.matrix
+#' @param x	a numeric matrix.
+#' @param use.cols logical indicating if columns (by default) or rows (use.cols = FALSE) should be plotted.
+#' @param ...	Further arguments to \code{\link[vioplot]{vioplot}}.
+#' @rdname vioplot.matrix
+#' @export
+vioplot.matrix <- function (x, use.cols = TRUE, ...)
+{
+  groups <- if (use.cols) {
+    split(c(x), rep.int(1L:ncol(x), rep.int(nrow(x), ncol(x))))
+  }
+  else split(c(x), seq(nrow(x)))
+  if (length(nam <- dimnames(x)[[1 + use.cols]]))
+    names(groups) <- nam
+  invisible(vioplot(groups, ...))
+}
+
+#' @rdname vioplot
+#' @export
+vioplot.list <- function (x, ...){
+  ind <- sapply(x, is.numeric)
+  if(all(!ind)){
+    stop(paste("elements are not numeric: ", names(x)[!sapply(x, is.numeric)]))
+  }
+  if(any(!ind)){
+    warning(paste("some elements are not numeric: ", names(x)[!sapply(x, is.numeric)]))
+    x <- x[sapply(x, is.numeric)]
+  }
+  invisible(vioplot.default(x, ...))
+}
+#' @rdname vioplot
+#' @export
+vioplot.data.frame <- vioplot.list
+
+#' @rdname vioplot
+#' @export
+vioplot.matrix <- vioplot.matrix
+
 #' @rdname vioplot
 #' @export
 vioplot.formula <-
@@ -173,7 +215,6 @@ vioplot.formula <-
             sep = sep, lex.order = lex.order), xlab = xlab, ylab = ylab, names = names,
             add = add, ann = ann, horizontal = horizontal, ...)
   }
-
 
 #' @rdname vioplot
 #' @export
