@@ -1,6 +1,6 @@
 # vioplot
 
-## Version 0.3.3
+## Version 0.3.4
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vioplot)](https://cran.r-project.org/package=vioplot)
 [![Travis Build Status](https://travis-ci.org/TomKellyGenetics/vioplot.svg?branch=master)](https://travis-ci.org/TomKellyGenetics/vioplot)
@@ -27,7 +27,7 @@ To get the development version from github:
 
 ```R
 # install.packages("devtools")
-devtools::install_github("TomKellyGenetics/vioplot")
+devtools::install_github("TomKellyGenetics/vioplot", ref = "dev")
 ```
 
 ## Running
@@ -72,7 +72,7 @@ See the NEWS.md file for more detail on added features in the 0.3 release.
 
 ## Development and sources
 
-For development history of version 0.3.2 prior to package documentation, see the original repo: https://github.com/TomKellyGenetics/R-violin-plot/commits?author=TomKellyGenetics
+For development history of version 0.3.0 prior to package documentation, see the original repo: https://github.com/TomKellyGenetics/R-violin-plot/commits?author=TomKellyGenetics
 
 Modifications inspired by the following StackOverFlow threads and GitHub Gists:
 

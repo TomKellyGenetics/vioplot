@@ -2,9 +2,10 @@
 % Please edit documentation in R/vioplot.R
 \name{vioplot}
 \alias{vioplot}
+\alias{violinplot}
 \alias{vioplot.formula}
 \alias{vioplot.default}
-\title{violin plot}
+\title{Violin Plot}
 \usage{
 \method{vioplot}{formula}(
   formula,

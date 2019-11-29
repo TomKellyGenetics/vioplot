@@ -2,6 +2,7 @@
 
 S3method(vioplot,default)
 S3method(vioplot,formula)
+S3method(vioplot,stats)
 export(vioplot)
 import(sm)
 importFrom(grDevices,boxplot.stats)

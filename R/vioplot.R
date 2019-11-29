@@ -1,7 +1,8 @@
-#' violin plot
+#' Violin Plot
 #'
 #' Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Includes customisation of colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
 #'
+#' @aliases violinplot vioplot
 #' @param x for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.
 #' @param ... additional data vectors or formula parameters. For the formula method, named arguments to be passed to the default method.
 #' @param formula a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).
@@ -442,3 +443,20 @@ vioplot.default <-
                    q1 = q1, q3 = q3))
   }
 
+
+
+#' Violin Plot Statistics
+#'
+#' This function is typically called by another function to gather the statistics necessary
+#' for producing box plots, but may be invoked separately. See: \code{\link[grDevices]{boxplot.stats}}
+#'
+#' @rdname vioplot.stats
+#' @aliases violinplot vioplot
+#' @param x	a numeric vector for which the boxplot will be constructed (\code{\link[base]{NA}}s and \code{\link[base]{NaN}}s are allowed and omitted).
+#' @param coef	this determines how far the plot ‘whiskers’ extend out from the box. If coef is positive, the
+#' whiskers extend to the most extreme data point which is no more than coef times the length of the box away
+#' from the box. A value of zero causes the whiskers to extend to the data extremes (and no outliers be returned).
+#' @param do.conf, do.out	logicals; if FALSE, the conf or out component respectively will be empty in the result.
+#' @importFrom grDevices boxplot.stats
+#' @export
+vioplot.stats <- boxplot.stats
