@@ -98,7 +98,7 @@ The following information can be retrieved from within an R session by using `ci
 
 To cite the enhanced vioplot package in publications use:
 
-  Daniel Adler and S. Thomas Kelly (2018). vioplot: violin plot. R package version 0.3.2
+  Daniel Adler and S. Thomas Kelly (2019). vioplot: violin plot. R package version 0.3.4
   https://github.com/TomKellyGenetics/vioplot
 
 A BibTeX entry for LaTeX users is
@@ -106,8 +106,8 @@ A BibTeX entry for LaTeX users is
   @Manual{,
     title = {vioplot: violin plot},
     author = {Daniel Adler and S. Thomas Kelly},
-    year = {2018},
-    note = {R package version 0.3.2},
+    year = {2019},
+    note = {R package version 0.3.4},
     url = {https://github.com/TomKellyGenetics/vioplot},
   }
 
