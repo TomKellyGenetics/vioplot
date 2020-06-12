@@ -219,7 +219,7 @@ vioplot.formula <-
 #' @rdname vioplot
 #' @export
 vioplot.default <-
-  function (x, ..., data = NULL, range = 1.5, h = NULL, ylim = NULL, names = NULL,
+  function (x, ..., data = NULL, range = 1.5, h = NULL, xlim = NULL, ylim = NULL, names = NULL,
             horizontal = FALSE, col = "grey50", border = par()$fg, lty = 1,
             lwd = 1, rectCol = par()$fg, lineCol = par()$fg, pchMed = 19, colMed = "white", colMed2 = "grey 75",
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE,
@@ -364,9 +364,20 @@ vioplot.default <-
       }
     }
     if (!add) {
-      xlim <- if (n == 1)
-        at + c(-0.5, 0.5)
-      else range(at) + min(diff(at))/2 * c(-1, 1)
+      if (is.null(xlim)) {
+        xlim <- if (n == 1){
+          at + c(-0.5, 0.5)
+        } else {
+          range(at) + min(diff(at))/2 * c(-1, 1)
+        }
+      } else {
+        xlim.default <- if (n == 1){
+          at + c(-0.5, 0.5)
+        } else {
+          range(at) + min(diff(at))/2 * c(-1, 1)
+        }
+        print(paste0("Using c(", xlim[1],",", xlim[2], ") as input for xlim, note that default values for these dimensions are c(", xlim.default[1],",", xlim.default[2], ")"))
+      }
       if (is.null(ylim)) {
         ylim <- baserange
       }
