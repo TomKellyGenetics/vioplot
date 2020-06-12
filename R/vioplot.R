@@ -410,20 +410,20 @@ vioplot.default <-
       }
       for (i in 1:n) {
         polygon(c(at[i] - radj*height[[i]], rev(at[i] + ladj*height[[i]])),
-                c(base[[i]], rev(base[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border),
+                c(base[[i]], rev(base[[i]])), col = ifelse(length(col)>1,col[1+(i-1)%%length(col)], col), border = ifelse(length(border)>1, border[1+(i-1)%%length(border)], border),
                 lty = lty, lwd = lwd, xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
         if (drawRect) {
           lines(at[c(i, i)], c(lower[i], upper[i]), lwd = lwd,
-                lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol), lend = lend, ljoin = ljoin, lmitre = lmitre)
+                lty = lty, col = ifelse(length(lineCol)>1, lineCol[1+(i-1)%%length(lineCol)], lineCol), lend = lend, ljoin = ljoin, lmitre = lmitre)
           rect(at[i] - radj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q1[i], at[i] + ladj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2,
-               q3[i], col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol), xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
+               q3[i], col = ifelse(length(rectCol)>1, rectCol[1+(i-1)%%length(rectCol)], rectCol), border = ifelse(length(lineCol)>1, lineCol[1+(i-1)%%length(lineCol)], lineCol), xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
           if(plotCentre == "line"){
             lines(x = c(at[i] - radj*med.dens[i],
                         at[i],
                         at[i] + ladj*med.dens[i]),
                   y = rep(med[i],3))
           } else {
-            points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed), bg = ifelse(length(colMed2)>1, colMed2[i], colMed2), cex = cex, lwd = lwd, lty = lty)
+            points(at[i], med[i], pch = ifelse(length(pchMed)>1, pchMed[1+(i-1)%%length(pchMed)], pchMed), col = ifelse(length(colMed)>1, colMed[1+(i-1)%%length(colMed)], colMed), bg = ifelse(length(colMed2)>1, colMed2[1+(i-1)%%length(colMed2)], colMed2), cex = cex, lwd = lwd, lty = lty)
           }
         }
       }
@@ -459,20 +459,20 @@ vioplot.default <-
       }
       for (i in 1:n) {
         polygon(c(base[[i]], rev(base[[i]])), c(at[i] - radj*height[[i]],
-                                                rev(at[i] + ladj*height[[i]])), col = ifelse(length(col)>1, col[i], col), border = ifelse(length(border)>1, border[i], border),
+                                                rev(at[i] + ladj*height[[i]])), col = ifelse(length(col)>1,col[1+(i-1)%%length(col)], col), border = ifelse(length(border)>1, border[1+(i-1)%%length(border)], border),
                 lty = lty, lwd = lwd, xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
         if (drawRect) {
           lines(c(lower[i], upper[i]), at[c(i, i)], lwd = lwd,
-                lty = lty, col = ifelse(length(lineCol)>1, lineCol[i], lineCol), lend = lend, ljoin = ljoin, lmitre = lmitre)
+                lty = lty, col = ifelse(length(lineCol)>1, lineCol[1+(i-1)%%length(lineCol)], lineCol), lend = lend, ljoin = ljoin, lmitre = lmitre)
           rect(q1[i], at[i] - radj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, q3[i], at[i] +
-                 ladj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, col = ifelse(length(rectCol)>1, rectCol[i], rectCol), border = ifelse(length(lineCol)>1, lineCol[i], lineCol), xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
+                 ladj*ifelse(length(boxwidth)>1, boxwidth[i], boxwidth)/2, col = ifelse(length(rectCol)>1, rectCol[1+(i-1)%%length(rectCol)], rectCol), border = ifelse(length(lineCol)>1, lineCol[1+(i-1)%%length(lineCol)], lineCol), xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
           if(plotCentre == "line"){
             lines(y = c(at[i] - radj*med.dens[i],
                         at[i],
                         at[i] + ladj*med.dens[i]),
                   x = rep(med[i],3))
           } else {
-            points(med[i], at[i], pch = ifelse(length(pchMed)>1, pchMed[i], pchMed), col = ifelse(length(colMed)>1, colMed[i], colMed), , bg = ifelse(length(colMed2)>1, colMed2[i], colMed2), cex = cex, lwd = lwd, lty = lty)
+            points(med[i], at[i], pch = ifelse(length(pchMed)>1, pchMed[1+(i-1)%%length(pchMed)], pchMed), col = ifelse(length(colMed)>1, colMed[1+(i-1)%%length(colMed)], colMed), , bg = ifelse(length(colMed2)>1, colMed2[1+(i-1)%%length(colMed2)], colMed2), cex = cex, lwd = lwd, lty = lty)
           }
         }
       }
