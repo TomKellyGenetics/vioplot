@@ -212,7 +212,7 @@ vioplot.formula <-
     mf <- eval(m, parent.frame())
     response <- attr(attr(mf, "terms"), "response")
     vioplot(split(mf[[response]], mf[-response], drop = drop,
-            sep = sep, lex.order = lex.order), xlab = xlab, ylab = ylab, names = names,
+                  sep = sep, lex.order = lex.order), xlab = xlab, ylab = ylab, names = names,
             add = add, ann = ann, horizontal = horizontal, ...)
   }
 
@@ -385,7 +385,7 @@ vioplot.default <-
       } else {
         plot.window(ylim, xlim, log = ifelse(log == "y", "x", ""), asp = asp, bty = bty, cex = cex, xaxs = xaxs, yaxs = yaxs, lab = lab, mai = mai, mar = mar, mex = mex, mfcol = mfcol, mfrow = mfrow, mfg = mfg, xlog = ylog, ylog = xlog)
       }
-          }
+    }
     panel.first
     if (!horizontal) {
       if (!add) {
@@ -400,16 +400,20 @@ vioplot.default <-
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
             Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
             if(is.null(cex.names)) cex.names <- cex.axis
-            Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            if(xaxt !="n"){
+              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            }
           } else {
             Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
             if(is.null(cex.names)) cex.names <- cex.axis
-            Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+            if(xaxt !="n"){
+              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+            }
           }
         }
       }
       if (frame.plot) {
-       box(lty = lty, lwd = lwd)
+        box(lty = lty, lwd = lwd)
       }
       for (i in 1:n) {
         polygon(c(at[i] - radj*height[[i]], rev(at[i] + ladj*height[[i]])),
@@ -449,11 +453,15 @@ vioplot.default <-
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
             Axis(unlist(datas), side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
             if(is.null(cex.names)) cex.names <- cex.axis
-            Axis(1:length(datas), at = at, labels = label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            if(xaxt !="n"){
+              Axis(1:length(datas), at = at, labels = label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            }
           } else {
             Axis(unlist(datas), side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
             if(is.null(cex.names)) cex.names <- cex.axis
-            Axis(1:length(datas), at = at, labels = label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            if(xaxt !="n"){
+              Axis(1:length(datas), at = at, labels = label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            }
           }
         }
       }
@@ -482,7 +490,7 @@ vioplot.default <-
     }
     panel.last
     if (ann) {
-        title(main = main, sub = sub, xlab = xlab, ylab = ylab, line = line, outer = outer, xpd = xpd, cex.main = cex.main, col.main = col.main, font.main = font.main)
+      title(main = main, sub = sub, xlab = xlab, ylab = ylab, line = line, outer = outer, xpd = xpd, cex.main = cex.main, col.main = col.main, font.main = font.main)
     }
     invisible(list(upper = upper, lower = lower, median = med,
                    q1 = q1, q3 = q3))
