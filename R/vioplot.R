@@ -250,8 +250,8 @@ vioplot.default <-
       }
     }
     if(is.character(log)) if("y" %in% unlist(strsplit(log, ""))) log <- TRUE
+    if(is.na(xlog) | (horizontal == TRUE & (log == FALSE | log == ""))) xlog <- FALSE
     log <- ifelse(log == TRUE, "y", "")
-    if(is.na(xlog)) xlog <- FALSE
     if(log == 'x' | log == 'xy' | xlog == TRUE){
       if(horizontal | log == "xy"){
         log <- TRUE
