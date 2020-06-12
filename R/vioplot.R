@@ -14,8 +14,8 @@
 #' @param h the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum
 #' @param ylim y limits
 #' @param yaxt A character which specifies the y axis type. Specifying "n" suppresses plotting.
-#' @param ylog A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.
-#' @param log  Logarithmic scale if log = "y" or TRUE. Invokes ylog = TRUE.
+#' @param ylog,xlog A logical value (see log in \code{\link[graphics]{plot.default}}). If ylog is TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For horizontal = TRUE then, if xlog is TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "x")). For a new device, it defaults to FALSE, i.e., linear scale.
+#' @param log  Logarithmic scale if log = "y" or TRUE. Invokes ylog = TRUE. If horizontal is TRUE then invokes xlog = TRUE.
 #' @param logLab Increments for labelling y-axis on log-scale, defaults to numbers starting with 1, 2, 5, and 10.
 #' @param names one label, or a vector of labels for the data must match the number of data given
 #' @param col Graphical parameter for fill colour of the violin(s) polygon. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.
@@ -30,7 +30,7 @@
 #' @param at position of each violin. Default to 1:n
 #' @param add logical. if FALSE (default) a new plot is created
 #' @param wex relative expansion of the violin.  If wex is a vector, it specifies the area/width size per violin and sizes are reused if necessary.
-#' @param horizontal logical. horizontal or vertical violins
+#' @param horizontal logical. To use horizontal or vertical violins. Note that log scale can only be used on the x-axis for horizontal violins, and on the y-axis otherwise.
 #' @param main,sub,xlab,ylab graphical parameters passed to plot.
 #' @param cex A numerical value giving the amount by which plotting text should be magnified relative to the default.
 #' @param cex.axis The magnification to be used for y axis annotation relative to the current setting of cex.
@@ -42,7 +42,7 @@
 #' @param na.rm logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
 #' @param side defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.
 #' @param plotCentre defaults to "points", plotting a central point at the median. If "line" is given a median line is plotted (subject to side) alternatively.
-#' @param axes,frame.plot,panel.first,panel.last,asp,line,outer,adj,ann,ask,bg,bty,cin,col.axis,col.lab,col.main,col.sub,cra,crt,csi,cxy,din,err,family,fg,fig,fin,font,font.axis,font.lab,font.main,font.sub,lab,las,lend,lheight,ljoin,lmitre,mai,mar,mex,mfcol,mfg,mfrow,mgp,mkh,new,oma,omd,omi,page,pch,pin,plt,ps,pty,smo,srt,tck,tcl,usr,xlog,xaxp,xaxs,xaxt,xpd,yaxp,yaxs,ylbias Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).
+#' @param axes,frame.plot,panel.first,panel.last,asp,line,outer,adj,ann,ask,bg,bty,cin,col.axis,col.lab,col.main,col.sub,cra,crt,csi,cxy,din,err,family,fg,fig,fin,font,font.axis,font.lab,font.main,font.sub,lab,las,lend,lheight,ljoin,lmitre,mai,mar,mex,mfcol,mfg,mfrow,mgp,mkh,new,oma,omd,omi,page,pch,pin,plt,ps,pty,smo,srt,tck,tcl,usr,xaxp,xaxs,xaxt,xpd,yaxp,yaxs,ylbias Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).
 #' @keywords plot graphics violin
 #' @import sm
 #' @importFrom zoo rollmean
@@ -251,6 +251,7 @@ vioplot.default <-
     }
     if(is.character(log)) if("y" %in% unlist(strsplit(log, ""))) log <- TRUE
     log <- ifelse(log == TRUE, "y", "")
+    if(is.na(xlog)) xlog <- FALSE
     if(log == 'x' | log == 'xy' | xlog == TRUE){
       if(horizontal | log == "xy"){
         log <- TRUE
@@ -263,6 +264,8 @@ vioplot.default <-
     if(log == TRUE | ylog == TRUE){
       ylog <- TRUE
       log <- "y"
+    } else {
+      log <- ""
     }
     if(ylog){
       #check data is compatible with log scale

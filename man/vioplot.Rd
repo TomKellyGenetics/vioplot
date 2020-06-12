@@ -160,7 +160,7 @@
 
 \item{add}{logical. if FALSE (default) a new plot is created}
 
-\item{horizontal}{logical. horizontal or vertical violins}
+\item{horizontal}{logical. To use horizontal or vertical violins. Note that log scale can only be used on the x-axis for horizontal violins, and on the y-axis otherwise.}
 
 \item{names}{one label, or a vector of labels for the data must match the number of data given}
 
@@ -194,11 +194,11 @@
 
 \item{areaEqual}{logical. Density plots checked for equal area if TRUE. wex must be scalar, relative widths of violins depend on area.}
 
-\item{axes, frame.plot, panel.first, panel.last, asp, line, outer, adj, ann, ask, bg, bty, cin, col.axis, col.lab, col.main, col.sub, cra, crt, csi, cxy, din, err, family, fg, fig, fin, font, font.axis, font.lab, font.main, font.sub, lab, las, lend, lheight, ljoin, lmitre, mai, mar, mex, mfcol, mfg, mfrow, mgp, mkh, new, oma, omd, omi, page, pch, pin, plt, ps, pty, smo, srt, tck, tcl, usr, xlog, xaxp, xaxs, xaxt, xpd, yaxp, yaxs, ylbias}{Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).}
+\item{axes, frame.plot, panel.first, panel.last, asp, line, outer, adj, ann, ask, bg, bty, cin, col.axis, col.lab, col.main, col.sub, cra, crt, csi, cxy, din, err, family, fg, fig, fin, font, font.axis, font.lab, font.main, font.sub, lab, las, lend, lheight, ljoin, lmitre, mai, mar, mex, mfcol, mfg, mfrow, mgp, mkh, new, oma, omd, omi, page, pch, pin, plt, ps, pty, smo, srt, tck, tcl, usr, xaxp, xaxs, xaxt, xpd, yaxp, yaxs, ylbias}{Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).}
 
 \item{main, sub, xlab, ylab}{graphical parameters passed to plot.}
 
-\item{ylog}{A logical value (see log in \code{\link[graphics]{plot.default}}). If TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For a new device, it defaults to FALSE, i.e., linear scale.}
+\item{ylog, xlog}{A logical value (see log in \code{\link[graphics]{plot.default}}). If ylog is TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For horizontal = TRUE then, if xlog is TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "x")). For a new device, it defaults to FALSE, i.e., linear scale.}
 
 \item{cex}{A numerical value giving the amount by which plotting text should be magnified relative to the default.}
 
@@ -214,7 +214,7 @@
 
 \item{yaxt}{A character which specifies the y axis type. Specifying "n" suppresses plotting.}
 
-\item{log}{Logarithmic scale if log = "y" or TRUE. Invokes ylog = TRUE.}
+\item{log}{Logarithmic scale if log = "y" or TRUE. Invokes ylog = TRUE. If horizontal is TRUE then invokes xlog = TRUE.}
 
 \item{logLab}{Increments for labelling y-axis on log-scale, defaults to numbers starting with 1, 2, 5, and 10.}
 
