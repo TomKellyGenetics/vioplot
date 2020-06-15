@@ -547,7 +547,7 @@ vioplot.default <-
 #' @param coef	this determines how far the plot ‘whiskers’ extend out from the box. If coef is positive, the
 #' whiskers extend to the most extreme data point which is no more than coef times the length of the box away
 #' from the box. A value of zero causes the whiskers to extend to the data extremes (and no outliers be returned).
-#' @param do.conf, do.out	logicals; if FALSE, the conf or out component respectively will be empty in the result.
+#' @param do.conf,do.out	logicals; if FALSE, the conf or out component respectively will be empty in the result.
 #' @importFrom grDevices boxplot.stats
 #' @export
 vioplot.stats <- boxplot.stats

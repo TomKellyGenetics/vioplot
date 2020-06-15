@@ -15,7 +15,7 @@
 whiskers extend to the most extreme data point which is no more than coef times the length of the box away
 from the box. A value of zero causes the whiskers to extend to the data extremes (and no outliers be returned).}
 
-\item{do.conf, }{do.out    logicals; if FALSE, the conf or out component respectively will be empty in the result.}
+\item{do.conf, do.out}{logicals; if FALSE, the conf or out component respectively will be empty in the result.}
 }
 \description{
 This function is typically called by another function to gather the statistics necessary
