@@ -16,8 +16,11 @@ matrix:
     - os: osx
       r: devel
 
-before_install:
-  - sudo apt-get install tk
+addons:
+  apt:
+    packages:
+    - tk
+
 r_packages:
   - covr
   - sm

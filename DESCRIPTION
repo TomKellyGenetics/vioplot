@@ -15,6 +15,7 @@ BugReports: https://github.com/TomKellyGenetics/vioplot/issues
 LazyData: true
 RoxygenNote: 7.1.0.9000
 Suggests:
+    base,
     ggplot2,
     RColorBrewer,
     knitr,

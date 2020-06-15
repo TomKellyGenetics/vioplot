@@ -10,7 +10,7 @@
 #' @param data a data.frame (or list) from which the variables in formula should be taken.
 #' @param use.cols logical indicating if columns (by default) or rows (use.cols = FALSE) should be plotted.
 #' @param subset	an optional vector specifying a subset of observations to be used for plotting.
-#' @param drop,sep,lex.order defines groups to plot from formula, passed to  \code{\link[base]{split.default}}, see there.
+#' @param drop,sep,lex.order defines groups to plot from formula, passed to \code{split.default}, see there.
 #' @param range a factor to calculate the upper/lower adjacent values
 #' @param h the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum
 #' @param xlim,ylim	 numeric vectors of length 2, giving the x and y coordinates ranges.
