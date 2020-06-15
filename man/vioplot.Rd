@@ -39,6 +39,7 @@
   data = NULL,
   range = 1.5,
   h = NULL,
+  xlim = NULL,
   ylim = NULL,
   names = NULL,
   horizontal = FALSE,
