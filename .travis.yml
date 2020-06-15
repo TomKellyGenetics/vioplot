@@ -16,11 +16,6 @@ matrix:
     - os: osx
       r: devel
 
-addons:
-  apt:
-    packages:
-    - tk
-
 r_packages:
   - covr
   - sm
