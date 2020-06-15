@@ -174,7 +174,7 @@
 
 \item{names}{one label, or a vector of labels for the data must match the number of data given}
 
-\item{drop, sep, lex.order}{defines groups to plot from formula, passed to  \code{\link[base]{split.default}}, see there.}
+\item{drop, sep, lex.order}{defines groups to plot from formula, passed to \code{split.default}, see there.}
 
 \item{range}{a factor to calculate the upper/lower adjacent values}
 
