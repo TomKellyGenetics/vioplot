@@ -10,12 +10,11 @@ matrix:
     - os: linux
       r: devel
     - os: osx
+      r: oldrel
+    - os: osx
       r: release
-
-addons:
-  apt:
-    packages:
-    - tk
+    - os: osx
+      r: devel
 
 r_packages:
   - covr
