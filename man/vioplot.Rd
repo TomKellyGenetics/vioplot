@@ -3,13 +3,17 @@
 \name{vioplot}
 \alias{vioplot}
 \alias{violinplot}
+\alias{vioplot.matrix}
+\alias{violin.matrix}
+\alias{violinplot.matrix}
 \alias{vioplot.list}
 \alias{vioplot.data.frame}
-\alias{vioplot.matrix}
 \alias{vioplot.formula}
 \alias{vioplot.default}
 \title{Violin Plot}
 \usage{
+\method{vioplot}{matrix}(x, use.cols = TRUE, ...)
+
 \method{vioplot}{list}(x, ...)
 
 \method{vioplot}{data.frame}(x, ...)
@@ -148,9 +152,11 @@
 )
 }
 \arguments{
-\item{x}{for specifying data from which the boxplots are to be produced. Either a numeric vector, or a single list containing such vectors. Additional unnamed arguments specify further data as separate vectors (each corresponding to a component boxplot). NAs are allowed in the data.}
+\item{x}{a numeric matrix.}
 
-\item{...}{additional data vectors or formula parameters. For the formula method, named arguments to be passed to the default method.}
+\item{...}{Further arguments to \code{\link[vioplot]{vioplot}}.}
+
+\item{use.cols}{logical indicating if columns (by default) or rows (use.cols = FALSE) should be plotted.}
 
 \item{formula}{a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).}
 
@@ -228,6 +234,8 @@
 }
 \description{
 Produce violin plot(s) of the given (grouped) values with enhanced annotation and colour per group. Includes customisation of colours for each aspect of the violin, boxplot, and separate violins. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{vioplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
+
+Interpreting the columns (or rows) of a matrix as different groups, draw a boxplot for each.
 }
 \examples{
 

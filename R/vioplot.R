@@ -8,6 +8,7 @@
 #' @param ... additional data vectors or formula parameters. For the formula method, named arguments to be passed to the default method.
 #' @param formula a formula, such as y ~ grp, where y is a numeric vector of data values to be split into groups according to the grouping variable grp (usually a factor).
 #' @param data a data.frame (or list) from which the variables in formula should be taken.
+#' @param use.cols logical indicating if columns (by default) or rows (use.cols = FALSE) should be plotted.
 #' @param subset	an optional vector specifying a subset of observations to be used for plotting.
 #' @param drop,sep,lex.order defines groups to plot from formula, passed to  \code{\link[base]{split.default}}, see there.
 #' @param range a factor to calculate the upper/lower adjacent values
@@ -153,7 +154,7 @@ vioplot <- function(x, ...) {
 #' @param x	a numeric matrix.
 #' @param use.cols logical indicating if columns (by default) or rows (use.cols = FALSE) should be plotted.
 #' @param ...	Further arguments to \code{\link[vioplot]{vioplot}}.
-#' @rdname vioplot.matrix
+#' @rdname vioplot
 #' @export
 vioplot.matrix <- function (x, use.cols = TRUE, ...)
 {
@@ -535,21 +536,3 @@ vioplot.default <-
     invisible(list(upper = upper, lower = lower, median = med,
                    q1 = q1, q3 = q3))
   }
-
-
-#' Violin Plot Statistics
-#'
-#' This function is typically called by another function to gather the statistics necessary
-#' for producing box plots, but may be invoked separately. See: \code{\link[grDevices]{boxplot.stats}}
-#'
-#' @aliases violin.stats violinplot.stats
-#' @param x	a numeric vector for which the boxplot will be constructed (\code{\link[base]{NA}}s and \code{\link[base]{NaN}}s are allowed and omitted).
-#' @param coef	this determines how far the plot ‘whiskers’ extend out from the box. If coef is positive, the
-#' whiskers extend to the most extreme data point which is no more than coef times the length of the box away
-#' from the box. A value of zero causes the whiskers to extend to the data extremes (and no outliers be returned).
-#' @param do.conf,do.out	logicals; if FALSE, the conf or out component respectively will be empty in the result.
-#' @importFrom grDevices boxplot.stats
-#' @export
-vioplot.stats <- boxplot.stats
-
-
