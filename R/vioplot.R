@@ -191,29 +191,46 @@ vioplot.matrix <- vioplot.matrix
 #' @export
 vioplot.formula <-
   function (formula, data = NULL, ..., subset,  na.action = NULL,
-            add = FALSE, ann = !add, horizontal = FALSE,
+            add = FALSE, ann = !add, horizontal = FALSE, side = "both",
             xlab = mklab(y_var = horizontal), ylab = mklab(y_var = !horizontal), names=NULL,
             drop = FALSE, sep = ".", lex.order = FALSE)
   {
-    if (missing(formula) || (length(formula) != 3L))
+    if (missing(formula) || (length(formula) != 3L)){
       stop("'formula' missing or incorrect")
-    if (missing(xlab) || missing(ylab))
-      mklab <- function(y_var) if (y_var)
-        names(mf)[response]
-    else paste(names(mf)[-response], collapse = " : ")
+    }
+    if(add && side != "both"){
+      if(!is.null(names)) warning("Warning: names can only be changed on first call of vioplot (when add = FALSE)
+")
+      if(!missing(xlab)) warning("Warning: x-axis labels can only be changed on first call of vioplot (when add = FALSE)
+")
+      if(!missing(ylab)) warning("Warning: y-axis labels can only be changed on first call of vioplot (when add = FALSE)
+")
+    }
+    if (missing(xlab) || missing(ylab)){
+      mklab <- function(y_var){
+        if(y_var){
+          names(mf)[response]
+        } else {
+          paste(names(mf)[-response], collapse = " : ")
+        }
+      }
+    }
     m <- match.call(expand.dots = FALSE)
     if (is.matrix(eval(m$data, parent.frame())))
       m$data <- as.data.frame(data)
     m$... <- m$drop <- m$sep <- m$lex.order <- NULL
     m$xlab <- m$ylab <- m$add <- m$ann <- m$horizontal <- NULL
-    m$names <- NULL
+    m$names <-  m$side <- NULL
     m$na.action <- na.action
     m[[1L]] <- quote(stats::model.frame.default)
     mf <- eval(m, parent.frame())
     response <- attr(attr(mf, "terms"), "response")
+    if(add){
+      xlab <- ylab <- NA
+    }
     vioplot(split(mf[[response]], mf[-response], drop = drop,
                   sep = sep, lex.order = lex.order), xlab = xlab, ylab = ylab, names = names,
-            add = add, ann = ann, horizontal = horizontal, ...)
+            add = add, ann = ann, horizontal = horizontal, side = side, ...)
   }
 
 #' @rdname vioplot
@@ -240,6 +257,18 @@ vioplot.default <-
     #assign graphical parameters if not given
     for(ii in 1:length(names(par()))){
       if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[[ii]]))
+    }
+    if(add && side != "both"){
+      if(!is.null(names)) warning("Warning: names can only be changed on first call of vioplot (when add = FALSE)
+")
+      if(!is.na(xlab)) warning("Warning: x-axis labels can only be changed on first call of vioplot (when add = FALSE)
+")
+      if(!is.na(ylab)) warning("vy-axis labels can only be changed on first call of vioplot (when add = FALSE)
+")
+      if(!missing(main)) warning("Warning: main title can only be changed on first call of vioplot (when add = FALSE)
+")
+      if(!missing(sub)) warning("Warning: subtitle can only be changed on first call of vioplot (when add = FALSE)
+ ")
     }
     if(!is.list(x)){
       datas <- list(x, ...)

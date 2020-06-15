@@ -25,6 +25,7 @@
   add = FALSE,
   ann = !add,
   horizontal = FALSE,
+  side = "both",
   xlab = mklab(y_var = horizontal),
   ylab = mklab(y_var = !horizontal),
   names = NULL,
@@ -163,6 +164,8 @@
 
 \item{horizontal}{logical. To use horizontal or vertical violins. Note that log scale can only be used on the x-axis for horizontal violins, and on the y-axis otherwise.}
 
+\item{side}{defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.}
+
 \item{names}{one label, or a vector of labels for the data must match the number of data given}
 
 \item{drop, sep, lex.order}{defines groups to plot from formula, passed to  \code{\link[base]{split.default}}, see there.}
@@ -220,8 +223,6 @@
 \item{logLab}{Increments for labelling y-axis on log-scale, defaults to numbers starting with 1, 2, 5, and 10.}
 
 \item{na.rm}{logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.}
-
-\item{side}{defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.}
 
 \item{plotCentre}{defaults to "points", plotting a central point at the median. If "line" is given a median line is plotted (subject to side) alternatively.}
 }
