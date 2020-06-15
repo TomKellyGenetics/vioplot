@@ -171,7 +171,7 @@
 
 \item{h}{the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum}
 
-\item{ylim}{y limits}
+\item{xlim, ylim}{numeric vectors of length 2, giving the x and y coordinates ranges.}
 
 \item{col}{Graphical parameter for fill colour of the violin(s) polygon. NA for no fill colour. If col is a vector, it specifies the colour per violin, and colours are reused if necessary.}
 
