@@ -10,11 +10,7 @@ matrix:
     - os: linux
       r: devel
     - os: osx
-      r: oldrel
-    - os: osx
       r: release
-    - os: osx
-      r: devel
 
 r_packages:
   - covr
