@@ -1,3 +1,15 @@
+# vioplot 0.3.5 (2020)
+
+Bug fixes.
+
+- allow reuse of vector inputs
+
+- correct graphical paramters: xaxt, xlim
+
+- correct log scales (xlog) for horizontal violins
+
+- document axes labels for split violins
+
 # vioplot 0.3.4 (2019)
 
 Bug fixes.

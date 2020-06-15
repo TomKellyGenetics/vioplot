@@ -3,12 +3,12 @@ citHeader("To cite the enhanced vioplot package in publications use:")
 citEntry(entry = "Manual",
   title        = "vioplot: violin plot",
   author       = personList(as.person("Daniel Adler"),as.person("S. Thomas Kelly")),
-  year         = "2019",
-  note         = "R package version 0.3.4",
+  year         = "2020",
+  note         = "R package version 0.3.5",
   url          = "https://github.com/TomKellyGenetics/vioplot",
 
   textVersion  =
-  paste("Daniel Adler and  S. Thomas Kelly (2019). vioplot: violin plot. R package version 0.3.4",
+  paste("Daniel Adler and  S. Thomas Kelly (2020). vioplot: violin plot. R package version 0.3.5",
          "https://github.com/TomKellyGenetics/vioplot")
 )
 
