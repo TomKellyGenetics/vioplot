@@ -16,12 +16,6 @@ matrix:
     - os: osx
       r: devel
 
-matrix:
-  include:
-    - r: oldrel
-    - r: release
-    - r: devel
-
 before_install:
   - sudo apt-get install tk
 r_packages:
