@@ -1,7 +1,7 @@
 Package: vioplot
 Title: Violin Plot
 Version: 0.3.6
-Date: 2020-06-15
+Date: 2021-03-26
 Authors@R: c(person("Daniel", "Adler", email = "dadler@uni-goettingen.de", role = c("aut", "cph")),
            person("S. Thomas", "Kelly", email = "tom.kelly@riken.jp", role = c("aut", "cre")),
            person("Tom M.", "Elliott", email = "tom.elliott@auckland.ac.nz", role = c("ctb")))
