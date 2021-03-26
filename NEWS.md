@@ -1,4 +1,4 @@
-# vioplot 0.3.6 (2021)
+# vioplot 0.3.7 (2021)
 
 Bug fixes.
 
