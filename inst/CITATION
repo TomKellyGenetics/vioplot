@@ -4,11 +4,11 @@ citEntry(entry = "Manual",
   title        = "vioplot: violin plot",
   author       = personList(as.person("Daniel Adler"),as.person("S. Thomas Kelly")),
   year         = "2020",
-  note         = "R package version 0.3.5",
+  note         = "R package version 0.3.6",
   url          = "https://github.com/TomKellyGenetics/vioplot",
 
   textVersion  =
-  paste("Daniel Adler and  S. Thomas Kelly (2020). vioplot: violin plot. R package version 0.3.5",
+  paste("Daniel Adler and  S. Thomas Kelly (2021). vioplot: violin plot. R package version 0.3.6",
          "https://github.com/TomKellyGenetics/vioplot")
 )
 

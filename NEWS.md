@@ -1,3 +1,9 @@
+# vioplot 0.3.6 (2021)
+
+Bug fixes.
+
+- allow plotting repeated non-unique values over threshold number with checks
+
 # vioplot 0.3.5 (2020)
 
 Bug fixes.

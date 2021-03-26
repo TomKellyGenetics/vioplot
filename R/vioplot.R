@@ -279,6 +279,13 @@ vioplot.default <-
         names <- names(datas)
       }
     }
+    datas <- lapply(datas, function(x){
+      if(all(x == unique(x)[1]) & length(x) > 100){
+        unique(x)[1]
+      } else {
+        x
+      }
+    })
     if(is.character(log)) if("y" %in% unlist(strsplit(log, ""))) log <- TRUE
     if(is.na(xlog) | (horizontal == TRUE & (log == FALSE | log == ""))) xlog <- FALSE
     log <- ifelse(log == TRUE, "y", "")
