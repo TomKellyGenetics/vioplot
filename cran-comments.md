@@ -9,10 +9,11 @@
 * MacOS 18.6.0 R 3.6.2 
 
 ## R CMD check results
-There were no ERRORs or WARNINGs or NOTEs
 
-### WARNINGS
-Links to base R functions removed (for compatibility with updated checks)
+── R CMD check results ────────────────────────────────────── vioplot 0.3.6 ────
+Duration: 48s
+
+0 errors ✓ | 0 warnings ✓ | 0 notes ✓
 
 ## Updates
 Minor bug fixes. 
