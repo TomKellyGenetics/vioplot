@@ -1,6 +1,10 @@
 Package: vioplot
 Title: Violin Plot
+<<<<<<< HEAD
 Version: 0.3.7.9001
+=======
+Version: 0.3.6
+>>>>>>> master
 Date: 2021-03-26
 Authors@R: c(person("Daniel", "Adler", email = "dadler@uni-goettingen.de", role = c("aut", "cph")),
            person("S. Thomas", "Kelly", email = "tom.kelly@riken.jp", role = c("aut", "cre")),
@@ -12,7 +16,7 @@ Depends:
 License: BSD_3_clause + file LICENSE
 URL: https://github.com/TomKellyGenetics/vioplot
 BugReports: https://github.com/TomKellyGenetics/vioplot/issues
-LazyData: true
+LazyData: false
 RoxygenNote: 7.1.1
 Suggests:
     base,
