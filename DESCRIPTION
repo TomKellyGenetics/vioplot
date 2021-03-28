@@ -12,7 +12,7 @@ Depends:
 License: BSD_3_clause + file LICENSE
 URL: https://github.com/TomKellyGenetics/vioplot
 BugReports: https://github.com/TomKellyGenetics/vioplot/issues
-LazyData: true
+LazyData: false
 RoxygenNote: 7.1.1
 Suggests:
     base,

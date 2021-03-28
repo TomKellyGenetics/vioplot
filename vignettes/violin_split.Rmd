@@ -156,6 +156,6 @@ These have previously been discussed on the following sites:
 
 * http://tagteam.harvard.edu/hub_feeds/1981/feed_items/209875
 
-* https://www.r-bloggers.com/split-violin-plots/
+* [https://www.r-bloggers.com/split-violin-plots/](https://www.r-bloggers.com/2013/06/split-violin-plots/)
 
 
