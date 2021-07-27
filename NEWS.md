@@ -1,3 +1,7 @@
+# vioplot 0.3.7 (2021)
+
+Updates maintainer contact details.
+
 # vioplot 0.3.6 (2021)
 
 Bug fixes.
