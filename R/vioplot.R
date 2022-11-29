@@ -280,8 +280,8 @@ vioplot.default <-
       }
     }
     datas <- lapply(datas, function(x){
-      if(all(x == unique(x)[1]) & length(x) > 100){
-        unique(x)[1]
+      if((all(x == na.omit(unique(x))[1] | is.na(x))) & length(x) > 100){
+        na.omit(unique(x))[1]
       } else {
         x
       }
