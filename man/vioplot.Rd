@@ -178,7 +178,7 @@
 
 \item{range}{a factor to calculate the upper/lower adjacent values}
 
-\item{h}{the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum}
+\item{h}{the height for the density estimator, if omit as explained in sm.density, h will be set to an optimum.  A vector of length one, two or three, defining the smoothing parameter. A normal kernel function is used and h is its standard deviation. If this parameter is omitted, a normal optimal smoothing parameter is used.}
 
 \item{xlim, ylim}{numeric vectors of length 2, giving the x and y coordinates ranges.}
 

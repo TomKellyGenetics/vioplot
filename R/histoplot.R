@@ -11,7 +11,6 @@
 #' @param use.cols logical indicating if columns (by default) or rows (use.cols = FALSE) should be plotted.
 #' @param subset	an optional vector specifying a subset of observations to be used for plotting.
 #' @param drop,sep,lex.order defines groups to plot from formula, passed to \code{split.default}, see there.
-#' @param range OMITTED
 #' @param breaks the breaks for the density estimator, as explained in hist
 #' @param xlim,ylim	 numeric vectors of length 2, giving the x and y coordinates ranges.
 #' @param yaxt A character which specifies the y axis type. Specifying "n" suppresses plotting.

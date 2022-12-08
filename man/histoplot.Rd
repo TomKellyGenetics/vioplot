@@ -224,8 +224,6 @@
 
 \item{na.rm}{logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.}
 
-\item{range}{OMITTED}
-
 \item{plotCentre}{NOT AVAILABLE}
 }
 \description{
