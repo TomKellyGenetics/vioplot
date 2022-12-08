@@ -13,7 +13,7 @@ License: BSD_3_clause + file LICENSE
 URL: https://github.com/TomKellyGenetics/vioplot
 BugReports: https://github.com/TomKellyGenetics/vioplot/issues
 LazyData: false
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Suggests:
     base,
     ggplot2,
