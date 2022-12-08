@@ -6,17 +6,25 @@
 * local Windows 7 install, R 3.2.1
 * Windows Server 2012 (on AppVeyor), R 4.0.1
 * win-builder (devel and release)
-* MacOS 18.6.0 R 3.6.2 
+* MacOS 18.6.0 R 4.2.0
+* CentOS 7 R 4.1.2
+* CentOS 7 R 4.2.1 
 
 ## R CMD check results
 
-── R CMD check results ────────────────────────────────────── vioplot 0.3.6 ────
-Duration: 48s
+── R CMD check results ────────────── vioplot 0.4.0.9001 ────
+Duration: 40s
 
 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
 
+R CMD check succeeded
+
 ## Updates
-Minor bug fixes. 
+Minor bug fixes. Significant changes to documentation.
+
+New feature for histograms.
+
+All changes expected to be backwards compatible without affecting reverse dependencies.
 
 #NOTE
 None.

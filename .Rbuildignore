@@ -18,3 +18,4 @@ revdep
 ^.*\.pkg
 ^\.circleci/config\.yml$
 ^todo.txt
+^CRAN-SUBMISSION$
