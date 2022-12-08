@@ -151,7 +151,7 @@ histoplot <- function(x, ...) {
 #' @aliases histogram.matrix histoplot.matrix
 #' @param x	a numeric matrix.
 #' @param use.cols logical indicating if columns (by default) or rows (use.cols = FALSE) should be plotted.
-#' @param ...	Further arguments to \code{\link[viooplot]{histoplot}}.
+#' @param ...	Further arguments to \code{\link[vioplot]{histoplot}}.
 #' @rdname histoplot
 #' @export
 histoplot.matrix <- function (x, use.cols = TRUE, ...)

@@ -150,7 +150,7 @@
 \arguments{
 \item{x}{a numeric matrix.}
 
-\item{...}{Further arguments to \code{\link[viooplot]{histoplot}}.}
+\item{...}{Further arguments to \code{\link[vioplot]{histoplot}}.}
 
 \item{use.cols}{logical indicating if columns (by default) or rows (use.cols = FALSE) should be plotted.}
 
