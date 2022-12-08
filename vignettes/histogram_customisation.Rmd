@@ -112,8 +112,6 @@ These color and shape settings can also be customised separately for each histog
 histoplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length (Equal Area)", areaEqual = T, col=c("lightgreen", "lightblue", "palevioletred"), border=c("darkolivegreen4", "royalblue4", "violetred4"), rectCol=c("forestgreen", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), colMed=c("green", "cyan", "magenta"), pchMed=c(15, 17, 19))
 ```
 
-This should be sufficient to customise the histogram plot but further examples are given in [the areaEqual histoplot vignette](histogram_area.html) including how histogram plots are useful for comparing variation when data does not follow the same distribution. This document also compares the histogram plot with other established methods to plot data variation.
-
 ## Split Bihistogram Plots
 
 We set up the data with two categories (Sepal Width) as follows:
