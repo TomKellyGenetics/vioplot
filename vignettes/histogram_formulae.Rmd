@@ -1,10 +1,10 @@
 ---
-title: "Customising Violin Plots with Formula Input"
+title: "Customising Histogram Plots with Formula Input"
 author: "Tom Kelly"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{histoplot: Customising Violin Plots with Formula Input}
+  %\VignetteIndexEntry{histoplot: Customising Histogram Plots with Formula Input}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,7 +14,7 @@ Since boxplots have become the _de facto_ standard for plotting the distribution
 As shown below for the `iris` dataset, histogram plots show distribution information taking formula input that `boxplot` implements but `histoplot` is unable to. This demonstrates the customisation demonstrated in [the main histoplot vignette using histoplot syntax](histogram_customisation.html) with the formula method commonly used for `boxplot`, `t.test`, and `lm`.
 
 ```{r}
-library("histoplot")
+library("vioplot")
 ```
 
 ```{r, message=FALSE, eval=FALSE}
@@ -27,12 +27,12 @@ data(iris)
 boxplot(Sepal.Length~Species, data = iris, main = "Sepal Length")
 ```
 
-Whereas performing the same function does not work with `histoplot` (0.2).
+Whereas performing the same function does not work with `vioplot` (0.2).
 
 ```{r, message=FALSE, eval=FALSE}
-devtools::install_version("histoplot", version = "0.2")
-library("histoplot")
-histoplot(Sepal.Length~Species, data = iris)
+devtools::install_version("vioplot", version = "0.2")
+library("vioplot")
+vioplot(Sepal.Length~Species, data = iris)
 ```
 
 ```
@@ -42,22 +42,22 @@ Error in min(data) : invalid 'type' (language) of argument
 ## Plot Defaults
 
 ```{r, message=FALSE, eval=FALSE}
-histoplot(Sepal.Length~Species, data = iris)
+vioplot(Sepal.Length~Species, data = iris)
 ```
 
 ```{r, message=FALSE, echo=FALSE}
-histoplot(Sepal.Length~Species, data = iris, main = "Sepal Length", col="magenta")
+vioplot(Sepal.Length~Species, data = iris, main = "Sepal Length", col="magenta")
 ```
 
-Another concern we see here is that the `histoplot` defaults are not aesthetically pleasing, with a rather glaring colour scheme unsuitable for professional or academic usage. Thus the plot default colours have been changed as shown here:
+Another concern we see here is that the `vioplot` defaults are not aesthetically pleasing, with a rather glaring colour scheme unsuitable for professional or academic usage. Thus the plot default colours have been changed as shown here:
 
 ```{r}
-histoplot(Sepal.Length~Species, data = iris, main = "Sepal Length")
+vioplot(Sepal.Length~Species, data = iris, main = "Sepal Length")
 ```
 
-## Plot colours: Violin Fill
+## Plot colours: Histogram Fill
 
-Plot colours can be further customised as with the original histoplot package using the `col` argument:
+Plot colours can be further customised as with the original vioplot package using the `col` argument:
 
 ```{r}
 histoplot(Sepal.Length~Species, data = iris, main = "Sepal Length", col="lightblue")
@@ -65,7 +65,7 @@ histoplot(Sepal.Length~Species, data = iris, main = "Sepal Length", col="lightbl
 
 ### Vectorisation
 
-However the `histoplot` (0.2) function is unable to colour each histogram separately, thus this is enabled with a vectorised `col` in `histoplot` (0.3):
+However the `vioplot` (0.2) function is unable to colour each histogram separately, thus this is enabled with a vectorised `col` in `histoplot` (0.4):
 
 ```{r}
 histoplot(Sepal.Length~Species, data = iris, main = "Sepal Length", col=c("lightgreen", "lightblue", "palevioletred"))
@@ -107,3 +107,25 @@ These colour and shape settings can also be customised separately for each histo
 ```{r}
 histoplot(Sepal.Length~Species, data = iris, main="Sepal Length", col=c("lightgreen", "lightblue", "palevioletred"), border=c("darkolivegreen4", "royalblue4", "violetred4"), rectCol=c("forestgreen", "blue", "palevioletred3"), lineCol=c("darkolivegreen", "royalblue", "violetred4"), colMed=c("green", "cyan", "magenta"), pchMed=c(15, 17, 19))
 ```
+
+## Split Bihistogram Plots
+
+We set up the data with two categories (Sepal Width) as follows:
+
+```{r, message=FALSE}
+data(iris)
+summary(iris$Sepal.Width)
+table(iris$Sepal.Width > mean(iris$Sepal.Width))
+iris_large <- iris[iris$Sepal.Width > mean(iris$Sepal.Width), ]
+iris_small <- iris[iris$Sepal.Width <= mean(iris$Sepal.Width), ]
+```
+
+A direct comparision of 2 datasets can be made with the `side` argument and `add = TRUE` on the second plot:
+
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
+histoplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line", side = "right")
+histoplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line", side = "left", add = T)
+title(xlab = "Species", ylab = "Sepal Length")
+legend("topleft", fill = c("lightblue", "palevioletred"), legend = c("small", "large"), title = "Sepal Width")
+```
+

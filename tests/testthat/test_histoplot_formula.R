@@ -1,4 +1,4 @@
-library("histoplot")
+library("vioplot")
 context("formula input")
 
 test_that("plot data list input", {

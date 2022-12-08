@@ -2,6 +2,7 @@
 ^doc$
 ^CRAN-RELEASE$
 ^LICENSE\.md$
+^CITATION.cff$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .travis.yml

@@ -150,7 +150,7 @@
 \arguments{
 \item{x}{a numeric matrix.}
 
-\item{...}{Further arguments to \code{\link[histoplot]{histoplot}}.}
+\item{...}{Further arguments to \code{\link[viooplot]{histoplot}}.}
 
 \item{use.cols}{logical indicating if columns (by default) or rows (use.cols = FALSE) should be plotted.}
 
@@ -223,11 +223,9 @@
 \item{logLab}{Increments for labelling y-axis on log-scale, defaults to numbers starting with 1, 2, 5, and 10.}
 
 \item{na.rm}{logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.}
-
-\item{plotCentre}{NOT AVAILABLE}
 }
 \description{
-Produce histogram plot(s) of the given (grouped) values with enhanced annotation and colour per group. Includes customisation of colours for each aspect of the histogram, boxplot, and separate histograms. This supports input of data as a list or formula, being backwards compatible with \code{\link[histoplot]{histoplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
+Produce histogram plot(s) of the given (grouped) values with enhanced annotation and colour per group. Includes customisation of colours for each aspect of the histogram, boxplot, and separate histograms. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{histoplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
 
 Interpreting the columns (or rows) of a matrix as different groups, draw a boxplot for each.
 }

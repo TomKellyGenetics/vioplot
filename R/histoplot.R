@@ -1,6 +1,6 @@
 #' histoplot
 #'
-#' Produce histogram plot(s) of the given (grouped) values with enhanced annotation and colour per group. Includes customisation of colours for each aspect of the histogram, boxplot, and separate histograms. This supports input of data as a list or formula, being backwards compatible with \code{\link[histoplot]{histoplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
+#' Produce histogram plot(s) of the given (grouped) values with enhanced annotation and colour per group. Includes customisation of colours for each aspect of the histogram, boxplot, and separate histograms. This supports input of data as a list or formula, being backwards compatible with \code{\link[vioplot]{histoplot}} (0.2) and taking input in a formula as used for \code{\link[graphics]{boxplot}}.
 #'
 #' @name histoplot
 #' @aliases histoplot
@@ -41,7 +41,6 @@
 #' @param na.action a function which indicates what should happen when the data contain NAs. The default is to ignore missing values in either the response or the group.
 #' @param na.rm logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
 #' @param side defaults to "both". Assigning "left" or "right" enables one sided plotting of histograms. May be applied as a scalar across all groups.
-#' @param plotCentre NOT AVAILABLE
 #' @param axes,frame.plot,panel.first,panel.last,asp,line,outer,adj,ann,ask,bg,bty,cin,col.axis,col.lab,col.main,col.sub,cra,crt,csi,cxy,din,err,family,fg,fig,fin,font,font.axis,font.lab,font.main,font.sub,lab,las,lend,lheight,ljoin,lmitre,mai,mar,mex,mfcol,mfg,mfrow,mgp,mkh,new,oma,omd,omi,page,pch,pin,plt,ps,pty,smo,srt,tck,tcl,usr,xaxp,xaxs,xaxt,xpd,yaxp,yaxs,ylbias Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).
 #' @keywords plot graphics histogram
 #' @import sm
@@ -152,7 +151,7 @@ histoplot <- function(x, ...) {
 #' @aliases histogram.matrix histoplot.matrix
 #' @param x	a numeric matrix.
 #' @param use.cols logical indicating if columns (by default) or rows (use.cols = FALSE) should be plotted.
-#' @param ...	Further arguments to \code{\link[histoplot]{histoplot}}.
+#' @param ...	Further arguments to \code{\link[viooplot]{histoplot}}.
 #' @rdname histoplot
 #' @export
 histoplot.matrix <- function (x, use.cols = TRUE, ...)
@@ -466,7 +465,7 @@ histoplot.default <-
         nB <- length(base[[i]])
         #xp <- c(at[i] - radj*height[[i]], rev(at[i] + ladj*height[[i]]))
         #yp <- c(base[[i]], rev(base[[i]]))
-        #polygon(xp, yp, col=colp, border=borderp, 
+        #polygon(xp, yp, col=colp, border=borderp,
         #lty = lty, lwd = lwd, xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
 
         x0 <- at[i]- radj*height[[i]]
@@ -538,7 +537,7 @@ histoplot.default <-
         nB <- length(height[[i]])
         #xp <- c(at[i] - radj*height[[i]], rev(at[i] + ladj*height[[i]]))
         #yp <- c(base[[i]], rev(base[[i]]))
-        #polygon(xp, yp, col=colp, border=borderp, 
+        #polygon(xp, yp, col=colp, border=borderp,
         #lty = lty, lwd = lwd, xpd = xpd, lend = lend, ljoin = ljoin, lmitre = lmitre)
 
         x0 <- at[i]- radj*height[[i]]
@@ -547,7 +546,7 @@ histoplot.default <-
         y1 <- base[[i]][-1L]
          rect(x0, y0, x1, y1,
             col = colp, border = borderp, lty = lty)
-                
+
         if (drawRect) {
           #lines(c(lower[i], upper[i]), at[c(i, i)], lwd = lwd,
           #      lty = lty, col = ifelse(length(lineCol)>1, lineCol[1+(i-1)%%length(lineCol)], lineCol), lend = lend, ljoin = ljoin, lmitre = lmitre)
@@ -562,7 +561,7 @@ histoplot.default <-
       title(main = main, sub = sub, xlab = xlab, ylab = ylab, line = line, outer = outer, xpd = xpd, cex.main = cex.main, col.main = col.main, font.main = font.main)
     }
     invisible(list(
-    #upper = upper, lower = lower, 
+    #upper = upper, lower = lower,
     median = med, q1 = q1, q3 = q3))
   }
 

@@ -1,4 +1,4 @@
-library("histoplot")
+library("vioplot")
 context("color custom and vectorised")
 
 test_that("plot with defaults and scalar colours", {
