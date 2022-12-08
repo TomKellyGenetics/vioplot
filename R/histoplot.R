@@ -444,6 +444,18 @@ histoplot.default <-
               Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
             }
           }
+        } else {
+          if(ylog){
+            if(is.null(cex.names)) cex.names <- cex.axis
+            if(xaxt !="n"){
+              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            }
+          } else {
+            if(is.null(cex.names)) cex.names <- cex.axis
+            if(xaxt !="n"){
+              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+            }
+          }
         }
       }
       if (frame.plot) {
@@ -502,6 +514,18 @@ histoplot.default <-
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
               Axis(1:length(datas), at = at, labels = label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            }
+          }
+        } else {
+          if(ylog){
+            if(is.null(cex.names)) cex.names <- cex.axis
+            if(xaxt !="n"){
+              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            }
+          } else {
+            if(is.null(cex.names)) cex.names <- cex.axis
+            if(xaxt !="n"){
+              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
             }
           }
         }
