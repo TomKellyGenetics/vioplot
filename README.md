@@ -1,6 +1,6 @@
 # vioplot
 
-## Version 0.3.7
+## Version 0.4.0
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/vioplot)](https://cran.r-project.org/package=vioplot)
 [![Travis Build Status](https://travis-ci.com/TomKellyGenetics/vioplot.svg?branch=master)](https://travis-ci.com/TomKellyGenetics/vioplot)
@@ -99,7 +99,7 @@ The following information can be retrieved from within an R session by using `ci
 
 To cite the enhanced vioplot package in publications use:
 
-  Daniel Adler and S. Thomas Kelly (2021). vioplot: violin plot. R package version 0.3.7
+  Daniel Adler and S. Thomas Kelly (2022). vioplot: violin plot. R package version 0.4.0
   https://github.com/TomKellyGenetics/vioplot
 
 A BibTeX entry for LaTeX users is
@@ -107,8 +107,8 @@ A BibTeX entry for LaTeX users is
   @Manual{,
     title = {vioplot: violin plot},
     author = {Daniel Adler and S. Thomas Kelly},
-    year = {2020},
-    note = {R package version 0.3.7},
+    year = {2022},
+    note = {R package version 0.4.0},
     url = {https://github.com/TomKellyGenetics/vioplot},
   }
 

@@ -1,6 +1,27 @@
 # vioplot 0.4.0 (2022)
 
+New feature
 
+- adds feature for histograms in dedicated function
+discussed on GitHub issue #15 and PR #18
+
+Documentation
+
+- adds vignette for histograms #18
+
+- adds examples to overlay information with base R graphics
+discussed in issues #16 and #17 on GitHub
+
+- updates documentation for h parameter #14
+
+Bug fixes
+
+- allow supression of y-axes with `yaxt = 'n'` without disabing x-axes
+(should be independent parameter). Resolves unexpected behaviour reported
+on GitHub issue #16.
+
+- allow NA values when plotting repeated values
+resolves bug in #13 commit bd68db3c10ee5b8a550568f449fecd1d47a62197
 
 # vioplot 0.3.7 (2021)
 
@@ -10,7 +31,7 @@ Updates maintainer contact details.
 
 Bug fixes.
 
-- allow plotting repeated non-unique values over threshold number with checks
+- allow plotting repeated non-unique values over threshold number with checks #13
 
 # vioplot 0.3.5 (2020)
 

@@ -10,6 +10,6 @@ authors:
   affiliation: "University of Göttingen, Germany"
   orcid: "https://orcid.org/0000-0000-0000-0000"
 title: "vioplot: violin plot"
-version: 0.3.7
-date-released: 2021-07-27
+version: 0.4.0
+date-released: 2022-12-08
 url: "https://github.com/TomKellyGenetics/vioplot"
