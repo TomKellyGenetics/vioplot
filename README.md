@@ -106,7 +106,7 @@ A BibTeX entry for LaTeX users is
 
   @Manual{,
     title = {vioplot: violin plot},
-    author = {Daniel Adler and S. Thomas Kelly},
+    author = {Daniel Adler, S. Thomas Kelly, Tom Elliot, and Jordan Adamson},
     year = {2022},
     note = {R package version 0.4.0},
     url = {https://github.com/TomKellyGenetics/vioplot},

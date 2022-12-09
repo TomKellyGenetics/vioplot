@@ -4,8 +4,8 @@ Version: 0.4.0
 Date: 2022-12-08
 Authors@R: c(person("Daniel", "Adler", email = "dadler@uni-goettingen.de", role = c("aut", "cph")),
            person("S. Thomas", "Kelly", email = "tomkellygenetics@gmail.com", role = c("aut", "cre")),
-           person("Tom M.", "Elliott", email = "tom.elliott@auckland.ac.nz", role = c("ctb")),
-           person("Jordan", "Adamson", email = "adamson@wifa.uni-leipzig.de", role = c("ctb")))
+           person("Tom M.", "Elliott", email = "tom.elliott@auckland.ac.nz", role = c("aut", "ctb")),
+           person("Jordan", "Adamson", email = "adamson@wifa.uni-leipzig.de", role = c("aut", "ctb")))
 Description: A violin plot is a combination of a box plot and a kernel density plot. This package allows extensive customisation of violin plots. 
 Depends:
     sm,

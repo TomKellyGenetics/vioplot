@@ -1,14 +1,20 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 authors:
-- family-names: "Kelly"
-  given-names: "S. Thomas"
-  affiliation: "University of Otago, New Zealand; RIKEN IMS, Japan"
-  orcid: "https://orcid.org/0000-0003-3904-6690"
 - family-names: "Adler"
   given-names: "Daniel"
   affiliation: "University of Göttingen, Germany"
   orcid: "https://orcid.org/0000-0000-0000-0000"
+- family-names: "Kelly"
+  given-names: "S. Thomas"
+  affiliation: "University of Otago, New Zealand; RIKEN IMS, Japan"
+  orcid: "https://orcid.org/0000-0003-3904-6690"
+- family-names: "Elliot"
+  given-names: "Tom"
+  affiliation: "University of Auckland, New Zealand"
+- family-names: "Adamson"
+  given-names: "Jordan"
+  affiliation: "Leipzig University, Germany"
 title: "vioplot: violin plot"
 version: 0.4.0
 date-released: 2022-12-08
