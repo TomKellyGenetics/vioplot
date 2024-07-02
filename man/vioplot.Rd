@@ -30,6 +30,7 @@
   ann = !add,
   horizontal = FALSE,
   side = "both",
+  srt.axis = c(0, 90),
   xlab = mklab(y_var = horizontal),
   ylab = mklab(y_var = !horizontal),
   names = NULL,
@@ -71,7 +72,7 @@
   sub = "",
   xlab = NA,
   ylab = NA,
-  line = NA,
+  line = 1,
   outer = FALSE,
   xlog = NA,
   ylog = NA,
@@ -132,6 +133,7 @@
   pty = NA,
   smo = NA,
   srt = NA,
+  srt.axis = c(0, 90),
   tck = NA,
   tcl = NA,
   usr = NA,
@@ -171,6 +173,8 @@
 \item{horizontal}{logical. To use horizontal or vertical violins. Note that log scale can only be used on the x-axis for horizontal violins, and on the y-axis otherwise.}
 
 \item{side}{defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.}
+
+\item{srt.axis}{angle for axis labels, scalar applies to both axes or vector with 2 components. [x, y] defaults to c(0, 90) with angles counter-clockwise from vertical.}
 
 \item{names}{one label, or a vector of labels for the data must match the number of data given}
 

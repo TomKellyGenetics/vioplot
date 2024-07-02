@@ -43,6 +43,7 @@
 #' @param na.rm logical value indicating whether NA values should be stripped before the computation proceeds. Defaults to TRUE.
 #' @param side defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.
 #' @param plotCentre defaults to "points", plotting a central point at the median. If "line" is given a median line is plotted (subject to side) alternatively.
+#' @param srt.axis angle for axis labels, scalar applies to both axes or vector with 2 components. [x, y] defaults to c(0, 90) with angles counter-clockwise from vertical.
 #' @param axes,frame.plot,panel.first,panel.last,asp,line,outer,adj,ann,ask,bg,bty,cin,col.axis,col.lab,col.main,col.sub,cra,crt,csi,cxy,din,err,family,fg,fig,fin,font,font.axis,font.lab,font.main,font.sub,lab,las,lend,lheight,ljoin,lmitre,mai,mar,mex,mfcol,mfg,mfrow,mgp,mkh,new,oma,omd,omi,page,pch,pin,plt,ps,pty,smo,srt,tck,tcl,usr,xaxp,xaxs,xaxt,xpd,yaxp,yaxs,ylbias Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).
 #' @keywords plot graphics violin
 #' @import sm
@@ -192,7 +193,7 @@ vioplot.matrix <- vioplot.matrix
 #' @export
 vioplot.formula <-
   function (formula, data = NULL, ..., subset,  na.action = NULL,
-            add = FALSE, ann = !add, horizontal = FALSE, side = "both",
+            add = FALSE, ann = !add, horizontal = FALSE, side = "both", srt.axis = c(0, 90),
             xlab = mklab(y_var = horizontal), ylab = mklab(y_var = !horizontal), names=NULL,
             drop = FALSE, sep = ".", lex.order = FALSE)
   {
@@ -231,7 +232,7 @@ vioplot.formula <-
     }
     vioplot(split(mf[[response]], mf[-response], drop = drop,
                   sep = sep, lex.order = lex.order), xlab = xlab, ylab = ylab, names = names,
-            add = add, ann = ann, horizontal = horizontal, side = side, ...)
+            add = add, ann = ann, horizontal = horizontal, side = side, srt.axis = srt.axis, ...)
   }
 
 #' @rdname vioplot
@@ -242,7 +243,7 @@ vioplot.default <-
             lwd = 1, rectCol = par()$fg, lineCol = par()$fg, pchMed = 19, colMed = "white", colMed2 = "grey 75",
             at, add = FALSE, wex = 1, drawRect = TRUE, areaEqual=FALSE,
             axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA,
-            main="", sub="", xlab=NA, ylab=NA, line = NA, outer = FALSE,
+            main="", sub="", xlab=NA, ylab=NA, line = 1, outer = FALSE,
             xlog = NA, ylog=NA, adj=NA, ann = NA, ask=NA, bg=NA, bty=NA,
             cex=NA, cex.axis=NA, cex.lab=NA, cex.main=NA, cex.names=NULL, cex.sub=NA,
             cin=NA, col.axis=NA, col.lab=NA, col.main=NA, col.sub=NA,
@@ -250,11 +251,23 @@ vioplot.default <-
             fig=NA, fin=NA, font=NA, font.axis=NA, font.lab=NA, font.main=NA, font.sub=NA,
             lab=NA, las=NA, lend=NA, lheight=NA, ljoin=NA, lmitre=NA, mai=NA, mar=NA, mex=NA,
             mfcol=NA, mfg=NA, mfrow=NA, mgp=NA, mkh=NA, new=NA, oma=NA, omd=NA, omi=NA,
-            page=NA, pch=NA, pin=NA, plt=NA, ps=NA, pty=NA, smo=NA, srt=NA, tck=NA, tcl=NA,
+            page=NA, pch=NA, pin=NA, plt=NA, ps=NA, pty=NA, smo=NA, srt=NA, srt.axis = c(0, 90), tck=NA, tcl=NA,
             usr=NA, xaxp=NA, xaxs=NA, xaxt=NA, xpd=NA, yaxp=NA, yaxs=NA, yaxt=NA, ylbias=NA,
             log="", logLab=c(1,2,5),
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
+    #check axis parameters
+    if(length(srt.axis) == 1){
+      srt.axis <- rep(srt.axis, 2)
+    }
+    if(length(srt.axis) < 1){
+      srt.axis <- c(0, 90)
+    }
+    srt.axis.x <- srt.axis[1]
+    srt.axis.y <- srt.axis[2]
+    print(srt.axis.x)
+    print(srt.axis.y)
+
     #assign graphical parameters if not given
     for(ii in 1:length(names(par()))){
       if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[[ii]]))
@@ -425,6 +438,12 @@ vioplot.default <-
     else {
       label <- names
     }
+    if(srt.axis.x == 0 && srt.axis.y == 90){
+      print(TRUE)
+      groups <- label
+    } else {
+      groups <- FALSE
+    }
     boxwidth <- 0.05 * ifelse(length(boxwex)>1, boxwex[i], boxwex)
     if (!add){
       plot.new()
@@ -446,28 +465,58 @@ vioplot.default <-
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            if (!groups[1]){
+              yaxis <- Axis(unlist(datas), side = 2, labels = groups, srt = srt.axis.y, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              text(x = par("usr")[1] * 0.8 , y = yaxis, labels = yaxis, srt = srt.axis.y, xpd = TRUE, adj = c(1.5,-1), cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las)
+            } else {
+              Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            }
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              if (!groups[1]){
+                xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              } else {
+                Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              }
             }
           } else {
-            Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            if (!groups[1]){
+              yaxis <- Axis(unlist(datas), side = 2, labels = groups, srt = srt.axis.y, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+              text(x = par("usr")[1] * 0.8 , y = yaxis, labels = yaxis, srt = srt.axis.y, xpd = TRUE, adj = c(1.5,-1), cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            } else {
+              Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+            }
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              if (!groups[1]){
+                xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              } else {
+                Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              }
             }
           }
         } else {
           if(ylog){
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              if (!groups[1]){
+                xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              } else {
+                Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              }
             }
           } else {
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              if (!groups[1]){
+                xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              } else {
+                Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              }
             }
           }
         }
@@ -511,28 +560,58 @@ vioplot.default <-
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            Axis(unlist(datas), side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            if (!groups[1]){
+              xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            } else {
+              Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+            }
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              Axis(1:length(datas), at = at, labels = label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              if (!groups[1]){
+                yaxis <- Axis(unlist(datas), side = 2, labels = groups, srt = srt.axis.y, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+                text(x = par("usr")[1] * 0.8 , y = yaxis, labels = yaxis, srt = srt.axis.y, xpd = TRUE, adj = c(1.5,-1), cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las)
+              } else {
+                Axis(unlist(datas), side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              }
             }
           } else {
-            Axis(unlist(datas), side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+            if (!groups[1]){
+              xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+            } else {
+              Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+            }
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              Axis(1:length(datas), at = at, labels = label, side = 2, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+              if (!groups[1]){
+                xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+              } else {
+                Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+              }
             }
           }
         } else {
           if(ylog){
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              if (!groups[1]){
+                xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              } else {
+                Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              }
             }
           } else {
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              Axis(1:length(datas), at = at, labels = label, side = 1, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              if (!groups[1]){
+                xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              } else {
+                Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              }
             }
           }
         }
