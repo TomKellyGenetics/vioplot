@@ -99,18 +99,18 @@ The following information can be retrieved from within an R session by using `ci
 
 To cite the enhanced vioplot package in publications use:
 
-  Daniel Adler and S. Thomas Kelly (2024). vioplot: violin plot. R package version 0.5.0
-  https://github.com/TomKellyGenetics/vioplot
+>  Daniel Adler and S. Thomas Kelly (2024). vioplot: violin plot. R package version 0.5.0
+>  https://github.com/TomKellyGenetics/vioplot
 
 A BibTeX entry for LaTeX users is
 
-  @Manual{,
-    title = {vioplot: violin plot},
-    author = {Daniel Adler, S. Thomas Kelly, Tom Elliot, and Jordan Adamson},
-    year = {2024},
-    note = {R package version 0.5.0},
-    url = {https://github.com/TomKellyGenetics/vioplot},
-  }
+>  @Manual{,
+>    title = {vioplot: violin plot},
+>    author = {Daniel Adler, S. Thomas Kelly, Tom Elliot, and Jordan Adamson},
+>    year = {2024},
+>    note = {R package version 0.5.0},
+>    url = {https://github.com/TomKellyGenetics/vioplot},
+>  }
 
 Please also acknowledge the original package: citation("vioplot")
 
