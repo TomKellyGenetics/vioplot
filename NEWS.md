@@ -1,3 +1,13 @@
+# vioplot 0.5.0 (2024)
+
+New feature
+
+- enable angled axis labels with srt.axis
+
+Documentation
+
+- add demo of histogram plots (#19 by @Jadamso)
+
 # vioplot 0.4.0 (2022)
 
 New feature
@@ -16,7 +26,7 @@ discussed in issues #16 and #17 on GitHub
 
 Bug fixes
 
-- allow supression of y-axes with `yaxt = 'n'` without disabing x-axes
+- allow suppression of y-axes with `yaxt = 'n'` without disabing x-axes
 (should be independent parameter). Resolves unexpected behaviour reported
 on GitHub issue #16.
 

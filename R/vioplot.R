@@ -256,7 +256,12 @@ vioplot.default <-
             log="", logLab=c(1,2,5),
             na.action = NULL, na.rm = T, side = "both", plotCentre = "point")
   {
-    #check axis parameters
+    #assign graphical parameters if not given
+    for(ii in 1:length(names(par()))){
+      if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[[ii]]))
+    }
+
+    #check axis parameters after setting srt parameter for kernel density
     if(length(srt.axis) == 1){
       srt.axis <- rep(srt.axis, 2)
     }
@@ -265,13 +270,7 @@ vioplot.default <-
     }
     srt.axis.x <- srt.axis[1]
     srt.axis.y <- srt.axis[2]
-    print(srt.axis.x)
-    print(srt.axis.y)
 
-    #assign graphical parameters if not given
-    for(ii in 1:length(names(par()))){
-      if(is.na(get(names(par())[ii])[1])) assign(names(par()[ii]), unlist(par()[[ii]]))
-    }
     if(add && side != "both"){
       if(!is.null(names)) warning("Warning: names can only be changed on first call of vioplot (when add = FALSE)
 ")
@@ -439,7 +438,6 @@ vioplot.default <-
       label <- names
     }
     if(srt.axis.x == 0 && srt.axis.y == 90){
-      print(TRUE)
       groups <- label
     } else {
       groups <- FALSE
@@ -465,7 +463,7 @@ vioplot.default <-
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            if (!groups[1]){
+            if (groups[1] == FALSE){
               yaxis <- Axis(unlist(datas), side = 2, labels = groups, srt = srt.axis.y, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
               text(x = par("usr")[1] * 0.8 , y = yaxis, labels = yaxis, srt = srt.axis.y, xpd = TRUE, adj = c(1.5,-1), cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las)
             } else {
@@ -473,7 +471,7 @@ vioplot.default <-
             }
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              if (!groups[1]){
+              if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
                 text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
               } else {
@@ -481,7 +479,7 @@ vioplot.default <-
               }
             }
           } else {
-            if (!groups[1]){
+            if (groups[1] == FALSE){
               yaxis <- Axis(unlist(datas), side = 2, labels = groups, srt = srt.axis.y, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
               text(x = par("usr")[1] * 0.8 , y = yaxis, labels = yaxis, srt = srt.axis.y, xpd = TRUE, adj = c(1.5,-1), cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
             } else {
@@ -489,7 +487,7 @@ vioplot.default <-
             }
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              if (!groups[1]){
+              if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
                 text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               } else {
@@ -501,7 +499,7 @@ vioplot.default <-
           if(ylog){
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              if (!groups[1]){
+              if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
                 text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
               } else {
@@ -511,7 +509,7 @@ vioplot.default <-
           } else {
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              if (!groups[1]){
+              if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
                 text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               } else {
@@ -560,7 +558,7 @@ vioplot.default <-
             #log_axis <- log_axis[log_axis >= exp(par("usr")[3])]
             #log_axis_label <- log_axis_label[log_axis <= exp(par("usr")[4])]
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
-            if (!groups[1]){
+            if (groups[1] == FALSE){
               xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
               text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
             } else {
@@ -568,7 +566,7 @@ vioplot.default <-
             }
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              if (!groups[1]){
+              if (groups[1] == FALSE){
                 yaxis <- Axis(unlist(datas), side = 2, labels = groups, srt = srt.axis.y, cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
                 text(x = par("usr")[1] * 0.8 , y = yaxis, labels = yaxis, srt = srt.axis.y, xpd = TRUE, adj = c(1.5,-1), cex.axis = cex.axis, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las)
               } else {
@@ -576,7 +574,7 @@ vioplot.default <-
               }
             }
           } else {
-            if (!groups[1]){
+            if (groups[1] == FALSE){
               xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
             } else {
@@ -584,7 +582,7 @@ vioplot.default <-
             }
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              if (!groups[1]){
+              if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
                 text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
               } else {
@@ -596,7 +594,7 @@ vioplot.default <-
           if(ylog){
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              if (!groups[1]){
+              if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
                 text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               } else {
@@ -606,7 +604,7 @@ vioplot.default <-
           } else {
             if(is.null(cex.names)) cex.names <- cex.axis
             if(xaxt !="n"){
-              if (!groups[1]){
+              if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
                 text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               } else {
