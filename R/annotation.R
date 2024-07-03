@@ -76,17 +76,21 @@ add_labels <- function(variable, categories, cex = par()$cex, col = par()$fg, he
 #' Annotation to highlight outliers.
 #' @param variable continuous variable to to plot on y-axis (numeric or integer).
 #' @param categories discrete variable to break down groups (factor or string).
-#' @param fill colour of spots.
-#' @param bar colour of horizontal bars
+#' @param col colour of rings or borders. Scalar applied to all columns or a vector for each category.
+#' @param fill colour of spots. Scalar applied to all columns or a vector for each category.
+#' @param bar colour of horizontal bars. Scalar applied to all columns or a vector for each category.
 #' @param cutoff minimum number (default 3L) of standard deviations to report.
 #' @param verbose to print logs (defaults to FALSE).
 #' @keywords plot graphics violin annotation
 #'
-#' @usage add_add_outliers(variable, categories,
-#'                         cutoff = 3, verbose = FALSE)
+#' @usage add_add_outliers(variable, categories, cutoff = 3,
+#'                         col = "black", fill = "lightblue", bars = "grey75",
+#'                         verbose = FALSE)
 #' @rdname annotation
 #' @export
 add_outliers <- function(variable, categories, cutoff = 3, fill = par()$bg, col = par()$fg, bars = par()$fg, verbose = FALSE){
+  if(length(col) == 1) col <- rep(col, length(unique(categories)))
+  if(length(fill) == 1) fill <- rep(fill, length(unique(categories)))
   for(category in unique(categories)){
     ii <- which(sort(unique(categories)) == category)
     if(verbose){
@@ -98,11 +102,11 @@ add_outliers <- function(variable, categories, cutoff = 3, fill = par()$bg, col 
     if(verbose) print(length(y[y < mean(y, na.rm = TRUE) - cutoff * sd(y, na.rm = TRUE)]))
     points(rep(ii, length(y[y < mean(y, na.rm = TRUE) - cutoff * sd(y, na.rm = TRUE)])),
            y[y < mean(y, na.rm = TRUE) - cutoff * sd(y, na.rm = TRUE)],
-           cex = 1.25, pch = 21, bg = fill, col = col)
+           cex = 1.25, pch = 21, bg = fill[ii], col = col[ii])
     if(verbose) print(length(y[y > mean(y, na.rm = TRUE) + cutoff * sd(y, na.rm = TRUE)]))
     points(rep(ii, length(y[y > mean(y, na.rm = TRUE) + cutoff * sd(y, na.rm = TRUE)])),
            y[y > mean(y, na.rm = TRUE) + cutoff * sd(y, na.rm = TRUE)],
-           cex = 1.25, pch = 21, bg = fill, col = col)
+           cex = 1.25, pch = 21, bg = fill[ii], col = col[ii])
   }
   abline(h=0, lwd = 1.5, lty = 2, col = bars)
   return(0)

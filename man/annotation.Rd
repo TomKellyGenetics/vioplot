@@ -7,8 +7,9 @@
 \usage{
 add_labels(variable, categories, cex = 0.75)
 
-add_add_outliers(variable, categories,
-                        cutoff = 3, verbose = FALSE)
+add_add_outliers(variable, categories, cutoff = 3,
+                        col = "black", fill = "lightblue", bars = "grey75",
+                        verbose = FALSE)
 }
 \arguments{
 \item{variable}{continuous variable to to plot on y-axis (numeric or integer).}
@@ -17,17 +18,17 @@ add_add_outliers(variable, categories,
 
 \item{cex}{size of text.}
 
-\item{col}{colour of text}
+\item{col}{colour of rings or borders. Scalar applied to all columns or a vector for each category.}
 
 \item{height}{adjust placement of text.}
 
 \item{cutoff}{minimum number (default 3L) of standard deviations to report.}
 
-\item{fill}{colour of spots.}
+\item{fill}{colour of spots. Scalar applied to all columns or a vector for each category.}
 
 \item{verbose}{to print logs (defaults to FALSE).}
 
-\item{bar}{colour of horizontal bars}
+\item{bar}{colour of horizontal bars. Scalar applied to all columns or a vector for each category.}
 }
 \description{
 Annotate violin plots with custom labels
