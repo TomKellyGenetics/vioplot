@@ -2,41 +2,23 @@
 % Please edit documentation in R/annotation.R
 \name{add_labels}
 \alias{add_labels}
-\alias{add_outliers}
 \title{Annotated Violin Plot}
 \usage{
-add_labels(variable, categories, cex = 0.75)
-
-add_add_outliers(variable, categories, cutoff = 3,
-                        col = "black", fill = "lightblue", bars = "grey75",
-                        verbose = FALSE)
+add_labels(variable, categories, cex = par()$cex, col = par()$fg, height = 0.5)
 }
 \arguments{
-\item{variable}{continuous variable to to plot on y-axis (numeric or integer).}
+\item{variable}{continuous variable to to plot on y-axis (numeric or integer)}
 
 \item{categories}{discrete variable to break down groups (factor or string).}
 
 \item{cex}{size of text.}
 
-\item{col}{colour of rings or borders. Scalar applied to all columns or a vector for each category.}
+\item{col}{colour of text}
 
 \item{height}{adjust placement of text.}
-
-\item{cutoff}{minimum number (default 3L) of standard deviations to report.}
-
-\item{fill}{colour of spots. Scalar applied to all columns or a vector for each category.}
-
-\item{verbose}{to print logs (defaults to FALSE).}
-
-\item{bar}{colour of horizontal bars. Scalar applied to all columns or a vector for each category.}
 }
 \description{
 Annotate violin plots with custom labels
-
-Annotation to highlight outliers.
-}
-\details{
-Annotate violin plots with outliers
 }
 \examples{
 
@@ -81,13 +63,13 @@ iris2$Sepal.Length <- as.numeric(iris2$Sepal.Length)
 
 vioplot(Sepal.Length~Species, data = iris2, main = "Sepal Length",
         col=c("lightgreen", "lightblue", "palevioletred"))
-add_outliers(unlist(iris2$Sepal.Length), iris2$Species, col = "grey50", fill = "red", bars = "grey85")
+add_outliers(unlist(iris2$Sepal.Length), iris2$Species,
+             col = "grey50", fill = "red", bars = "grey85")
 legend("bottomright", legend=c("setosa", "versicolor", "virginica"),
        fill=c("lightgreen", "lightblue", "palevioletred"), cex = 0.6)
 add_labels(unlist(iris2$Sepal.Length), iris2$Species, height = 0, cex = 0.8)
 
 }
-\keyword{annotation}
 \keyword{annotation.}
 \keyword{graphics}
 \keyword{plot}

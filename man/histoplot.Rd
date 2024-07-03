@@ -324,15 +324,15 @@ dlist1 <- lapply(c(10,20,30,40), function(n) runif(n))
 dlist2 <- lapply(c(100,200,300,400), function(n) runif(n))
 
 hscale1 <- sapply(dlist1, function(r){
-  max(hist(r, plot=F, breaks=seq(0,1,by=.05))$density)})
+  max(hist(r, plot=FALSE, breaks=seq(0,1,by=.05))$density)})
 histoplot(dlist1, side='left', col=grey(.3),
-          breaks=seq(0,1,by=.05), add=F, pchMed=NA, drawRect=F, border=NA,
+          breaks=seq(0,1,by=.05), add=FALSE, pchMed=NA, drawRect=FALSE, border=NA,
           wex=hscale1/length(hscale1))
 
 hscale2 <- sapply(dlist2, function(r){
-  max(hist(r, plot=F, breaks=seq(0,1,by=.05))$density)})
+  max(hist(r, plot=FALSE, breaks=seq(0,1,by=.05))$density)})
 histoplot(dlist2, side='right', col=grey(.7),
-          breaks=seq(0,1,by=.05), add=T, pchMed=NA, drawRect=F, border=NA,
+          breaks=seq(0,1,by=.05), add=TRUE, pchMed=NA, drawRect=FALSE, border=NA,
           wex=hscale2/length(hscale2))
 
 #Sometimes, it is helpful to see the raw counts instead.
@@ -340,19 +340,19 @@ histoplot(dlist2, side='right', col=grey(.7),
 dvec <- length(unlist(c(dlist1, dlist2)))/4
 
 histoplot(dlist1, side='left', col=grey(.3),
-          breaks=seq(0,1,by=.05), add=F, pchMed=NA, drawRect=F, border=NA,
+          breaks=seq(0,1,by=.05), add=FALSE, pchMed=NA, drawRect=FALSE, border=NA,
           wex=sapply(dlist1, length)/dvec*hscale1/length(hscale1))
 histoplot(dlist2, side='right', col=grey(.7),
-          breaks=seq(0,1,by=.05), add=T, pchMed=NA, drawRect=F, border=NA,
+          breaks=seq(0,1,by=.05), add=TRUE, pchMed=NA, drawRect=FALSE, border=NA,
           wex=sapply(dlist2, length)/dvec*hscale2/length(hscale2))
 
 #It may also benefit some users to pass density and angle arguments to the
-histograms (ultimately rect) and create outer legends
+# histograms (ultimately rect) and create outer legends
 
 hist(runif(100), density=c(10,20), angle=c(22,90+22) ,col=1)
 
 outer_legend <- function(...) {
-  opar <- par(fig=c(0, 1, 0, 1), oma=c(0, 0, 0, 0), mar=c(0, 0, 0, 0), new=T)
+  opar <- par(fig=c(0, 1, 0, 1), oma=c(0, 0, 0, 0), mar=c(0, 0, 0, 0), new=TRUE)
   on.exit(par(opar))
   plot(0, 0, type='n', bty='n', xaxt='n', yaxt='n')
   legend(...)

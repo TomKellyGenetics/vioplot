@@ -53,13 +53,14 @@
 #'
 #' vioplot(Sepal.Length~Species, data = iris2, main = "Sepal Length",
 #'         col=c("lightgreen", "lightblue", "palevioletred"))
-#' add_outliers(unlist(iris2$Sepal.Length), iris2$Species, col = "grey50", fill = "red", bars = "grey85")
+#' add_outliers(unlist(iris2$Sepal.Length), iris2$Species,
+#'              col = "grey50", fill = "red", bars = "grey85")
 #' legend("bottomright", legend=c("setosa", "versicolor", "virginica"),
 #'        fill=c("lightgreen", "lightblue", "palevioletred"), cex = 0.6)
 #' add_labels(unlist(iris2$Sepal.Length), iris2$Species, height = 0, cex = 0.8)
 #'
-#' @usage add_labels(variable, categories, cex = 0.75)
-#' @rdname annotation
+#' @usage add_labels(variable, categories, cex = par()$cex, col = par()$fg, height = 0.5)
+#' @rdname add_labels
 #' @export
 #'
 add_labels <- function(variable, categories, cex = par()$cex, col = par()$fg, height = 0.5){
@@ -78,15 +79,17 @@ add_labels <- function(variable, categories, cex = par()$cex, col = par()$fg, he
 #' @param categories discrete variable to break down groups (factor or string).
 #' @param col colour of rings or borders. Scalar applied to all columns or a vector for each category.
 #' @param fill colour of spots. Scalar applied to all columns or a vector for each category.
-#' @param bar colour of horizontal bars. Scalar applied to all columns or a vector for each category.
+#' @param bars colour of horizontal bars. Scalar applied to all columns or a vector for each category.
 #' @param cutoff minimum number (default 3L) of standard deviations to report.
 #' @param verbose to print logs (defaults to FALSE).
 #' @keywords plot graphics violin annotation
 #'
-#' @usage add_add_outliers(variable, categories, cutoff = 3,
-#'                         col = "black", fill = "lightblue", bars = "grey75",
-#'                         verbose = FALSE)
-#' @rdname annotation
+#' @usage add_outliers(variable, categories, cutoff = 3,
+#' fill = par()$bg, col = par()$fg, bars = par()$fg,
+#' verbose = FALSE)
+#' @rdname add_outliers
+#' @importFrom stats sd
+#' @importFrom graphics abline text
 #' @export
 add_outliers <- function(variable, categories, cutoff = 3, fill = par()$bg, col = par()$fg, bars = par()$fg, verbose = FALSE){
   if(length(col) == 1) col <- rep(col, length(unique(categories)))
