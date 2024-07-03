@@ -64,7 +64,7 @@
 #' @export
 #'
 add_labels <- function(variable, categories, cex = par()$cex, col = par()$fg, height = 0.5){
-  text(x =  seq_along(categories), y = rep(max(variable)+height, length(categories)), sapply(table(categories), function(nn) paste0(c("n=", nn), collapse = "")), col = col, cex = cex)
+  text(x =  seq_along(table(categories)), y = rep(max(variable)+height, length(categories)), sapply(table(categories), function(nn) paste0(c("n=", nn), collapse = "")), col = col, cex = cex)
 }
 
 

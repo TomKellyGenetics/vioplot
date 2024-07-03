@@ -223,7 +223,7 @@ vioplot.formula <-
     m$... <- m$drop <- m$sep <- m$lex.order <- NULL
     m$xlab <- m$ylab <- m$add <- m$ann <- m$horizontal <- NULL
     m$names <-  m$side <- NULL
-    m$srt.axis <- NULL
+    m$srt.axis <- cex.axis <- NULL
     m$na.action <- na.action
     m[[1L]] <- quote(stats::model.frame.default)
     mf <- eval(m, parent.frame())
@@ -233,7 +233,7 @@ vioplot.formula <-
     }
     vioplot(split(mf[[response]], mf[-response], drop = drop,
                   sep = sep, lex.order = lex.order), xlab = xlab, ylab = ylab, names = names,
-            add = add, ann = ann, horizontal = horizontal, side = side, srt.axis = srt.axis, ...)
+            add = add, ann = ann, horizontal = horizontal, side = side, srt.axis = cex.axis, srt.axis = cex.axis, ...)
   }
 
 #' @rdname vioplot
