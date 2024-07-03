@@ -193,7 +193,8 @@ vioplot.matrix <- vioplot.matrix
 #' @export
 vioplot.formula <-
   function (formula, data = NULL, ..., subset,  na.action = NULL,
-            add = FALSE, ann = !add, horizontal = FALSE, side = "both", srt.axis = c(0, 90),
+            add = FALSE, ann = !add, horizontal = FALSE, side = "both",
+            cex.axis = par()$cex, srt.axis = c(0, 90),
             xlab = mklab(y_var = horizontal), ylab = mklab(y_var = !horizontal), names=NULL,
             drop = FALSE, sep = ".", lex.order = FALSE)
   {
