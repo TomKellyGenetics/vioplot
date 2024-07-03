@@ -22,7 +22,7 @@ test_that("log-scale y-axis with log TRUE", {
 test_that("linear y-axis with log FALSE", {
   vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", log = F)
 })
-detest_that("override with ylog TRUE", {
+test_that("override with ylog TRUE", {
   vioplot(iris$Sepal.Length[iris$Species=="setosa"], iris$Sepal.Length[iris$Species=="versicolor"], iris$Sepal.Length[iris$Species=="virginica"], names=c("setosa", "versicolor", "virginica"), main="Sepal Length", log = F, ylog=T)
 })
 
