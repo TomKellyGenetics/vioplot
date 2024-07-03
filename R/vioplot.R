@@ -234,7 +234,8 @@ vioplot.formula <-
     }
     vioplot(split(mf[[response]], mf[-response], drop = drop,
                   sep = sep, lex.order = lex.order), xlab = xlab, ylab = ylab, names = names,
-            add = add, ann = ann, horizontal = horizontal, side = side, srt.axis = cex.axis, cex.axis = cex.axis, ...)
+            add = add, ann = ann, horizontal = horizontal, side = side,
+            srt.axis = srt.axis, cex.axis = cex.axis, ...)
   }
 
 #' @rdname vioplot
