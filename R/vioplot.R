@@ -223,6 +223,7 @@ vioplot.formula <-
     m$... <- m$drop <- m$sep <- m$lex.order <- NULL
     m$xlab <- m$ylab <- m$add <- m$ann <- m$horizontal <- NULL
     m$names <-  m$side <- NULL
+    m$srt.axis <- NULL
     m$na.action <- na.action
     m[[1L]] <- quote(stats::model.frame.default)
     mf <- eval(m, parent.frame())
@@ -473,7 +474,7 @@ vioplot.default <-
             if(xaxt !="n"){
               if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
-                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = label, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
               } else {
                 Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
               }
@@ -489,7 +490,7 @@ vioplot.default <-
             if(xaxt !="n"){
               if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
-                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = label, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               } else {
                 Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               }
@@ -501,7 +502,7 @@ vioplot.default <-
             if(xaxt !="n"){
               if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
-                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = label, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
               } else {
                 Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
               }
@@ -511,7 +512,7 @@ vioplot.default <-
             if(xaxt !="n"){
               if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
-                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = label, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               } else {
                 Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               }
@@ -560,7 +561,7 @@ vioplot.default <-
             #log_axis <- log_axis[log_axis <= exp(par("usr")[4])]
             if (groups[1] == FALSE){
               xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
-              text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
+              text(x =  xaxis , y = par("usr")[3] * 1.2, labels = label, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
             } else {
               Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, tck = tck, tcl = tcl, las = las) # xaxp = xaxp, yaxp = yaxp disabled for log
             }
@@ -576,7 +577,7 @@ vioplot.default <-
           } else {
             if (groups[1] == FALSE){
               xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
-              text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+              text(x =  xaxis , y = par("usr")[3] * 1.2, labels = label, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
             } else {
               Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
             }
@@ -584,7 +585,7 @@ vioplot.default <-
             if(xaxt !="n"){
               if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
-                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = label, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
               } else {
                 Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, yaxp = yaxp, tck = tck, tcl = tcl, las = las)
               }
@@ -596,7 +597,7 @@ vioplot.default <-
             if(xaxt !="n"){
               if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
-                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = label, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               } else {
                 Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               }
@@ -606,7 +607,7 @@ vioplot.default <-
             if(xaxt !="n"){
               if (groups[1] == FALSE){
                 xaxis <- Axis(1:length(datas), at = at, labels = FALSE, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
-                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = xaxis, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
+                text(x =  xaxis , y = par("usr")[3] * 1.2, labels = label, srt = srt.axis.x, xpd = TRUE, adj = c(0.5,0.5), cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               } else {
                 Axis(1:length(datas), at = at, labels = groups, side = 1, srt = srt.axis.x, cex.axis = cex.names, col.axis = col.axis, font.axis = font.axis, mgp = mgp, xaxp = xaxp, tck = tck, tcl = tcl, las = las)
               }
