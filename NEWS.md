@@ -1,12 +1,24 @@
 # vioplot 0.5.0 (2024)
 
-New feature
+New features (pilot release with limited API and documentation)
+
+- adds function to annotate sample size per group
+- adds function to plot outliers  by standard deviation magnitude threshold
+
+Updates to Violin plot
 
 - enable angled axis labels with srt.axis
+- pass axis aesthetic parameters from formula input
 
 Documentation
 
 - add demo of histogram plots (#19 by @Jadamso)
+- updated vignettes for split histograms (#19 by @Jadamso) 
+- expands vignettes for annotated violins and annotated split violins
+
+Bug fixes
+
+- formula input detects group names but avoids overlapping axis labels
 
 # vioplot 0.4.0 (2022)
 
