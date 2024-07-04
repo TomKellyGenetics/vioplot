@@ -30,9 +30,12 @@
   ann = !add,
   horizontal = FALSE,
   side = "both",
+  cex.axis = par()$cex,
   srt.axis = c(0, 90),
   xlab = mklab(y_var = horizontal),
   ylab = mklab(y_var = !horizontal),
+  main = "",
+  sub = "",
   names = NULL,
   drop = FALSE,
   sep = ".",
@@ -174,7 +177,11 @@
 
 \item{side}{defaults to "both". Assigning "left" or "right" enables one sided plotting of violins. May be applied as a scalar across all groups.}
 
+\item{cex.axis}{The magnification to be used for y axis annotation relative to the current setting of cex.}
+
 \item{srt.axis}{angle for axis labels, scalar applies to both axes or vector with 2 components. [x, y] defaults to c(0, 90) with angles counter-clockwise from vertical.}
+
+\item{main, sub, xlab, ylab}{graphical parameters passed to plot.}
 
 \item{names}{one label, or a vector of labels for the data must match the number of data given}
 
@@ -210,13 +217,9 @@
 
 \item{axes, frame.plot, panel.first, panel.last, asp, line, outer, adj, ann, ask, bg, bty, cin, col.axis, col.lab, col.main, col.sub, cra, crt, csi, cxy, din, err, family, fg, fig, fin, font, font.axis, font.lab, font.main, font.sub, lab, las, lend, lheight, ljoin, lmitre, mai, mar, mex, mfcol, mfg, mfrow, mgp, mkh, new, oma, omd, omi, page, pch, pin, plt, ps, pty, smo, srt, tck, tcl, usr, xaxp, xaxs, xaxt, xpd, yaxp, yaxs, ylbias}{Arguments to be passed to methods, such as graphical parameters (see \code{\link[graphics]{par}})).}
 
-\item{main, sub, xlab, ylab}{graphical parameters passed to plot.}
-
 \item{ylog, xlog}{A logical value (see log in \code{\link[graphics]{plot.default}}). If ylog is TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "y")). For horizontal = TRUE then, if xlog is TRUE, a logarithmic scale is in use (e.g., after plot(*, log = "x")). For a new device, it defaults to FALSE, i.e., linear scale.}
 
 \item{cex}{A numerical value giving the amount by which plotting text should be magnified relative to the default.}
-
-\item{cex.axis}{The magnification to be used for y axis annotation relative to the current setting of cex.}
 
 \item{cex.lab}{The magnification to be used for x and y labels relative to the current setting of cex.}
 

@@ -21,6 +21,8 @@ verbose = FALSE)
 
 \item{bars}{colour of horizontal bars. Scalar applied to all columns or a vector for each category.}
 
+\item{lwd}{thickness of border.}
+
 \item{verbose}{to print logs (defaults to FALSE).}
 }
 \description{

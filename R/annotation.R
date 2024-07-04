@@ -80,6 +80,7 @@ add_labels <- function(variable, categories, cex = par()$cex, col = par()$fg, he
 #' @param col colour of rings or borders. Scalar applied to all columns or a vector for each category.
 #' @param fill colour of spots. Scalar applied to all columns or a vector for each category.
 #' @param bars colour of horizontal bars. Scalar applied to all columns or a vector for each category.
+#' @param lwd thickness of border.
 #' @param cutoff minimum number (default 3L) of standard deviations to report.
 #' @param verbose to print logs (defaults to FALSE).
 #' @keywords plot graphics violin annotation
@@ -91,7 +92,7 @@ add_labels <- function(variable, categories, cex = par()$cex, col = par()$fg, he
 #' @importFrom stats sd
 #' @importFrom graphics abline text
 #' @export
-add_outliers <- function(variable, categories, cutoff = 3, fill = par()$bg, col = par()$fg, bars = par()$fg, verbose = FALSE){
+add_outliers <- function(variable, categories, cutoff = 3, fill = par()$bg, col = par()$fg, bars = par()$fg, lwd = par()$lwd, verbose = FALSE){
   if(length(col) == 1) col <- rep(col, length(unique(categories)))
   if(length(fill) == 1) fill <- rep(fill, length(unique(categories)))
   for(category in unique(categories)){
@@ -109,8 +110,7 @@ add_outliers <- function(variable, categories, cutoff = 3, fill = par()$bg, col 
     if(verbose) print(length(y[y > mean(y, na.rm = TRUE) + cutoff * sd(y, na.rm = TRUE)]))
     points(rep(ii, length(y[y > mean(y, na.rm = TRUE) + cutoff * sd(y, na.rm = TRUE)])),
            y[y > mean(y, na.rm = TRUE) + cutoff * sd(y, na.rm = TRUE)],
-           cex = 1.25, pch = 21, bg = fill[ii], col = col[ii])
+           cex = 1.25, pch = 21, bg = fill[ii], col = col[ii], lwd = lwd)
   }
   abline(h=0, lwd = 1.5, lty = 2, col = bars)
-  return(0)
 }
