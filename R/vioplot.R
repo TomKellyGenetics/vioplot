@@ -195,7 +195,9 @@ vioplot.formula <-
   function (formula, data = NULL, ..., subset,  na.action = NULL,
             add = FALSE, ann = !add, horizontal = FALSE, side = "both",
             cex.axis = par()$cex, srt.axis = c(0, 90),
-            xlab = mklab(y_var = horizontal), ylab = mklab(y_var = !horizontal), names=NULL,
+            xlab = mklab(y_var = horizontal), ylab = mklab(y_var = !horizontal),
+            main = "", sub = "",
+            names=NULL,
             drop = FALSE, sep = ".", lex.order = FALSE)
   {
     if (missing(formula) || (length(formula) != 3L)){
@@ -222,7 +224,8 @@ vioplot.formula <-
     if (is.matrix(eval(m$data, parent.frame())))
       m$data <- as.data.frame(data)
     m$... <- m$drop <- m$sep <- m$lex.order <- NULL
-    m$xlab <- m$ylab <- m$add <- m$ann <- m$horizontal <- NULL
+    m$xlab <- m$ylab <- m$main <- m$sub <- NULL
+    m$add <- m$ann <- m$horizontal <- NULL
     m$names <-  m$side <- NULL
     m$srt.axis <- m$cex.axis <- NULL
     m$na.action <- na.action
@@ -233,9 +236,11 @@ vioplot.formula <-
       xlab <- ylab <- NA
     }
     vioplot(split(mf[[response]], mf[-response], drop = drop,
-                  sep = sep, lex.order = lex.order), xlab = xlab, ylab = ylab, names = names,
+                  sep = sep, lex.order = lex.order),
+            names = names,
             add = add, ann = ann, horizontal = horizontal, side = side,
             srt.axis = srt.axis, cex.axis = cex.axis, ...)
+    title(main = main, sub = sub, xlab = xlab, ylab = ylab)
   }
 
 #' @rdname vioplot
