@@ -79,6 +79,17 @@ par(mfrow=c(1,1))
 }
 ```
 
+An indirect comparison can be achieved with par:
+
+```{r,  fig.align = 'center', fig.height = 6, fig.width = 6, fig.keep = 'last'}
+{
+  par(mfrow=c(1,2))
+vioplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line")
+vioplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line")
+par(mfrow=c(1,1))
+}
+```
+
 ### Split Violin Plots
 
 A more direct comparision can be made with the `side` argument and `add = TRUE` on the second plot:
@@ -144,7 +155,7 @@ legend("topleft", fill = c("lightblue", "palevioletred"), legend = c("small", "l
 
 Here it is aesthetically pleasing and intuitive to interpret categorical differences in mean and variation in a continuous variable.
 
-
+ 
 #### Sources
 These extensions to `vioplot` here are based on those provided here:
 
