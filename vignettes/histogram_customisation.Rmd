@@ -1,10 +1,10 @@
 ---
-title: "Customising Violin Plots with Histograms"
-author: "Tom Kelly"
+title: "An alternative to Violin Plots with Histograms"
+author: "Tom Kelly, Jordan Adamson"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{vioplot: Customising Violin Plots with Histograms}
+  %\VignetteIndexEntry{vioplot: An alternative to Violin Plots with Histograms}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -13,7 +13,7 @@ While boxplots have become the _de facto_ standard for plotting the distribution
 
 While density plots are helpful in this regard, they can be less aesthetically pleasing than boxplots and harder to interpret for those familiar with boxplots. Often the only ways to compare multiple data types with density use slices of the data with faceting the plotting panes or overlaying density curves with colours and a legend. This approach is jarring for new users and leads to cluttered plots difficult to present to a wider audience.
 
-Therefore violin plots are a powerful tool to assist researchers to visualise data, particularly in the quality checking and exploratory parts of an analysis. Violin plots have many benefits:
+Therefore violin plots, density plots, and histograms are a powerful tool to assist researchers to visualise data, particularly in the quality checking and exploratory parts of an analysis. These plots have many benefits:
 
 - Greater flexibility for plotting variation than boxplots
 - More familiarity to boxplot users than density plots
@@ -124,6 +124,17 @@ iris_large <- iris[iris$Sepal.Width > mean(iris$Sepal.Width), ]
 iris_small <- iris[iris$Sepal.Width <= mean(iris$Sepal.Width), ]
 ```
 
+An indirect comparison can be achieved with par:
+
+```{r,  fig.align = 'center', fig.height = 6, fig.width = 6, fig.keep = 'last'}
+{
+  par(mfrow=c(1,2))
+histoplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line")
+histoplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line")
+par(mfrow=c(1,1))
+}
+```
+
 A direct comparision of 2 datasets can be made with the `side` argument and `add = TRUE` on the second plot:
 
 ```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
@@ -131,4 +142,73 @@ histoplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCent
 histoplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line", side = "left", add = T)
 title(xlab = "Species", ylab = "Sepal Length")
 legend("topleft", fill = c("lightblue", "palevioletred"), legend = c("small", "large"), title = "Sepal Width")
+```
+
+## Split Histogram Plots
+
+We set up the data with two categories (Sepal Width) as follows:
+
+```{r, message=FALSE}
+data(iris)
+summary(iris$Sepal.Width)
+table(iris$Sepal.Width > mean(iris$Sepal.Width))
+iris_large <- iris[iris$Sepal.Width > mean(iris$Sepal.Width), ]
+iris_small <- iris[iris$Sepal.Width <= mean(iris$Sepal.Width), ]
+```
+
+A more direct comparision can be made with the `side` argument and `add = TRUE` on the second plot:
+
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
+histoplot(Sepal.Length~Species, data=iris_large, col = "palevioletred", plotCentre = "line", side = "right")
+histoplot(Sepal.Length~Species, data=iris_small, col = "lightblue", plotCentre = "line", side = "left", add = T)
+title(xlab = "Species", ylab = "Sepal Length")
+legend("topleft", fill = c("lightblue", "palevioletred"), legend = c("small", "large"), title = "Sepal Width")
+```
+
+## Fine tuning with split histograms
+
+#To compare multiple groups of histogram densities, it helps to adjust the wex.
+
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
+dlist1 <- lapply(c(10,20,30,40), function(n) runif(n))
+dlist2 <- lapply(c(100,200,300,400), function(n) runif(n))
+
+hscale1 <- sapply(dlist1, function(r){
+  max(hist(r, plot=FALSE, breaks=seq(0,1,by=.05))$density)})
+histoplot(dlist1, side='left', col=grey(.3),
+          breaks=seq(0,1,by=.05), add=FALSE, pchMed=NA, drawRect=FALSE, border=NA,
+          wex=hscale1/length(hscale1))
+hscale2 <- sapply(dlist2, function(r){
+  max(hist(r, plot=FALSE, breaks=seq(0,1,by=.05))$density)})
+histoplot(dlist2, side='right', col=grey(.7),
+          breaks=seq(0,1,by=.05), add=TRUE, pchMed=NA, drawRect=FALSE, border=NA,
+          wex=hscale2/length(hscale2))
+```
+
+Sometimes, it is helpful to see the raw counts instead.
+
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
+dvec <- length(unlist(c(dlist1, dlist2)))/4
+
+histoplot(dlist1, side='left', col=grey(.3),
+          breaks=seq(0,1,by=.05), add=FALSE, pchMed=NA, drawRect=FALSE, border=NA,
+          wex=sapply(dlist1, length)/dvec*hscale1/length(hscale1))
+histoplot(dlist2, side='right', col=grey(.7),
+          breaks=seq(0,1,by=.05), add=TRUE, pchMed=NA, drawRect=FALSE, border=NA,
+          wex=sapply(dlist2, length)/dvec*hscale2/length(hscale2))
+```
+### Shading histograms
+
+It may also benefit some users to pass density and angle arguments to the histograms (ultimately rect) and create outer legends.
+
+```{r, fig.align = 'center', fig.height = 3, fig.width = 6, fig.keep = 'last'}
+hist(runif(100), density=c(10,20), angle=c(22,90+22) ,col=1)
+
+outer_legend <- function(...) {
+  opar <- par(fig=c(0, 1, 0, 1), oma=c(0, 0, 0, 0), mar=c(0, 0, 0, 0), new=TRUE)
+  on.exit(par(opar))
+  plot(0, 0, type='n', bty='n', xaxt='n', yaxt='n')
+  legend(...)
+}
+outer_legend('topright', pch=15, density=c(10,20), angle=c(22,90+22), col=0, legend=c('Y','N'))
 ```
