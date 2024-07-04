@@ -86,7 +86,7 @@ add_labels <- function(variable, categories, cex = par()$cex, col = par()$fg, he
 #' @keywords plot graphics violin annotation
 #'
 #' @usage add_outliers(variable, categories, cutoff = 3,
-#' fill = par()$bg, col = par()$fg, bars = par()$fg,
+#' fill = par()$bg, col = par()$fg, bars = par()$fg, lwd = par()$lwd,
 #' verbose = FALSE)
 #' @rdname add_outliers
 #' @importFrom stats sd

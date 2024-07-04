@@ -5,7 +5,7 @@
 \title{Annotated Violin Plot}
 \usage{
 add_outliers(variable, categories, cutoff = 3,
-fill = par()$bg, col = par()$fg, bars = par()$fg,
+fill = par()$bg, col = par()$fg, bars = par()$fg, lwd = par()$lwd,
 verbose = FALSE)
 }
 \arguments{
