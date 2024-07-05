@@ -45,4 +45,5 @@ New experimental features are fully-documented with separate functions to
 avoid problems with existing functions.
 
 #NOTE
-None.
+
+Avoids deprecated methods for storing author and citation information.
