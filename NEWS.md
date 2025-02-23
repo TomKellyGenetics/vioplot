@@ -1,3 +1,9 @@
+# vioplot 0.5.1 (2025)
+
+Corrections to examples for annotation labels
+
+- updates example for add_labels() to avoid deprecated usage of unlist()
+
 # vioplot 0.5.0 (2024)
 
 New features (pilot release with limited API and documentation)

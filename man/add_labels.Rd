@@ -35,11 +35,11 @@ group <- rep(c("bimodal", "uniform", "normal"),
              sapply(list(bimodal, uniform, normal), length))
 table(group)
 vioplot(bimodal,uniform,normal)
-add_labels(unlist(bimodal,uniform,normal), group, height = 3, cex = 0.8)
+add_labels(c(bimodal,uniform,normal), group, height = -2.5, cex = 0.8)
 
 # boxplots are also supported
 boxplot(bimodal,uniform,normal)
-add_labels(unlist(bimodal,uniform,normal), group, height = 3, cex = 0.8)
+add_labels(c(bimodal,uniform,normal), group, height = -2.5, cex = 0.8)
 
 
 # formula input

@@ -11,8 +11,27 @@
 * CentOS 7 R 4.1.2
 * CentOS 7 R 4.2.1 
 
-── R CMD check results ───────────────────── vioplot 0.5.0 ────
-Duration: 59.3s
+── R CMD check results ───────────────────── 
+──── vioplot ────
+✔ | F W  S  OK | Context
+✔ |      7   0 | color custom and vectorised                 
+✔ |      5   0 | formula input                               
+✔ |      5   0 | controlling area                            
+✔ |      4   0 | different input classes                     
+✔ |      7   0 | color custom and vectorised                 
+✔ |      5   0 | formula input                               
+✔ |      4   0 | side option                                 
+✔ |      5   0 | NA handling for vector or formula input     
+✔ |      2   0 | names input                                 
+✔ |      1   0 | side option                                 
+✔ |      2   0 | unequal group size                          
+✔ |     13   0 | log-scale                                   
+✔ |     17   0 | log-scale [1.8s]                            
+
+══ Results ══════════════════════════════════════════════════
+Duration: 7.9 s
+──── 0.5.1 ────
+
 
 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
@@ -20,30 +39,17 @@ R CMD check succeeded
 
 ## Updates
 
-New features (pilot release with limited API and documentation)
-
-- adds function to annotate sample size per group
-- adds function to plot outliers  by standard deviation magnitude threshold
-
-Updates to Violin plot
-
-- enable angled axis labels with srt.axis
-- pass axis aesthetic parameters from formula input
-
 Documentation
 
-- add demo of histogram plots (#19 by @Jadamso)
-- updated vignettes for split histograms (#19 by @Jadamso) 
-- expands vignettes for annotated violins and annotated split violins
+- updates examples for adding annotation labels using unlist() with deprecated behaviours
 
 Bug fixes
 
-- formula input detects group names but avoids overlapping axis labels
-
-All changes expected to be backwards compatible without affecting reverse dependencies.
-New experimental features are fully-documented with separate functions to
-avoid problems with existing functions.
+- avoids error in CRAN checks on development version 
 
 #NOTE
 
-Avoids deprecated methods for storing author and citation information.
+Fixes issued notified to maintainer on 2025-02-23
+> Please correct before 2025-03-09 to safely retain your package on CRAN.
+
+No changes to source code or package functions. Documentation updated for compliance.

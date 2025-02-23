@@ -16,6 +16,6 @@ authors:
   given-names: "Jordan"
   affiliation: "Leipzig University, Germany"
 title: "vioplot: violin plot"
-version: 0.4.0
-date-released: 2022-12-08
+version: 0.5.1
+date-released: 2025-02-24
 url: "https://github.com/TomKellyGenetics/vioplot"
